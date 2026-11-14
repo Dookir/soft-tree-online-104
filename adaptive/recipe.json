@@ -1,0 +1,109 @@
+{
+  "version": "104-v1",
+  "data_sha256": "877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023",
+  "seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "epochs": {
+    "2026": 486,
+    "2027": 484,
+    "2028": 484,
+    "2029": 481,
+    "2030": 471
+  },
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "rank_weight": 0.02,
+  "rank_temperature": 0.1,
+  "low_training_fraction": 0.2,
+  "policy": "max",
+  "near_best_margin": 5.702176040780036,
+  "search_seed": 20261111,
+  "pool_per_alpha": 8192,
+  "concentrations": [
+    1.0,
+    0.3
+  ],
+  "low_starts": 256,
+  "random_starts": 256,
+  "start_separation": 0.1,
+  "phase1_steps": 1000,
+  "phase1_rates": [
+    [
+      0,
+      0.02
+    ],
+    [
+      400,
+      0.005
+    ],
+    [
+      700,
+      0.001
+    ]
+  ],
+  "phase2_steps": 1000,
+  "phase2_rates": [
+    [
+      0,
+      0.01
+    ],
+    [
+      400,
+      0.002
+    ],
+    [
+      700,
+      0.0004
+    ]
+  ],
+  "input_feature_order": [
+    "b1_cost",
+    "b1_carbon",
+    "b1_peak",
+    "b1_discomfort",
+    "b1_degradation",
+    "b1_ramping",
+    "b1_resilience",
+    "b2_cost",
+    "b2_carbon",
+    "b2_peak",
+    "b2_discomfort",
+    "b2_degradation",
+    "b2_ramping",
+    "b2_resilience",
+    "b3_cost",
+    "b3_carbon",
+    "b3_peak",
+    "b3_discomfort",
+    "b3_degradation",
+    "b3_ramping",
+    "b3_resilience"
+  ],
+  "target_R": 104.0,
+  "acquisition_quotas": {
+    "surrogate": 10,
+    "transfer": 20,
+    "recombination": 10,
+    "joint": 8,
+    "disagreement": 2
+  },
+  "transfer_scales": [
+    0.001,
+    0.01,
+    0.08,
+    "full_donor"
+  ],
+  "alpha_bounds": [
+    0.5,
+    4.0
+  ],
+  "joint_std": 0.04,
+  "training_update": "baseline_full_refit",
+  "initialization": "verified_original_only_v00"
+}

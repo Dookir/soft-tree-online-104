@@ -1,0 +1,39 @@
+{
+  "round": 14,
+  "batch_min_R": 104.5122000882402,
+  "best_online_R": 104.5122000882402,
+  "cumulative_best_R": 104.5122000882402,
+  "prediction_MAE": 3.4580471584632075,
+  "prediction_RMSE": 3.713779892071417,
+  "source_counts": {
+    "disagreement": 2,
+    "joint": 8,
+    "recombination": 10,
+    "surrogate": 10,
+    "transfer": 20
+  },
+  "successful_observations": 700,
+  "model_version": 13,
+  "scale_update": {
+    "alpha_used": 0.5,
+    "alpha_next": 0.5,
+    "unique_rounded_R_fraction": 1.0,
+    "improvement": 0.05426379106938839,
+    "reason": "contract_after_two_improvements"
+  },
+  "source_best_R": {
+    "joint": 105.57524022553116,
+    "surrogate": 105.65748692397028,
+    "recombination": 104.79822787176818,
+    "transfer": 104.5122000882402,
+    "disagreement": 109.63969603320584
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 5,
+    "coarse": 5,
+    "support": 5
+  },
+  "unranked_count": 12,
+  "local_pair_accuracy": 0.833469387755102
+}

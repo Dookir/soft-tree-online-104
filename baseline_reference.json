@@ -1,0 +1,44 @@
+{
+  "soft_tree": {
+    "experiment": "formal-20261112-01",
+    "best_R": 106.6843907663133,
+    "evaluation_calls": 20,
+    "observations": 1000,
+    "best_R_by_round": [
+      111.29589934123214,
+      109.20438426121837,
+      108.92048986244481,
+      108.31065398443025,
+      108.31065398443025,
+      108.31065398443025,
+      108.27280542987864,
+      108.14418802026194,
+      108.02744700375479,
+      107.78346153337043,
+      107.78346153337043,
+      107.78346153337043,
+      107.75459921348374,
+      107.75459212053102,
+      107.68700544524472,
+      107.64821331191342,
+      107.04415022139437,
+      107.04415022139437,
+      107.02014701603912,
+      106.6843907663133
+    ],
+    "total_wall_seconds": 22030.171832814813,
+    "training_seed_seconds_sum": 17758.364020079374,
+    "evaluation_seconds": 2873.8512926772237,
+    "search_and_other_residual_seconds": 1397.9565200582147,
+    "timing_limitation": "Baseline did not separately time search; residual includes other overhead.",
+    "purpose": "Post-run comparison only; not used in training, calibration, replay or candidate acquisition"
+  },
+  "tabm": {
+    "best_R": 107.01899083587341,
+    "observations": 1000
+  },
+  "fast": {
+    "best_R": 108.28481595264748,
+    "observations": 1000
+  }
+}

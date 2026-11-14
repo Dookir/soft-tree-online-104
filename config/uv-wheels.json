@@ -1,0 +1,17 @@
+{
+  "version": "0.13.7",
+  "platforms": {
+    "windows-x86_64": {
+      "url": "https://files.pythonhosted.org/packages/8e/4f/041b59d2a38807a3e31ef41064cf3e45d2752fe0409d89040d52778049ae/uv-0.13.7-py3-none-win_amd64.whl",
+      "sha256": "2835e2ab397d0db86323b9975dce75ecd76aa9cfa0d6a2aea84734aae7f8c9b3"
+    },
+    "linux-x86_64": {
+      "url": "https://files.pythonhosted.org/packages/b9/93/0e053a2ca4523ee9825ccbedeb7121470d0a188933f11688b6d90d7f5c08/uv-0.13.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "2c9bdc4a872b60a93c5f26c0791089ea11585a4f9d3b3c017d78eb8487505e25"
+    },
+    "macos-arm64": {
+      "url": "https://files.pythonhosted.org/packages/40/a5/8756c38ace102fa13fd4e653e8bc40e1f65924f1c0a0d23350339dac97e5/uv-0.13.7-py3-none-macosx_11_0_arm64.whl",
+      "sha256": "f91a229093163eefca89ea1b220a221d64c3beade05d03519a6584d1797a5a5f"
+    }
+  }
+}

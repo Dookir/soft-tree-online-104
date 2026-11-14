@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "checked_date": "2026-11-14",
+  "frozen_run_best_real_R": 104.50394996162504,
+  "original_rows": 2048,
+  "archived_feedback_rows": 1000,
+  "packaging_real_evaluations": 0,
+  "macos_arm64": {
+    "python": "3.10.21",
+    "torch": "2.6.0",
+    "numpy": "1.26.4",
+    "contract_tests_passed": 9,
+    "original_only_checkpoint_load_max_probe_difference": 0.0,
+    "full_two_stage_optimizer": {
+      "steps": [
+        1000,
+        1000
+      ],
+      "candidates": 50,
+      "score_type": "predictions_only",
+      "oracle_calls": 0
+    },
+    "portable_online_entry": {
+      "synthetic_rounds": 2,
+      "synthetic_rows": 100,
+      "resume_added_calls": 0,
+      "passed": true
+    }
+  },
+  "linux_x86_64": {
+    "python": "3.10.21",
+    "torch": "2.6.0+cu118",
+    "numpy": "1.26.4",
+    "device_during_validation": "cpu",
+    "contract_tests_passed": 9
+  },
+  "windows_x86_64": {
+    "scripts_provided": true,
+    "hashed_CPU_lock_provided": true,
+    "actual_training_validated": false
+  },
+  "checks": [
+    "all21 versions /105 model files checksum-verified",
+    "all1000 request/response pairs checked",
+    "complete20x50 ledger checked",
+    "best is an observed real point",
+    "new optimizer output marked predictions only",
+    "private-machine paths and common credential patterns absent"
+  ],
+  "excluded_from_public_repository": [
+    "closed evaluator executable",
+    "recovered bytecode and temperature models",
+    "server credentials and machine-specific launch metadata"
+  ],
+  "algorithm_core_sha256": {
+    "model.py": "ff8d4dc46c2dae9809d01a78a9582ca481c7e7a4fbf8562a5b7bf286815b38d5",
+    "base.py": "dc4df5fb4cb36d216a3c28928e423ddeaeccde9abfe3ab76ef1a570bb05edbfe",
+    "acquisition.py": "d0be5cd5db3c68f2ca3cdb681dcbe072b6a2bdd35f8729a52c17675368012ae0",
+    "learning.py": "7133e9d84aff19e181eaf301555b443755c0b62e768a4408a310d0380a844b10",
+    "protocol.py": "7dd4de074d6ca90c68b0a7bacc564e3f33a5d68089f5ce18145ae794828005db",
+    "recipe.json": "e9f63969961345c38219c2fc8cc7e76a31288ee1918a64a2414bcd3de7bb9be7"
+  }
+}

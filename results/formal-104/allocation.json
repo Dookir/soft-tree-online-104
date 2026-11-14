@@ -1,0 +1,12 @@
+{
+  "device": "cuda:0",
+  "physical_gpu": 3,
+  "free_MiB": 67567,
+  "utilization": 0,
+  "memory_budget_GiB": 2,
+  "other_GPU_processes": 2,
+  "shared_GPU_allowed": true,
+  "wait_gpu_seconds": 2.0509523823857307,
+  "excluded_GPUs": [],
+  "first_GPU_wait_seconds": 2.0509523823857307
+}

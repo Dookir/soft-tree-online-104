@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "experiment": "formal-104-20261113-01",
+  "original_runtime_source_sha256": "5216d2f0503b0b708dae9f197c8aa938bffda91687c56e497d397b9f69467f32",
+  "original_data_sha256": "877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023",
+  "best_real_R": 104.50394996162504,
+  "evaluations": 1000,
+  "original_metadata_sha256_before_path_redaction": {
+    "pretrained_original/provenance.json": "448b1c6f65a2800fc477a3be1e7c2a89fb2d018f8a437a9de41c5f89d6f8aa34",
+    "pretrained_original/original-oof-verification.json": "0c5ca09b9855f39689e7741c0cc5d356ad0a5faae24a083bfe770fa94c01058b",
+    "results/formal-104/config.json": "1a9da50b318948380992a9d88bb3ec3fa47624b77b7d7744d460a80d18da7659"
+  },
+  "unchanged_algorithm_files": {
+    "model.py": "ff8d4dc46c2dae9809d01a78a9582ca481c7e7a4fbf8562a5b7bf286815b38d5",
+    "base.py": "dc4df5fb4cb36d216a3c28928e423ddeaeccde9abfe3ab76ef1a570bb05edbfe",
+    "acquisition.py": "d0be5cd5db3c68f2ca3cdb681dcbe072b6a2bdd35f8729a52c17675368012ae0",
+    "learning.py": "7133e9d84aff19e181eaf301555b443755c0b62e768a4408a310d0380a844b10",
+    "protocol.py": "7dd4de074d6ca90c68b0a7bacc564e3f33a5d68089f5ce18145ae794828005db",
+    "recipe.json": "e9f63969961345c38219c2fc8cc7e76a31288ee1918a64a2414bcd3de7bb9be7"
+  },
+  "packaging_changes": [
+    "host path redaction in metadata",
+    "portable CLI and external JSON backend adapter",
+    "CPU default; original CUDA results preserved"
+  ],
+  "evaluator_runtime_bundled": false
+}
