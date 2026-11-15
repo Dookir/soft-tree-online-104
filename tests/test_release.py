@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 import numpy as np
@@ -17,7 +19,7 @@ class FrozenRelease(unittest.TestCase):
     def test_manifest_and_complete_transcript(self):
         report=verify_report()
         self.assertEqual(report['feedback_rows'],1000)
-        self.assertEqual(report['real_R'],104.50394996162504)
+        self.assertEqual(report['real_R'],104.14030796010047)
         self.assertFalse(report['target_achieved'])
         self.assertFalse(report['evaluator_called'])
 
@@ -28,17 +30,17 @@ class FrozenRelease(unittest.TestCase):
             np.testing.assert_allclose(x.reshape(-1,3,7).sum(-1),1,atol=1e-12)
         self.assertEqual(len(records()),2048)
 
-    def test_original_pretrain_and_all_model_hashes(self):
-        from adaptive.learning import verify_pretrained
+    def test_original_cold_start_and_all_model_hashes(self):
+        from adaptive.learning import verify_original_data
         from adaptive.base import load_ensemble
-        x,y=training_data(0);verify_pretrained(x,y)
+        x,y=training_data(0);verify_original_data(x,y)
         for n in range(21):
             models=load_ensemble(RESULT/'models'/f'v{n:02d}')
             self.assertEqual(len(models),5)
             self.assertTrue(all(sum(p.numel() for p in m.parameters())==3692 for m in models))
 
     def test_transfer_bins_and_cross_building_pairs(self):
-        from adaptive.acquisition import transfer_proposals,joint_pair,BINS,update_alpha
+        from adaptive.acquisition_v1 import transfer_proposals,joint_pair,BINS,update_alpha
         w=np.tile([.999999,1e-6,0,0,0,0,0],(3,1)).reshape(21)
         distances=[]
         for b in BINS:
@@ -73,14 +75,38 @@ class FrozenRelease(unittest.TestCase):
                 for n in range(1,21):reserve_call(args,n,str(n));complete_call(args,n,str(n))
                 with self.assertRaises(RuntimeError):reserve_call(args,21,'no')
 
-    def test_frozen_quota_exceptions_are_explicit(self):
-        # Preserve actual history, including the late structured fallback.
-        b=json.loads((RESULT/'rounds/19/candidates.json').read_text())
-        self.assertEqual(len(b['weights']),50)
-        self.assertEqual(len(set(weight_key(w) for w in b['weights'])),50)
-        self.assertEqual(b['sources'][12],'transfer')
-        self.assertEqual(b['metadata'][12]['selection'],'rotating')
-        self.assertEqual(b['metadata'][12]['delta'],.002)
+    def test_observed_winner_and_polish_policy(self):
+        b=json.loads((RESULT/'rounds/18/candidates.json').read_text())
+        self.assertEqual(b['sources'][8],'transfer')
+        self.assertEqual(b['metadata'][8]['selection'],'rotating')
+        self.assertEqual(b['metadata'][8]['delta'],.01)
+        from adaptive.anchor import update_feedback
+        state={};previous=min(r['R'] for r in records())
+        for number in range(1,21):
+            folder=RESULT/'rounds'/f'{number:02d}'
+            batch=json.loads((folder/'candidates.json').read_text())
+            scores=json.loads((folder/'stdout.json').read_text())['R']
+            self.assertEqual(batch['phase'],'feedback_triggered_polish' if state.get('polish_active') else 'v1_discovery')
+            self.assertEqual(batch['anchor_used_for_selection'],bool(state.get('polish_active') and state.get('anchor_enabled')))
+            best=min(previous,min(scores))
+            transition=update_feedback(state,batch,scores,previous,best)
+            saved=json.loads((folder/'feedback.json').read_text())['v3_transition']
+            self.assertEqual(transition['anchor_enabled_next'],saved['anchor_enabled_next'])
+            previous=best
+        self.assertEqual(state['polish_trigger_round'],16)
+        self.assertTrue(state['anchor_enabled'])
+
+    def test_line_scans_and_direction_identity(self):
+        from adaptive.polling import moved,scan
+        class Context:
+            def shadow(self,points):
+                return {'raw_score':np.asarray(points)[:,0],'anchor_score':np.asarray(points)[:,0]}
+        x=np.full((1,21),1/7);y=np.array([100.])
+        points,metadata=scan(Context(),x,y,17,[],{weight_key(x[0].tolist())})
+        self.assertEqual(len(points),20)
+        self.assertTrue((points>=0).all())
+        np.testing.assert_allclose(points.reshape(-1,3,7).sum(-1),1.)
+        self.assertTrue(all(m['delta']>=.0005-1e-14 for m in metadata))
 
     def test_training_smoke_preserves_original_rows_and_weight_cap(self):
         from adaptive import base
@@ -93,6 +119,11 @@ class FrozenRelease(unittest.TestCase):
             with np.load(Path(temp)/'fit/sample_weights.npz',allow_pickle=False) as z:
                 self.assertTrue((z['weights']<=3).all())
             self.assertTrue(np.isfinite(base.predict(models,x[:8])).all())
+
+    def test_portable_access_audit_allows_source_but_blocks_archives(self):
+        script="from pathlib import Path\nimport sys,tempfile\nfrom adaptive.audit import install,ROOT\nsys.argv=['guard','--session',tempfile.gettempdir()+'/public-audit-test']\ninstall('public-audit-test')\nopen(ROOT/'adaptive/data/train.csv','rb').close()\nfor path in (ROOT/'results/formal-v3/online.json',Path(tempfile.gettempdir())/'online-soft-tree/solver/sessions/blocked.json'):\n try:open(path,'rb')\n except PermissionError:continue\n raise RuntimeError('Archived input not blocked')\n"
+        result=subprocess.run([sys.executable,'-c',script],cwd=ROOT,text=True,capture_output=True)
+        self.assertEqual(result.returncode,0,result.stderr)
 
     def test_response_rejects_misalignment_and_nan(self):
         for x in ({'R':[1.]},{'R':[float('nan'),1.]},{'R':[True,1.]}):

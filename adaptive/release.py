@@ -12,7 +12,7 @@ import time
 from .protocol import atomic_json, digest, parse_request, parse_response, weight_key
 
 ROOT=Path(__file__).resolve().parents[1]
-RESULT=ROOT/'results/formal-104'
+RESULT=ROOT/'results/formal-v3'
 DATA=ROOT/'adaptive/data/train.csv'
 DATA_HASH='877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023'
 
@@ -43,11 +43,23 @@ def verify_report():
     checked=verify_manifest()
     original=records();known={weight_key(r['weights']) for r in original};online=[]
     best=min(original,key=lambda r:r['R'])
+    visible_R=[r['R'] for r in original]
+    reference=json.loads((ROOT/'ORIGIN.json').read_text())['v1_reference_request_sha256_first16']
     for number in range(1,21):
         folder=RESULT/'rounds'/f'{number:02d}'
         request=parse_request(json.loads((folder/'request.json').read_text()))
         scores=parse_response(json.loads((folder/'stdout.json').read_text()),50)
         batch=json.loads((folder/'candidates.json').read_text())
+        shadow=batch['shadow']
+        if (shadow['available_rows']!=2048+50*(number-1) or not shadow['generated_before_feedback']
+                or batch['prediction_model_version']!=number-1
+                or shadow['raw_predictions']!=batch['predictions']):
+            raise RuntimeError('Shadow predictions do not match pre-feedback model/data version')
+        for index,value in zip(shadow['center_indices'],shadow['center_R']):
+            if not 0<=index<len(visible_R) or visible_R[index]!=value:
+                raise RuntimeError('Shadow center refers to future or mismatched feedback')
+        if number<=16 and digest(folder/'request.json')!=reference[str(number)]:
+            raise RuntimeError('Discovery prefix differs from the frozen v1 reference')
         if request!=batch['weights'] or len(request)!=50:
             raise RuntimeError('Recorded weight/score pairing mismatch')
         for i,(w,r) in enumerate(zip(request,scores)):
@@ -56,6 +68,7 @@ def verify_report():
                 raise RuntimeError('Repeated weight in recorded run')
             known.add(key)
             online.append(dict(id=f'r{number:02d}-{i+1:02d}',weights=w,R=r,round=number,index=i+1))
+        visible_R.extend(scores)
         best=min([best,*online[-50:]],key=lambda r:r['R'])
         feedback=json.loads((folder/'feedback.json').read_text())
         if feedback['batch_min_R']!=min(scores) or feedback['cumulative_best_R']!=best['R']:
@@ -72,7 +85,7 @@ def verify_report():
     state=json.loads((RESULT/'state.json').read_text())
     if state['completed_rounds']!=20 or state['attempted_calls']!=20 or state['status']!='complete':
         raise RuntimeError('Experiment was not a completed20x50 run')
-    return dict(version='1.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
+    return dict(version='3.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
                 real_R=best['R'],origin=best['id'],weights=best['weights'],target_R=104.,
                 target_achieved=best['R']<=104.,score_type='archived_real_evaluation',
                 evaluator_called=False,models_retrained=False)
@@ -109,7 +122,7 @@ def train(args):
     x,y=training_data(args.round)
     output=args.output.absolute()
     output.mkdir(parents=True,exist_ok=True)
-    function=base.train_ensemble if args.from_scratch else learning.train_ensemble
+    function=learning.train_ensemble
     started=time.monotonic();models=function(x,y,2048,output,1)
     reference=RESULT/'models'/f'v{args.round:02d}'
     original_models=base.load_ensemble(reference)
@@ -117,7 +130,7 @@ def train(args):
     probes=x[:64]
     gap=np.abs(base.predict(models,probes)-base.predict(original_models,probes))
     report=dict(round=args.round,training_rows=len(y),original_rows=2048,online_rows=len(y)-2048,
-                initialization='fresh_fixed_seeds' if args.from_scratch or args.round else 'verified_original_only_v00',
+                initialization='fresh_fixed_seeds',
                 reference_probe_prediction_max_abs_difference=float(gap.max()),
                 reference_probe_prediction_MAE=float(gap.mean()),device=allocation,
                 seconds=time.monotonic()-started,evaluator_called=False,
@@ -159,9 +172,9 @@ def main():
     if args.command=='doctor':
         checked=verify_manifest();allocation=environment()
         import numpy as np,torch
-        from .learning import verify_pretrained
-        x,y=training_data(0);verify_pretrained(x,y)
-        print(json.dumps(dict(version='1.0.0',files_checked=checked,python=platform.python_version(),
+        from .learning import verify_original_data
+        x,y=training_data(0);verify_original_data(x,y)
+        print(json.dumps(dict(version='3.0.0',files_checked=checked,python=platform.python_version(),
                              numpy=np.__version__,torch=str(torch.__version__),allocation=allocation),indent=2));return 0
     if args.command=='test':
         import unittest
@@ -186,7 +199,13 @@ def main():
         models=load_ensemble(args.model or RESULT/'models'/f'v{args.round:02d}')
         alpha=1. if args.round==0 else json.loads((RESULT/'rounds'/f'{args.round:02d}'/'feedback.json').read_text())['scale_update']['alpha_next']
         # A free offline proposal computation; never requests an extra evaluation.
-        generate_batch(models,x,y,args.round+1,{weight_key(w.tolist()) for w in x},args.output,alpha)
+        if args.round:
+            f=json.loads((RESULT/'rounds'/f'{args.round:02d}'/'feedback.json').read_text())['v3_transition']
+            policy_state={'polish_active':f['polish_active_next'],'anchor_enabled':f['anchor_enabled_next']}
+        else:policy_state={'polish_active':False,'anchor_enabled':False}
+        history=[r for r in json.loads((RESULT/'online.json').read_text()) if r['round']<=args.round]
+        generate_batch(models,x,y,args.round+1,{weight_key(w.tolist()) for w in x},args.output,alpha,
+                       search_state=policy_state,online=history)
         atomic_json(args.output/'score-status.json',dict(predictions_only=True,oracle_calls=0,
                     true_R_available_for_new_proposals=False))
         print(json.dumps(dict(output=str(args.output),candidates=50,score_type='model_predictions',oracle_calls=0)));return 0

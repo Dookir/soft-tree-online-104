@@ -1,0 +1,10 @@
+{
+  "training_seconds": 11775.844248883426,
+  "search_seconds": 961.3856462091208,
+  "evaluation_seconds": 3034.619462430477,
+  "worker_seconds_this_invocation": 15839.78085886687,
+  "session_wall_seconds": 15778.613221,
+  "GPU_wait_seconds": 46.99558848887682,
+  "reused_pretraining_seconds": 0.0,
+  "total_with_GPU_wait_seconds": 15825.608809488876
+}

@@ -23,12 +23,12 @@ DATA_HASH = '877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023'
 
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--solver-command', type=Path, help='JSON file containing an executable argument array')
+    p.add_argument('--solver-command', type=Path, help='JSON executable argument array')
     p.add_argument('--session', type=Path, default=ROOT/'sessions'/datetime.now().strftime('%Y%m%d-%H%M%S'))
     p.add_argument('--resume', action='store_true')
     p.add_argument('--backend', choices=('recovered','external'), default='external')
     p.add_argument('--evaluator-python', type=Path, default=ROOT.parent/'evaluator-workflow/.venv'/('Scripts/python.exe' if os.name=='nt' else 'bin/python'))
-    p.add_argument('--workflow', type=Path, default=ROOT.parent/'evaluator-workflow')
+    p.add_argument('--workflow', type=Path, default=ROOT/'evaluator-workflow')
     p.add_argument('--wine', type=Path)
     p.add_argument('--wine-prefix', type=Path)
     p.add_argument('--executable', type=Path, default=ROOT/'solver.exe')
@@ -49,8 +49,7 @@ def parser():
 
 def solver_command(args, round_folder):
     if args.backend == 'external':
-        if args.solver_command is None:
-            raise ValueError('--backend external requires --solver-command')
+        if args.solver_command is None:raise ValueError('--backend external requires --solver-command')
         command=json.loads(args.solver_command.read_text(encoding='utf-8'))
         if not isinstance(command,list) or not command or any(not isinstance(v,str) or not v for v in command):
             raise ValueError('Solver command must be a nonempty JSON array of strings')
@@ -67,49 +66,14 @@ def solver_command(args, round_folder):
 
 def source_fingerprint():
     h = hashlib.sha256()
-    for p in [ROOT/'run.py',ROOT/'solver_bridge.py',*sorted((ROOT/'adaptive').glob('*.py')),ROOT/'adaptive/recipe.json']:
+    for p in [ROOT/'run.py',ROOT/'solver_bridge.py',ROOT/'supervise.py',*sorted((ROOT/'adaptive').glob('*.py')),ROOT/'adaptive/recipe.json']:
         h.update(p.relative_to(ROOT).as_posix().encode()); h.update(p.read_bytes())
     return h.hexdigest()
 
 
 def select_device(args):
-    if args.device=='cpu':
-        os.environ['CUDA_VISIBLE_DEVICES']=''
-        os.environ['SOFTTREE_DEVICE']='cpu'
-        return dict(device='cpu')
-    if args.allow_shared_gpu and args.gpu is None:
-        raise ValueError('--allow-shared-gpu requires an explicit --gpu')
-    started=time.monotonic();excluded={int(v) for v in args.exclude_gpu.split(',') if v}
-    while True:
-        raw=subprocess.check_output(['nvidia-smi','-q','-x'],text=True)
-        tree=ET.fromstring(raw);cards=[]
-        for index,gpu in enumerate(tree.findall('gpu')):
-            free=int(gpu.findtext('fb_memory_usage/free').split()[0])
-            used=int(gpu.findtext('fb_memory_usage/used').split()[0])
-            util=int(gpu.findtext('utilization/gpu_util').split()[0])
-            processes=gpu.findall('processes/process_info')
-            idle=used<=1024 and util<=5 and not processes
-            if index not in excluded and (args.gpu is None or args.gpu==index) and free>=8192 and (idle or args.allow_shared_gpu):
-                cards.append((util,-free,index,len(processes)))
-        if cards or not args.wait_for_gpu:break
-        message='WAITING_FOR_SHARED_GPU: require >=8GiB free on specified GPU' if args.allow_shared_gpu else 'WAITING_FOR_IDLE_GPU: no other GPU processes; utilization<=5%, free>=8GiB'
-        print(message+'; retry in60s',file=sys.stderr,flush=True)
-        time.sleep(60)
-    if not cards:
-        if args.device=='cuda':
-            raise RuntimeError('No idle GPU available; no running task was changed')
-        os.environ['CUDA_VISIBLE_DEVICES']=''; os.environ['SOFTTREE_DEVICE']='cpu'
-        return dict(device='cpu',reason='No qualifying GPU available')
-    util,negative_free,index,processes=min(cards)
-    os.environ['CUDA_VISIBLE_DEVICES']=str(index)
-    os.environ['SOFTTREE_DEVICE']='cuda:0'
-    os.environ['SOFTTREE_GPU_MEMORY_GIB']='2'
-    os.environ['CUBLAS_WORKSPACE_CONFIG']=':4096:8'
-    args.train_jobs=1
-    return dict(device='cuda:0',physical_gpu=index,free_MiB=-negative_free,utilization=util,
-                memory_budget_GiB=2,other_GPU_processes=processes,shared_GPU_allowed=args.allow_shared_gpu,
-                wait_gpu_seconds=time.monotonic()-started,
-                excluded_GPUs=sorted(excluded))
+    from .resources import select_device as automatic
+    return automatic(args)
 
 
 def record_feedback(session, state, folder):
@@ -122,6 +86,8 @@ def record_feedback(session, state, folder):
         raise RuntimeError('Candidate / request / output pairing mismatch')
     if digest(folder/'request.json') != state['pending']['input_sha256']:
         raise RuntimeError('Pending request fingerprint changed')
+    if state['pending'].get('candidates_sha256') is not None and digest(folder/'candidates.json') != state['pending']['candidates_sha256']:
+        raise RuntimeError('Pre-feedback candidates/shadow fingerprint changed')
     online = json.loads((session/'online.json').read_text()) if (session/'online.json').exists() else []
     existing = {r['id'] for r in online}
     rows = []
@@ -152,7 +118,11 @@ def record_feedback(session, state, folder):
     atomic_json(folder/'feedback.json',summary)
     previous = state.get('cumulative_best_R',state['offline_best']['R'])
     from .acquisition import update_alpha
-    summary['scale_update'] = update_alpha(state,scores,previous,overall['R'])
+    summary['scale_update'] = update_alpha(state,scores,previous,overall['R'],batch=batch)
+    from .anchor import update_feedback
+    summary['v3_transition'] = update_feedback(state,batch,scores,previous,overall['R'])
+    summary['phase'] = batch['phase']
+    summary['anchor_used_for_selection'] = batch['anchor_used_for_selection']
     summary['source_best_R'] = {source:min(r['R'] for r in rows if r['source']==source) for source in set(batch['sources'])}
     summary['transfer_bin_counts'] = batch['transfer_bin_counts']
     summary['unranked_count'] = batch['unranked_count']
@@ -207,18 +177,21 @@ def finalize_report(session,state,allocation,started,args):
     outcome=dict(target_R=104.,achieved=best['R']<=104.,best_real_R=best['R'],
                  calls=state['attempted_calls'],evaluations=state['completed_rounds']*50,
                  extra_evaluations=0,recommendation_is_observed=True)
+    outcome.update(polish_trigger_round=state.get('polish_trigger_round'),
+                   polish_rounds=sum(r.get('phase')=='feedback_triggered_polish' for r in summaries),
+                   anchor_enabled_rounds=[r['round'] for r in summaries if r.get('anchor_used_for_selection')])
     atomic_json(session/'outcome.json',outcome)
     with (session/'REPORT.md').open('a') as output:
         output.write('\n目标 R ≤104：'+('达到' if outcome['achieved'] else '未达到')+'。预算用完后不追加评估。\n')
         output.write('\n训练 / 寻优 / 真实评估秒数：'+str([timing[k] for k in ('training_seconds','search_seconds','evaluation_seconds')])+'。\n')
-        output.write('初始模型复用原始数据存档，历史预训练时间单独记为 '+str(timing['reused_pretraining_seconds'])+' 秒。\n')
+        output.write('初始模型从原始2048行从头训练；复用预训练时间为 '+str(timing['reused_pretraining_seconds'])+' 秒。\n')
     # This file is explicitly denied by the audit hook until all20 rounds finish.
     reference=ROOT/'baseline_reference.json'
     if args.rounds==20 and args.test_epochs is None and reference.exists():
         old=json.loads(reference.read_text())
         comparison=dict(references=old,new=outcome,timing=timing,
             same_evaluation_count=[dict(round=r['round'],new_R=r['cumulative_best_R'],
-                baseline_R=old['soft_tree']['best_R_by_round'][r['round']-1]) for r in summaries])
+                baseline_R=old['v1_frozen']['best_R_by_round'][r['round']-1]) for r in summaries])
         atomic_json(session/'comparison.json',comparison)
         with (session/'REPORT.md').open('a') as output:
             output.write('\n历史结果仅用于完成后的对照：'+json.dumps({k:v['best_R'] for k,v in old.items()},ensure_ascii=False)+'。\n')
@@ -235,6 +208,9 @@ def main():
             setattr(args,key,getattr(args,key).absolute())
     if digest(DATA)!=DATA_HASH:
         raise RuntimeError('Original CSV changed')
+    recipe=json.loads((ROOT/'adaptive/recipe.json').read_text())
+    if digest(ROOT/'adaptive/acquisition_v1.py')!=recipe['frozen_v1_acquisition_sha256']:
+        raise RuntimeError('Frozen v1 acquisition changed')
     if args.backend=='recovered' and (not args.evaluator_python.exists() or not (args.workflow/'src/pipeline.py').exists()):
         raise RuntimeError('Missing recovered evaluation environment or workflow')
     if args.backend in ('native','wine') and not args.executable.exists():
@@ -245,13 +221,12 @@ def main():
         return 0
     if sys.version_info[:2]!=(3,10):
         raise RuntimeError('Training entry requires Python3.10 / PyTorch2.6 / NumPy1.26.4; evaluator uses a separate Python3.11')
-    if args.backend=='external':
-        solver_command(args,args.session/'rounds/01')
+    if args.backend=='external':solver_command(args,args.session/'rounds/01')
     validate_mode(args)
     claim_run(args)
     worker_started=time.monotonic()
     allocation=select_device(args)
-    from .learning import configure, train_ensemble, generate_batch, verify_pretrained, predict
+    from .learning import configure, train_ensemble, generate_batch, verify_original_data, predict
     import numpy as np
     import torch
     configure()
@@ -262,7 +237,7 @@ def main():
     names=json.loads((ROOT/'adaptive/recipe.json').read_text())['input_feature_order']
     original_x=np.asarray([[float(row[k]) for k in names] for row in original])
     original_y=np.asarray([float(row['ramping']) for row in original])
-    provenance=verify_pretrained(original_x,original_y)
+    verify_original_data(original_x,original_y)
     session=args.session
     config=dict(backend=args.backend,rounds=args.rounds,batch_size=50,data_sha256=DATA_HASH,
                 solver_command=solver_command(args,args.session/'rounds/01') if args.backend=='external' else None,
@@ -273,7 +248,7 @@ def main():
                 training_environment=dict(python=platform.python_version(),torch=str(torch.__version__),numpy=np.__version__),
                 requested_device=args.device,gpu=args.gpu,allow_shared_gpu=args.allow_shared_gpu,exclude_gpu=args.exclude_gpu,
                 acquisition=json.loads((ROOT/'adaptive/recipe.json').read_text()),
-                pretrained_provenance_sha256=digest(ROOT/'pretrained_original/provenance.json'),
+                initialization='fresh_fixed_seeds_original_only',
                 historical_extra_labels_used=False)
     if (session/'state.json').exists():
         if not args.resume:
@@ -288,12 +263,12 @@ def main():
         offline_best=dict(id=original[i]['candidate_id'],R=float(original_y[i]),weights=original_x[i].reshape(3,7).tolist())
         state=dict(status='ready',backend=args.backend,completed_rounds=0,attempted_calls=0,pending=None,
                    offline_best=offline_best,radius=1.,small_improvement_streak=0,good_improvement_streak=0,
-                   cumulative_best_R=offline_best['R'],target_R=104.,started_at=datetime.now().isoformat())
+                   cumulative_best_R=offline_best['R'],target_R=104.,polish_active=False,anchor_enabled=False,
+                   polish_stall_streak=0,anchor_history=[],started_at=datetime.now().isoformat())
         atomic_json(session/'config.json',config); atomic_json(session/'state.json',state)
         snapshot=session/'source'; snapshot.mkdir()
-        for path in [ROOT/'run.py',ROOT/'solver_bridge.py',ROOT/'launch_background.py',*sorted((ROOT/'adaptive').glob('*.py')),ROOT/'adaptive/recipe.json',DATA]:
+        for path in [ROOT/'run.py',ROOT/'solver_bridge.py',ROOT/'supervise.py',ROOT/'launch_background.py',*sorted((ROOT/'adaptive').glob('*.py')),ROOT/'adaptive/recipe.json',DATA]:
             target=snapshot/path.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,target)
-        shutil.copytree(ROOT/'pretrained_original',snapshot/'pretrained_original')
     previous_allocation=json.loads((session/'allocation.json').read_text()) if (session/'allocation.json').exists() else {}
     allocation['first_GPU_wait_seconds']=previous_allocation.get('first_GPU_wait_seconds',allocation.get('wait_gpu_seconds',0.))
     atomic_json(session/'allocation.json',allocation)
@@ -340,7 +315,8 @@ def main():
             weights=np.asarray(batch['weights']).reshape(-1,21)
         else:
             search_started=time.monotonic()
-            weights,_,_=generate_batch(models,x,y,round_number,seen,folder,state['radius'],args.test_search_steps)
+            weights,_,_=generate_batch(models,x,y,round_number,seen,folder,state['radius'],args.test_search_steps,
+                                       search_state=state,online=online)
             timings['search_seconds']=time.monotonic()-search_started
         atomic_json(folder/'timings.json',timings)
         request=dict(weights=weights.reshape(-1,3,7).tolist())
@@ -350,7 +326,8 @@ def main():
         if len({weight_key(w) for w in request['weights']}) != 50 or any(weight_key(w) in seen for w in request['weights']):
             raise RuntimeError('Previously evaluated or duplicate candidates blocked before call')
         state['attempted_calls']+=1
-        state['pending']=dict(round=round_number,input_sha256=digest(folder/'request.json'))
+        state['pending']=dict(round=round_number,input_sha256=digest(folder/'request.json'),
+                              candidates_sha256=digest(folder/'candidates.json'))
         state['status']='evaluating'
         atomic_json(session/'state.json',state)
         reserve_call(args,round_number,state['pending']['input_sha256'])
@@ -382,7 +359,7 @@ def main():
              session/'models'/f'v{args.rounds:02d}'/'diagnostics.json')
     best=json.loads((session/'best.json').read_text())
     summaries=[json.loads(p.read_text()) for p in sorted((session/'rounds').glob('*/feedback.json'))]
-    lines=['# 软决策树 104 独立实验结果','',f'后端：{args.backend}；正式调用：{state["attempted_calls"]}；本次新标签：{len(online)}。',
+    lines=['# 软决策树 104-v3 独立实验结果','',f'后端：{args.backend}；正式调用：{state["attempted_calls"]}；本次新标签：{len(online)}。',
            f'最终最低真实 R：**{best["R"]:.12f}**，来源：{best["origin"]}。',
            f'原始最好 R：{state["offline_best"]["R"]:.12f}；本次线上最好 R：{best["online_best"]["R"]:.12f}。','',
            '| 轮次 | 本轮最低 R | 累计最低 R | 提交前预测 MAE |','|---:|---:|---:|---:|']

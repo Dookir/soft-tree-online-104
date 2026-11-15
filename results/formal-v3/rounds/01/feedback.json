@@ -1,0 +1,61 @@
+{
+  "round": 1,
+  "batch_min_R": 111.29589934123214,
+  "best_online_R": 111.29589934123214,
+  "cumulative_best_R": 111.29589934123214,
+  "prediction_MAE": 9.210219714990826,
+  "prediction_RMSE": 10.289085176091216,
+  "source_counts": {
+    "disagreement": 2,
+    "joint": 8,
+    "recombination": 10,
+    "surrogate": 10,
+    "transfer": 20
+  },
+  "successful_observations": 50,
+  "model_version": 0,
+  "scale_update": {
+    "alpha_used": 1.0,
+    "alpha_next": 1.0,
+    "unique_rounded_R_fraction": 1.0,
+    "improvement": 4.4689199179410934,
+    "reason": "unchanged"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 0,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 1,
+      "eligible_count": 26,
+      "raw_abs_error_sum": 160.84935505268047,
+      "anchor_abs_error_sum": 31.299663344924554,
+      "raw_top5_regret": 0.0,
+      "anchor_top5_regret": 0.0
+    },
+    "anchor_gate": {
+      "passed": false,
+      "reason": "insufficient_past_feedback",
+      "valid_batches": 1,
+      "eligible_points": 26
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "transfer": 114.29433696705382,
+    "joint": 115.48154592717765,
+    "surrogate": 111.29589934123214,
+    "recombination": 113.9492734750238,
+    "disagreement": 112.95690692547942
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 5,
+    "coarse": 5,
+    "support": 5
+  },
+  "unranked_count": 12,
+  "local_pair_accuracy": 0.7918367346938775
+}

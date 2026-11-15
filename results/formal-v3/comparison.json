@@ -1,0 +1,207 @@
+{
+  "references": {
+    "soft_tree": {
+      "experiment": "formal-20261112-01",
+      "best_R": 106.6843907663133,
+      "evaluation_calls": 20,
+      "observations": 1000,
+      "best_R_by_round": [
+        111.29589934123214,
+        109.20438426121837,
+        108.92048986244481,
+        108.31065398443025,
+        108.31065398443025,
+        108.31065398443025,
+        108.27280542987864,
+        108.14418802026194,
+        108.02744700375479,
+        107.78346153337043,
+        107.78346153337043,
+        107.78346153337043,
+        107.75459921348374,
+        107.75459212053102,
+        107.68700544524472,
+        107.64821331191342,
+        107.04415022139437,
+        107.04415022139437,
+        107.02014701603912,
+        106.6843907663133
+      ],
+      "total_wall_seconds": 22030.171832814813,
+      "training_seed_seconds_sum": 17758.364020079374,
+      "evaluation_seconds": 2873.8512926772237,
+      "search_and_other_residual_seconds": 1397.9565200582147,
+      "timing_limitation": "Baseline did not separately time search; residual includes other overhead.",
+      "purpose": "Post-run comparison only; not used in training, calibration, replay or candidate acquisition"
+    },
+    "tabm": {
+      "best_R": 107.01899083587341,
+      "observations": 1000
+    },
+    "fast": {
+      "best_R": 108.28481595264748,
+      "observations": 1000
+    },
+    "v1_frozen": {
+      "best_R": 104.50394996162504,
+      "observations": 1000,
+      "usage": "post-completion comparison only",
+      "best_R_by_round": [
+        111.29589934123214,
+        110.16760477295611,
+        109.02827481646091,
+        109.02827481646091,
+        108.60509757103864,
+        107.76556923298631,
+        106.4726674730191,
+        106.09870778117329,
+        105.32656269613653,
+        105.31483101192862,
+        104.7538047498092,
+        104.63923887070268,
+        104.5664638793096,
+        104.5122000882402,
+        104.5122000882402,
+        104.5122000882402,
+        104.5122000882402,
+        104.5122000882402,
+        104.50394996162504,
+        104.50394996162504
+      ]
+    },
+    "v2": {
+      "best_R": 105.28469773195684,
+      "observations": 1000,
+      "usage": "post-completion comparison only"
+    }
+  },
+  "new": {
+    "target_R": 104.0,
+    "achieved": false,
+    "best_real_R": 104.14030796010047,
+    "calls": 20,
+    "evaluations": 1000,
+    "extra_evaluations": 0,
+    "recommendation_is_observed": true,
+    "polish_trigger_round": 16,
+    "polish_rounds": 4,
+    "anchor_enabled_rounds": [
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "timing": {
+    "training_seconds": 11775.844248883426,
+    "search_seconds": 961.3856462091208,
+    "evaluation_seconds": 3034.619462430477,
+    "worker_seconds_this_invocation": 15839.78085886687,
+    "session_wall_seconds": 15778.613221,
+    "GPU_wait_seconds": 46.99558848887682,
+    "reused_pretraining_seconds": 0.0,
+    "total_with_GPU_wait_seconds": 15825.608809488876
+  },
+  "same_evaluation_count": [
+    {
+      "round": 1,
+      "new_R": 111.29589934123214,
+      "baseline_R": 111.29589934123214
+    },
+    {
+      "round": 2,
+      "new_R": 110.16760477295611,
+      "baseline_R": 110.16760477295611
+    },
+    {
+      "round": 3,
+      "new_R": 109.02827481646091,
+      "baseline_R": 109.02827481646091
+    },
+    {
+      "round": 4,
+      "new_R": 109.02827481646091,
+      "baseline_R": 109.02827481646091
+    },
+    {
+      "round": 5,
+      "new_R": 108.60509757103864,
+      "baseline_R": 108.60509757103864
+    },
+    {
+      "round": 6,
+      "new_R": 107.76556923298631,
+      "baseline_R": 107.76556923298631
+    },
+    {
+      "round": 7,
+      "new_R": 106.4726674730191,
+      "baseline_R": 106.4726674730191
+    },
+    {
+      "round": 8,
+      "new_R": 106.09870778117329,
+      "baseline_R": 106.09870778117329
+    },
+    {
+      "round": 9,
+      "new_R": 105.32656269613653,
+      "baseline_R": 105.32656269613653
+    },
+    {
+      "round": 10,
+      "new_R": 105.31483101192862,
+      "baseline_R": 105.31483101192862
+    },
+    {
+      "round": 11,
+      "new_R": 104.7538047498092,
+      "baseline_R": 104.7538047498092
+    },
+    {
+      "round": 12,
+      "new_R": 104.63923887070268,
+      "baseline_R": 104.63923887070268
+    },
+    {
+      "round": 13,
+      "new_R": 104.5664638793096,
+      "baseline_R": 104.5664638793096
+    },
+    {
+      "round": 14,
+      "new_R": 104.5122000882402,
+      "baseline_R": 104.5122000882402
+    },
+    {
+      "round": 15,
+      "new_R": 104.5122000882402,
+      "baseline_R": 104.5122000882402
+    },
+    {
+      "round": 16,
+      "new_R": 104.5122000882402,
+      "baseline_R": 104.5122000882402
+    },
+    {
+      "round": 17,
+      "new_R": 104.38657321035862,
+      "baseline_R": 104.5122000882402
+    },
+    {
+      "round": 18,
+      "new_R": 104.14030796010047,
+      "baseline_R": 104.5122000882402
+    },
+    {
+      "round": 19,
+      "new_R": 104.14030796010047,
+      "baseline_R": 104.50394996162504
+    },
+    {
+      "round": 20,
+      "new_R": 104.14030796010047,
+      "baseline_R": 104.50394996162504
+    }
+  ]
+}

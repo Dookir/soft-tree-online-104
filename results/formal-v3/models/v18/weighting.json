@@ -1,0 +1,19 @@
+{
+  "total_rows": 2948,
+  "original_rows": 2048,
+  "online_rows": 900,
+  "active_rows": 2948,
+  "pruned_indices": [],
+  "elite_indices": [
+    2906,
+    2918,
+    2914,
+    2916,
+    2908
+  ],
+  "weighting": "source(offline=1,online=1.5)*low_R[1,1.5]*region[1,1.5], cap=3",
+  "active_weight_min": 1.0000000000000002,
+  "active_weight_max": 3.0,
+  "online_weight_share": 0.5346879729601792,
+  "pruning": "high-R top20%, elite distance>=0.3, neighbor distance<=0.03, label gap<=1% median; at most5%"
+}

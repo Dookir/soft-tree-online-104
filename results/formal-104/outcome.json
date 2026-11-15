@@ -1,9 +1,0 @@
-{
-  "target_R": 104.0,
-  "achieved": false,
-  "best_real_R": 104.50394996162504,
-  "calls": 20,
-  "evaluations": 1000,
-  "extra_evaluations": 0,
-  "recommendation_is_observed": true
-}

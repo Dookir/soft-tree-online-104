@@ -1,0 +1,70 @@
+{
+  "round": 3,
+  "batch_min_R": 109.02827481646091,
+  "best_online_R": 109.02827481646091,
+  "cumulative_best_R": 109.02827481646091,
+  "prediction_MAE": 5.114899813312603,
+  "prediction_RMSE": 5.939514561917014,
+  "source_counts": {
+    "disagreement": 2,
+    "joint": 8,
+    "recombination": 10,
+    "surrogate": 10,
+    "transfer": 20
+  },
+  "successful_observations": 150,
+  "model_version": 2,
+  "scale_update": {
+    "alpha_used": 0.7,
+    "alpha_next": 0.7,
+    "unique_rounded_R_fraction": 0.98,
+    "improvement": 1.139329956495203,
+    "reason": "unchanged"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 0,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 3,
+      "eligible_count": 27,
+      "raw_abs_error_sum": 79.87700125277532,
+      "anchor_abs_error_sum": 18.669194559589485,
+      "raw_top5_regret": 1.3968442917102948,
+      "anchor_top5_regret": 1.350636242539622
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 82,
+      "raw_MAE": 4.262774798797973,
+      "anchor_MAE": 0.8543728147086171,
+      "raw_top5_regret": 0.6464736493847644,
+      "anchor_top5_regret": 0.6310709663278734,
+      "assessed_rounds": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "transfer": 109.87347343435977,
+    "joint": 109.02827481646091,
+    "surrogate": 110.94659001927357,
+    "recombination": 110.4251191081712,
+    "disagreement": 115.16224758911994
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 5,
+    "coarse": 5,
+    "support": 5
+  },
+  "unranked_count": 12,
+  "local_pair_accuracy": 0.369281045751634
+}

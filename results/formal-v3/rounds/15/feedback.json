@@ -1,0 +1,70 @@
+{
+  "round": 15,
+  "batch_min_R": 104.5122000882402,
+  "best_online_R": 104.5122000882402,
+  "cumulative_best_R": 104.5122000882402,
+  "prediction_MAE": 3.6966394805755396,
+  "prediction_RMSE": 4.000816168746837,
+  "source_counts": {
+    "disagreement": 2,
+    "joint": 8,
+    "recombination": 10,
+    "surrogate": 10,
+    "transfer": 20
+  },
+  "successful_observations": 750,
+  "model_version": 14,
+  "scale_update": {
+    "alpha_used": 0.5,
+    "alpha_next": 0.5,
+    "unique_rounded_R_fraction": 0.94,
+    "improvement": 0.0,
+    "reason": "unchanged"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 1,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 15,
+      "eligible_count": 40,
+      "raw_abs_error_sum": 173.47340716311675,
+      "anchor_abs_error_sum": 21.80811525970836,
+      "raw_top5_regret": 0.07509924191981554,
+      "anchor_top5_regret": 0.0
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 120,
+      "raw_MAE": 4.064672414259701,
+      "anchor_MAE": 0.6343869582518885,
+      "raw_top5_regret": 0.12278292421251535,
+      "anchor_top5_regret": 0.0,
+      "assessed_rounds": [
+        13,
+        14,
+        15
+      ]
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "transfer": 104.5122000882402,
+    "joint": 105.1420021969825,
+    "surrogate": 105.82556524127722,
+    "recombination": 104.5849750796333,
+    "disagreement": 106.4659433827037
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 5,
+    "coarse": 5,
+    "support": 5
+  },
+  "unranked_count": 12,
+  "local_pair_accuracy": 0.8224222585924713
+}

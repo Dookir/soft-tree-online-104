@@ -1,0 +1,70 @@
+{
+  "round": 4,
+  "batch_min_R": 109.02827481646091,
+  "best_online_R": 109.02827481646091,
+  "cumulative_best_R": 109.02827481646091,
+  "prediction_MAE": 3.616512306873625,
+  "prediction_RMSE": 3.8973555827673887,
+  "source_counts": {
+    "disagreement": 2,
+    "joint": 8,
+    "recombination": 10,
+    "surrogate": 10,
+    "transfer": 20
+  },
+  "successful_observations": 200,
+  "model_version": 3,
+  "scale_update": {
+    "alpha_used": 0.7,
+    "alpha_next": 0.7,
+    "unique_rounded_R_fraction": 1.0,
+    "improvement": 0.0,
+    "reason": "unchanged"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 1,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 4,
+      "eligible_count": 38,
+      "raw_abs_error_sum": 115.11609679875443,
+      "anchor_abs_error_sum": 37.62981638034073,
+      "raw_top5_regret": 0.31824473629239947,
+      "anchor_top5_regret": 0.2736368076875806
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 94,
+      "raw_MAE": 3.2320667579522104,
+      "anchor_MAE": 0.812645998314072,
+      "raw_top5_regret": 0.7525552281488975,
+      "anchor_top5_regret": 0.7222832355570669,
+      "assessed_rounds": [
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "transfer": 109.02827481646091,
+    "joint": 109.03163220419083,
+    "surrogate": 109.84449235035572,
+    "recombination": 109.26311758719385,
+    "disagreement": 113.65156606398523
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 5,
+    "coarse": 5,
+    "support": 5
+  },
+  "unranked_count": 12,
+  "local_pair_accuracy": 0.5142857142857142
+}
