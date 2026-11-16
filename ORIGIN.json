@@ -1,5 +1,5 @@
 {
-  "version": "4.0.1",
+  "version": "4.0.2",
   "experiment": "formal-v4-20261115-01",
   "original_runtime_source_sha256": "9a5dfbe7a40261ce76c2b57a4d3e686917b1803ce211f63faf51eb50556a3fd1",
   "original_data_sha256": "877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023",
@@ -54,7 +54,8 @@
       "runtime-policy recording and two-process repeatability check",
       "Git byte preservation under Windows autocrlf",
       "Windows-portable foreign-path access audit",
-      "reject reuse of cached training from a different runtime policy"
+      "reject reuse of cached training from a different runtime policy",
+      "exact Python3.10.21 enforced for training; Windows/Linux CI use the shipping bootstrap installer"
     ],
     "historical_results_modified": false,
     "historical_model_and_feedback_retrained": false,

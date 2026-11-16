@@ -250,8 +250,8 @@ def main():
         print(json.dumps(dict(backend=args.backend,rounds=args.rounds,batch_size=50,training_data=str(DATA),
                               evaluation_command=solver_command(args,args.session/'rounds/01')),ensure_ascii=False))
         return 0
-    if sys.version_info[:2]!=(3,10):
-        raise RuntimeError('Training entry requires Python3.10 / PyTorch2.6 / NumPy1.26.4; evaluator uses a separate Python3.11')
+    if sys.version_info[:3]!=(3,10,21):
+        raise RuntimeError('Training entry requires Python3.10.21 / PyTorch2.6 / NumPy1.26.4; evaluator uses a separate Python3.11')
     if args.backend=='external':solver_command(args,args.session/'rounds/01')
     validate_mode(args)
     claim_run(args)

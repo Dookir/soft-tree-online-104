@@ -1,4 +1,4 @@
-# Soft Tree Online Ramping · v4.0.1
+# Soft Tree Online Ramping · v4.0.2
 
 **分楼软决策树 + 分尺度在线寻优，可复现课程实验。**
 
@@ -24,7 +24,7 @@ v4相比v3的104.140308降低 **0.283311**，低于104目标约0.143003。实验
 
 本实验从原始2048行独立冷启动，所有轮次按原配置从头全量加权重训；没有加载旧模型、旧反馈或旧最好点。历史完整版本保留在 [v1.0.0](https://github.com/Dookir/soft-tree-online-104/tree/v1.0.0) 和 [v3.0.0](https://github.com/Dookir/soft-tree-online-104/tree/v3.0.0)。
 
-## v4.0.1：降低运行随机性
+## v4.0.2：降低运行随机性
 
 本补丁增强新运行的确定性；上面的103.856997仍是原v4.0.0实验的归档成绩，没有重新评分。原版保留在[v4.0.0](https://github.com/Dookir/soft-tree-online-104/tree/v4.0.0)。
 

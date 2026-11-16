@@ -1,5 +1,5 @@
 {
-  "version": "4.0.1",
+  "version": "4.0.2",
   "experiment_version": "4.0.0",
   "checked_date": "2026-11-16",
   "best_archived_real_R": 103.85699706606101,
@@ -71,5 +71,6 @@
     "lines.py": "af1ad01300e434843500579ba1576e58f0920c07f57f494d943992d8a4e3288b",
     "training_audit.py": "2d6fbf2e79170189627689eb867b9f76d00dc72eb9f69a20d0826f9e6d732f12",
     "recipe.json": "39694418c56f4567d31dd08a8eccac4b8e8cff8d21667d33e70f823c834286b8"
-  }
+  },
+  "canonical_training_python": "3.10.21"
 }

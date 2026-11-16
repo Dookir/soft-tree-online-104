@@ -119,15 +119,15 @@ def verify_report():
         weekly.append(math.fsum(abs(net[t]-net[t-1]) for t in range(1,168)))
     recomputed=math.fsum(weekly)/8
     if abs(recomputed-best['R'])>1e-9 or trace['R']!=best['R']:raise RuntimeError('Archived trace does not reproduce true R')
-    return dict(version='4.0.1',experiment_version='4.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
+    return dict(version='4.0.2',experiment_version='4.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
                 real_R=best['R'],origin=best['id'],weights=best['weights'],target_R=104.,
                 target_achieved=best['R']<=104.,score_type='archived_real_evaluation',
                 evaluator_called=False,models_retrained=False,role_totals=role_totals,trajectory_recomputed_R=recomputed)
 
 
 def environment(device='cpu',gpu=None):
-    if sys.version_info[:2]!=(3,10):
-        raise RuntimeError('Use the pinned Python3.10 training environment')
+    if sys.version_info[:3]!=(3,10,21):
+        raise RuntimeError('Use the pinned Python3.10.21 training environment; run bootstrap.py')
     from .runner import select_device
     # Device must be selected before importing modules that bind base.DEVICE.
     allocation=select_device(argparse.Namespace(device=device,gpu=gpu,allow_shared_gpu=False,
@@ -220,7 +220,7 @@ def main():
         from .learning import verify_original_data
         x,y=training_data(0);verify_original_data(x,y)
         from .determinism import settings
-        print(json.dumps(dict(version='4.0.1',files_checked=checked,python=platform.python_version(),
+        print(json.dumps(dict(version='4.0.2',files_checked=checked,python=platform.python_version(),
                              numpy=np.__version__,torch=str(torch.__version__),allocation=allocation,
                              determinism=settings()),indent=2));return 0
     if args.command=='check-determinism':
