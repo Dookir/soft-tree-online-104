@@ -1,0 +1,44 @@
+{
+  "after_feedback_round": 8,
+  "evaluated_round": 9,
+  "seed": 2026,
+  "full_rows": 2448,
+  "without_information_rows": 2433,
+  "excluded_sample_ids": [
+    "r08-36",
+    "r08-37",
+    "r08-38",
+    "r08-39",
+    "r08-40",
+    "r08-41",
+    "r08-42",
+    "r08-43",
+    "r08-44",
+    "r08-45",
+    "r08-46",
+    "r08-47",
+    "r08-48",
+    "r08-49",
+    "r08-50"
+  ],
+  "shadow_model_sha256": "8b1522fca925fe8617f1eb9271b266602a37769efca345706048eccd67442c07",
+  "generated_before_feedback": true,
+  "used_for_acquisition": false,
+  "full": {
+    "MAE": 2.748337903578595,
+    "low20_MAE": 2.049054449543283,
+    "pair_accuracy": 0.7567567567567568,
+    "selected_true_R": 106.25876941217575,
+    "selection_regret": 1.19426371215377
+  },
+  "without_information": {
+    "MAE": 1.906473213620282,
+    "low20_MAE": 0.9142482704102719,
+    "pair_accuracy": 0.7428337428337428,
+    "selected_true_R": 106.01891183073167,
+    "selection_regret": 0.9544061307096854
+  },
+  "MAE_improvement_from_information": -0.8418646899583129,
+  "interpretation": "conditional on next actually queried candidates; not a whole-space causal claim",
+  "extra_true_evaluations": 0
+}

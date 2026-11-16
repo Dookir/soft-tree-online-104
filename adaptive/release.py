@@ -12,7 +12,7 @@ import time
 from .protocol import atomic_json, digest, parse_request, parse_response, weight_key
 
 ROOT=Path(__file__).resolve().parents[1]
-RESULT=ROOT/'results/formal-v3'
+RESULT=ROOT/'results/formal-v4'
 DATA=ROOT/'adaptive/data/train.csv'
 DATA_HASH='877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023'
 
@@ -44,7 +44,12 @@ def verify_report():
     original=records();known={weight_key(r['weights']) for r in original};online=[]
     best=min(original,key=lambda r:r['R'])
     visible_R=[r['R'] for r in original]
-    reference=json.loads((ROOT/'ORIGIN.json').read_text())['v1_reference_request_sha256_first16']
+    recipe=json.loads((ROOT/'adaptive/recipe.json').read_text())
+    role_schedule=recipe['active_sampling']['role_schedule']
+    audit_rounds=recipe['information_audit']['after_feedback_rounds']
+    role_totals={'exploit':0,'learn':0}
+    listed_before_feedback=[]
+    archived_rows=json.loads((RESULT/'online.json').read_text())
     for number in range(1,21):
         folder=RESULT/'rounds'/f'{number:02d}'
         request=parse_request(json.loads((folder/'request.json').read_text()))
@@ -58,8 +63,25 @@ def verify_report():
         for index,value in zip(shadow['center_indices'],shadow['center_R']):
             if not 0<=index<len(visible_R) or visible_R[index]!=value:
                 raise RuntimeError('Shadow center refers to future or mismatched feedback')
-        if number<=16 and digest(folder/'request.json')!=reference[str(number)]:
-            raise RuntimeError('Discovery prefix differs from the frozen v1 reference')
+        target=next((e,l) for lo,hi,e,l in role_schedule if lo<=number<=hi)
+        if (batch['roles'].count('exploit'),batch['roles'].count('learn'))!=target:
+            raise RuntimeError('Archived role quotas do not match frozen schedule')
+        pair_members={}
+        for role,meta in zip(batch['roles'],batch['metadata']):
+            if meta['role']!=role:raise RuntimeError('Role/source pairing mismatch')
+            role_totals[role]+=1
+            if 'pair_id' in meta:pair_members.setdefault(meta['pair_id'],[]).append(meta['pair_member'])
+            for endpoint in meta.get('interval_endpoints',[]):
+                if not 0<=endpoint['index']<len(visible_R) or visible_R[endpoint['index']]!=endpoint['R']:
+                    raise RuntimeError('Boundary query used future or mismatched truth')
+        if any(sorted(v)!=[0,1] for v in pair_members.values()):raise RuntimeError('Unmatched contrast pair')
+        if number-1 in audit_rounds:
+            comparison=batch['information_model_comparison']
+            expected_ids=[r['id'] for r in listed_before_feedback if r['round']==number-1 and r['role']=='learn']
+            if comparison['excluded_sample_ids']!=expected_ids or not comparison['generated_before_feedback'] or comparison['used_for_acquisition']:
+                raise RuntimeError('Training-value diagnostic used wrong information group')
+            if comparison['after_feedback_round']!=number-1 or comparison['full_rows']!=len(visible_R):
+                raise RuntimeError('Training-value diagnostic used wrong data version')
         if request!=batch['weights'] or len(request)!=50:
             raise RuntimeError('Recorded weight/score pairing mismatch')
         for i,(w,r) in enumerate(zip(request,scores)):
@@ -68,6 +90,7 @@ def verify_report():
                 raise RuntimeError('Repeated weight in recorded run')
             known.add(key)
             online.append(dict(id=f'r{number:02d}-{i+1:02d}',weights=w,R=r,round=number,index=i+1))
+        listed_before_feedback.extend(archived_rows[(number-1)*50:number*50])
         visible_R.extend(scores)
         best=min([best,*online[-50:]],key=lambda r:r['R'])
         feedback=json.loads((folder/'feedback.json').read_text())
@@ -85,10 +108,21 @@ def verify_report():
     state=json.loads((RESULT/'state.json').read_text())
     if state['completed_rounds']!=20 or state['attempted_calls']!=20 or state['status']!='complete':
         raise RuntimeError('Experiment was not a completed20x50 run')
-    return dict(version='3.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
+    import math
+    trace=json.loads((RESULT/'verification/best-net-traces.json').read_text())
+    if len(trace['weeks'])!=8 or trace['source_case']!=best['id']:raise RuntimeError('Best trace identity mismatch')
+    weekly=[]
+    for week in trace['weeks']:
+        net=week['net'];buildings=week['building_nets']
+        if len(net)!=168 or len(buildings)!=3 or any(len(b)!=168 for b in buildings):raise RuntimeError('Invalid trace shape')
+        if any(abs(sum(b[t] for b in buildings)-net[t])>1e-9 for t in range(168)):raise RuntimeError('Building/district trace mismatch')
+        weekly.append(math.fsum(abs(net[t]-net[t-1]) for t in range(1,168)))
+    recomputed=math.fsum(weekly)/8
+    if abs(recomputed-best['R'])>1e-9 or trace['R']!=best['R']:raise RuntimeError('Archived trace does not reproduce true R')
+    return dict(version='4.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
                 real_R=best['R'],origin=best['id'],weights=best['weights'],target_R=104.,
                 target_achieved=best['R']<=104.,score_type='archived_real_evaluation',
-                evaluator_called=False,models_retrained=False)
+                evaluator_called=False,models_retrained=False,role_totals=role_totals,trajectory_recomputed_R=recomputed)
 
 
 def environment(device='cpu',gpu=None):
@@ -174,7 +208,7 @@ def main():
         import numpy as np,torch
         from .learning import verify_original_data
         x,y=training_data(0);verify_original_data(x,y)
-        print(json.dumps(dict(version='3.0.0',files_checked=checked,python=platform.python_version(),
+        print(json.dumps(dict(version='4.0.0',files_checked=checked,python=platform.python_version(),
                              numpy=np.__version__,torch=str(torch.__version__),allocation=allocation),indent=2));return 0
     if args.command=='test':
         import unittest
@@ -204,9 +238,10 @@ def main():
             policy_state={'polish_active':f['polish_active_next'],'anchor_enabled':f['anchor_enabled_next']}
         else:policy_state={'polish_active':False,'anchor_enabled':False}
         history=[r for r in json.loads((RESULT/'online.json').read_text()) if r['round']<=args.round]
-        generate_batch(models,x,y,args.round+1,{weight_key(w.tolist()) for w in x},args.output,alpha,
+        proposal_round=min(args.round+1,20)
+        generate_batch(models,x,y,proposal_round,{weight_key(w.tolist()) for w in x},args.output,alpha,
                        search_state=policy_state,online=history)
         atomic_json(args.output/'score-status.json',dict(predictions_only=True,oracle_calls=0,
-                    true_R_available_for_new_proposals=False))
+                    true_R_available_for_new_proposals=False,proposal_generator_round=proposal_round,training_feedback_round=args.round,formal_round_submission=False))
         print(json.dumps(dict(output=str(args.output),candidates=50,score_type='model_predictions',oracle_calls=0)));return 0
     return 0

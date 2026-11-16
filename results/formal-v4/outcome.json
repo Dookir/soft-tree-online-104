@@ -1,0 +1,198 @@
+{
+  "target_R": 104.0,
+  "achieved": true,
+  "best_real_R": 103.85699706606101,
+  "calls": 20,
+  "evaluations": 1000,
+  "extra_evaluations": 0,
+  "recommendation_is_observed": true,
+  "polish_trigger_round": null,
+  "polish_rounds": 0,
+  "anchor_enabled_rounds": [],
+  "role_totals": {
+    "exploit": 710,
+    "learn": 290
+  },
+  "best_R_by_role": {
+    "exploit": 103.85699706606101,
+    "learn": 104.92911434907
+  },
+  "information_training_audits": [
+    {
+      "after_feedback_round": 4,
+      "evaluated_round": 5,
+      "seed": 2026,
+      "full_rows": 2248,
+      "without_information_rows": 2228,
+      "excluded_sample_ids": [
+        "r04-31",
+        "r04-32",
+        "r04-33",
+        "r04-34",
+        "r04-35",
+        "r04-36",
+        "r04-37",
+        "r04-38",
+        "r04-39",
+        "r04-40",
+        "r04-41",
+        "r04-42",
+        "r04-43",
+        "r04-44",
+        "r04-45",
+        "r04-46",
+        "r04-47",
+        "r04-48",
+        "r04-49",
+        "r04-50"
+      ],
+      "shadow_model_sha256": "99169912b5e8bd82878204c0ed1abedcb17070a8a3967827697aa90dd95e988b",
+      "generated_before_feedback": true,
+      "used_for_acquisition": false,
+      "full": {
+        "MAE": 3.7228212276439283,
+        "low20_MAE": 2.08105777819173,
+        "pair_accuracy": 0.636437908496732,
+        "selected_true_R": 111.86469561688136,
+        "selection_regret": 4.671767805935815
+      },
+      "without_information": {
+        "MAE": 3.638699614463783,
+        "low20_MAE": 2.074529956191968,
+        "pair_accuracy": 0.6609477124183006,
+        "selected_true_R": 109.3288582386449,
+        "selection_regret": 2.13593042769935
+      },
+      "MAE_improvement_from_information": -0.08412161318014544,
+      "interpretation": "conditional on next actually queried candidates; not a whole-space causal claim",
+      "extra_true_evaluations": 0
+    },
+    {
+      "after_feedback_round": 8,
+      "evaluated_round": 9,
+      "seed": 2026,
+      "full_rows": 2448,
+      "without_information_rows": 2433,
+      "excluded_sample_ids": [
+        "r08-36",
+        "r08-37",
+        "r08-38",
+        "r08-39",
+        "r08-40",
+        "r08-41",
+        "r08-42",
+        "r08-43",
+        "r08-44",
+        "r08-45",
+        "r08-46",
+        "r08-47",
+        "r08-48",
+        "r08-49",
+        "r08-50"
+      ],
+      "shadow_model_sha256": "8b1522fca925fe8617f1eb9271b266602a37769efca345706048eccd67442c07",
+      "generated_before_feedback": true,
+      "used_for_acquisition": false,
+      "full": {
+        "MAE": 2.748337903578595,
+        "low20_MAE": 2.049054449543283,
+        "pair_accuracy": 0.7567567567567568,
+        "selected_true_R": 106.25876941217575,
+        "selection_regret": 1.19426371215377
+      },
+      "without_information": {
+        "MAE": 1.906473213620282,
+        "low20_MAE": 0.9142482704102719,
+        "pair_accuracy": 0.7428337428337428,
+        "selected_true_R": 106.01891183073167,
+        "selection_regret": 0.9544061307096854
+      },
+      "MAE_improvement_from_information": -0.8418646899583129,
+      "interpretation": "conditional on next actually queried candidates; not a whole-space causal claim",
+      "extra_true_evaluations": 0
+    },
+    {
+      "after_feedback_round": 12,
+      "evaluated_round": 13,
+      "seed": 2026,
+      "full_rows": 2648,
+      "without_information_rows": 2633,
+      "excluded_sample_ids": [
+        "r12-36",
+        "r12-37",
+        "r12-38",
+        "r12-39",
+        "r12-40",
+        "r12-41",
+        "r12-42",
+        "r12-43",
+        "r12-44",
+        "r12-45",
+        "r12-46",
+        "r12-47",
+        "r12-48",
+        "r12-49",
+        "r12-50"
+      ],
+      "shadow_model_sha256": "f9aeaeaaa9c4f4b2c34bc7bc1493fa17aa6780be6fb7a84067d42c2c175eeb9b",
+      "generated_before_feedback": true,
+      "used_for_acquisition": false,
+      "full": {
+        "MAE": 2.897515004162866,
+        "low20_MAE": 2.710567754266769,
+        "pair_accuracy": 0.7559377559377559,
+        "selected_true_R": 107.043127519486,
+        "selection_regret": 2.3073955928557552
+      },
+      "without_information": {
+        "MAE": 3.5880616468388578,
+        "low20_MAE": 3.371389604837495,
+        "pair_accuracy": 0.7403767403767404,
+        "selected_true_R": 107.043127519486,
+        "selection_regret": 2.3073955928557552
+      },
+      "MAE_improvement_from_information": 0.6905466426759919,
+      "interpretation": "conditional on next actually queried candidates; not a whole-space causal claim",
+      "extra_true_evaluations": 0
+    },
+    {
+      "after_feedback_round": 16,
+      "evaluated_round": 17,
+      "seed": 2026,
+      "full_rows": 2848,
+      "without_information_rows": 2838,
+      "excluded_sample_ids": [
+        "r16-41",
+        "r16-42",
+        "r16-43",
+        "r16-44",
+        "r16-45",
+        "r16-46",
+        "r16-47",
+        "r16-48",
+        "r16-49",
+        "r16-50"
+      ],
+      "shadow_model_sha256": "d3016bb7f8379d62511af52c1f0fe185a716fb8634bc88f1c7d9c3c06eab469f",
+      "generated_before_feedback": true,
+      "used_for_acquisition": false,
+      "full": {
+        "MAE": 3.2306051104937104,
+        "low20_MAE": 3.0143796769469615,
+        "pair_accuracy": 0.7757774140752864,
+        "selected_true_R": 106.09978570218664,
+        "selection_regret": 1.6474010553210974
+      },
+      "without_information": {
+        "MAE": 3.8820613311458247,
+        "low20_MAE": 3.7197280482439483,
+        "pair_accuracy": 0.7741407528641571,
+        "selected_true_R": 106.09978570218664,
+        "selection_regret": 1.6474010553210974
+      },
+      "MAE_improvement_from_information": 0.6514562206521144,
+      "interpretation": "conditional on next actually queried candidates; not a whole-space causal claim",
+      "extra_true_evaluations": 0
+    }
+  ]
+}

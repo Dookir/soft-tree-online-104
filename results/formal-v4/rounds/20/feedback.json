@@ -1,0 +1,79 @@
+{
+  "round": 20,
+  "batch_min_R": 103.85699706606101,
+  "best_online_R": 103.85699706606101,
+  "cumulative_best_R": 103.85699706606101,
+  "prediction_MAE": 4.6242580699146325,
+  "prediction_RMSE": 4.894121815049172,
+  "source_counts": {
+    "exploit_final_scan": 2,
+    "joint": 8,
+    "recombination": 10,
+    "surrogate": 10,
+    "transfer": 20
+  },
+  "successful_observations": 1000,
+  "model_version": 19,
+  "role_counts": {
+    "exploit": 50
+  },
+  "role_best_R": {
+    "exploit": 103.85699706606101
+  },
+  "role_improvements_over_previous_best": {
+    "exploit": 1
+  },
+  "scale_update": {
+    "alpha_used": 0.5,
+    "alpha_next": 0.5,
+    "unique_rounded_R_fraction": 0.92,
+    "improvement": 0.04628244787454605,
+    "reason": "unchanged"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 0,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 20,
+      "eligible_count": 43,
+      "raw_abs_error_sum": 193.42913598923653,
+      "anchor_abs_error_sum": 28.528863365150087,
+      "raw_top5_regret": 0.5953875808045268,
+      "anchor_top5_regret": 0.21595945954322815
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 143,
+      "raw_MAE": 3.973578166355956,
+      "anchor_MAE": 0.9508197031628038,
+      "raw_top5_regret": 0.6001610911140839,
+      "anchor_top5_regret": 0.38429855927824974,
+      "assessed_rounds": [
+        18,
+        19,
+        20
+      ]
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "surrogate": 104.73227847449016,
+    "joint": 104.27823530335445,
+    "recombination": 104.47593581164256,
+    "exploit_final_scan": 103.85699706606101,
+    "transfer": 103.90327951393556
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 5,
+    "coarse": 5,
+    "support": 5
+  },
+  "unranked_count": 14,
+  "local_pair_accuracy": 0.7483606557377049
+}

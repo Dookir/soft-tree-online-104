@@ -1,0 +1,86 @@
+{
+  "round": 14,
+  "batch_min_R": 104.71014555997681,
+  "best_online_R": 104.71014555997681,
+  "cumulative_best_R": 104.71014555997681,
+  "prediction_MAE": 3.6092438732640186,
+  "prediction_RMSE": 3.8582701135267814,
+  "source_counts": {
+    "joint": 8,
+    "learn_boundary": 4,
+    "learn_competitive": 3,
+    "learn_pair": 8,
+    "recombination": 6,
+    "surrogate": 4,
+    "transfer": 17
+  },
+  "successful_observations": 700,
+  "model_version": 13,
+  "role_counts": {
+    "exploit": 35,
+    "learn": 15
+  },
+  "role_best_R": {
+    "exploit": 104.71014555997681,
+    "learn": 105.92033564858139
+  },
+  "role_improvements_over_previous_best": {
+    "exploit": 1,
+    "learn": 0
+  },
+  "scale_update": {
+    "alpha_used": 0.5,
+    "alpha_next": 0.5,
+    "unique_rounded_R_fraction": 0.96,
+    "improvement": 0.025586366653442383,
+    "reason": "unchanged"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 0,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 14,
+      "eligible_count": 50,
+      "raw_abs_error_sum": 180.46219366320094,
+      "anchor_abs_error_sum": 47.2042105222565,
+      "raw_top5_regret": 0.0,
+      "anchor_top5_regret": 0.0
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 146,
+      "raw_MAE": 3.6293367041219766,
+      "anchor_MAE": 0.9665228058043368,
+      "raw_top5_regret": 0.11959690103928249,
+      "anchor_top5_regret": 0.1057807778318723,
+      "assessed_rounds": [
+        12,
+        13,
+        14
+      ]
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "surrogate": 107.16313700191677,
+    "learn_pair": 106.61680557194632,
+    "joint": 105.78654609713703,
+    "recombination": 105.38304991880432,
+    "learn_boundary": 105.92033564858139,
+    "learn_competitive": 106.04693897970719,
+    "transfer": 104.71014555997681
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 5,
+    "coarse": 4,
+    "support": 3
+  },
+  "unranked_count": 12,
+  "local_pair_accuracy": 0.7661488143908421
+}

@@ -19,8 +19,10 @@ class FrozenRelease(unittest.TestCase):
     def test_manifest_and_complete_transcript(self):
         report=verify_report()
         self.assertEqual(report['feedback_rows'],1000)
-        self.assertEqual(report['real_R'],104.14030796010047)
-        self.assertFalse(report['target_achieved'])
+        self.assertEqual(report['real_R'],103.85699706606101)
+        self.assertTrue(report['target_achieved'])
+        self.assertEqual(report['role_totals'],{'exploit':710,'learn':290})
+        self.assertAlmostEqual(report['trajectory_recomputed_R'],report['real_R'],places=9)
         self.assertFalse(report['evaluator_called'])
 
     def test_original_and_online_separation(self):
@@ -76,10 +78,10 @@ class FrozenRelease(unittest.TestCase):
                 with self.assertRaises(RuntimeError):reserve_call(args,21,'no')
 
     def test_observed_winner_and_polish_policy(self):
-        b=json.loads((RESULT/'rounds/18/candidates.json').read_text())
-        self.assertEqual(b['sources'][8],'transfer')
-        self.assertEqual(b['metadata'][8]['selection'],'rotating')
-        self.assertEqual(b['metadata'][8]['delta'],.01)
+        b=json.loads((RESULT/'rounds/20/candidates.json').read_text())
+        self.assertEqual(b['sources'][48],'exploit_final_scan')
+        self.assertEqual(b['metadata'][48]['selection'],'observed_improvement')
+        self.assertEqual(b['metadata'][48]['delta'],.0005)
         from adaptive.anchor import update_feedback
         state={};previous=min(r['R'] for r in records())
         for number in range(1,21):
@@ -93,8 +95,9 @@ class FrozenRelease(unittest.TestCase):
             saved=json.loads((folder/'feedback.json').read_text())['v3_transition']
             self.assertEqual(transition['anchor_enabled_next'],saved['anchor_enabled_next'])
             previous=best
-        self.assertEqual(state['polish_trigger_round'],16)
-        self.assertTrue(state['anchor_enabled'])
+        self.assertIsNone(state.get('polish_trigger_round'))
+        self.assertFalse(state['polish_active'])
+        self.assertFalse(state['anchor_enabled'])
 
     def test_line_scans_and_direction_identity(self):
         from adaptive.polling import moved,scan
@@ -121,9 +124,34 @@ class FrozenRelease(unittest.TestCase):
             self.assertTrue(np.isfinite(base.predict(models,x[:8])).all())
 
     def test_portable_access_audit_allows_source_but_blocks_archives(self):
-        script="from pathlib import Path\nimport sys,tempfile\nfrom adaptive.audit import install,ROOT\nsys.argv=['guard','--session',tempfile.gettempdir()+'/public-audit-test']\ninstall('public-audit-test')\nopen(ROOT/'adaptive/data/train.csv','rb').close()\nfor path in (ROOT/'results/formal-v3/online.json',Path(tempfile.gettempdir())/'online-soft-tree/solver/sessions/blocked.json'):\n try:open(path,'rb')\n except PermissionError:continue\n raise RuntimeError('Archived input not blocked')\n"
+        script="from pathlib import Path\nimport sys,tempfile\nfrom adaptive.audit import install,ROOT\nsys.argv=['guard','--session',tempfile.gettempdir()+'/public-audit-test']\ninstall('public-audit-test')\nopen(ROOT/'adaptive/data/train.csv','rb').close()\nfor path in (ROOT/'results/formal-v4/online.json',Path(tempfile.gettempdir())/'online-soft-tree/solver/sessions/blocked.json'):\n try:open(path,'rb')\n except PermissionError:continue\n raise RuntimeError('Archived input not blocked')\n"
         result=subprocess.run([sys.executable,'-c',script],cwd=ROOT,text=True,capture_output=True)
         self.assertEqual(result.returncode,0,result.stderr)
+
+    def test_information_training_audits_are_exact_and_pre_feedback(self):
+        from adaptive.training_audit import assess
+        from adaptive.protocol import digest
+        from adaptive.base import load_ensemble
+        for after,count in ((4,20),(8,15),(12,15),(16,10)):
+            folder=RESULT/'learning-audits'/f'after-r{after:02d}'
+            report=json.loads((folder/'training.json').read_text())
+            self.assertEqual(report['full_rows']-report['without_information_rows'],count)
+            self.assertEqual(len(load_ensemble(folder)),1)
+            self.assertEqual(digest(folder/'seed2026.npz'),report['models'][0]['sha256'])
+            batch=json.loads((RESULT/f'rounds/{after+1:02d}/candidates.json').read_text())
+            scores=json.loads((RESULT/f'rounds/{after+1:02d}/stdout.json').read_text())['R']
+            expected=json.loads((folder/f'evaluation-on-r{after+1:02d}.json').read_text())
+            self.assertEqual(assess(batch,scores),expected)
+            comparison=batch['information_model_comparison']
+            self.assertTrue(comparison['generated_before_feedback'])
+            self.assertFalse(comparison['used_for_acquisition'])
+            np.testing.assert_array_equal(comparison['full_predictions'],np.asarray(batch['predictions'])[:,0])
+
+    def test_frozen_core_files_match_original_experiment(self):
+        from adaptive.protocol import digest
+        origin=json.loads((ROOT/'ORIGIN.json').read_text())
+        for name,sha in origin['unchanged_algorithm_files'].items():
+            self.assertEqual(digest(ROOT/'adaptive'/name),sha)
 
     def test_response_rejects_misalignment_and_nan(self):
         for x in ({'R':[1.]},{'R':[float('nan'),1.]},{'R':[True,1.]}):

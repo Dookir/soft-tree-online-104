@@ -1,0 +1,246 @@
+{
+  "backend": "recovered",
+  "rounds": 20,
+  "batch_size": 50,
+  "data_sha256": "877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023",
+  "source_sha256": "9a5dfbe7a40261ce76c2b57a4d3e686917b1803ce211f63faf51eb50556a3fd1",
+  "eval_workers": 8,
+  "train_jobs": 1,
+  "evaluator_python": "experiment://online-soft-tree/evaluator-workflow/.venv/bin/python",
+  "workflow": "experiment://online-soft-tree/evaluator-workflow",
+  "executable": "experiment://soft-tree-online-104-v4/solver.exe",
+  "wine": null,
+  "wine_prefix": null,
+  "test_epochs": null,
+  "test_search_steps": null,
+  "training_environment": {
+    "python": "3.10.21",
+    "torch": "2.6.0+cu118",
+    "numpy": "1.26.4"
+  },
+  "requested_device": "cuda",
+  "gpu": null,
+  "allow_shared_gpu": true,
+  "exclude_gpu": "",
+  "acquisition": {
+    "version": "104-v4-experiment",
+    "data_sha256": "877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023",
+    "seeds": [
+      2026,
+      2027,
+      2028,
+      2029,
+      2030
+    ],
+    "epochs": {
+      "2026": 486,
+      "2027": 484,
+      "2028": 484,
+      "2029": 481,
+      "2030": 471
+    },
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "rank_weight": 0.02,
+    "rank_temperature": 0.1,
+    "low_training_fraction": 0.2,
+    "policy": "max",
+    "near_best_margin": 5.702176040780036,
+    "search_seed": 20261111,
+    "pool_per_alpha": 8192,
+    "concentrations": [
+      1.0,
+      0.3
+    ],
+    "low_starts": 256,
+    "random_starts": 256,
+    "start_separation": 0.1,
+    "phase1_steps": 1000,
+    "phase1_rates": [
+      [
+        0,
+        0.02
+      ],
+      [
+        400,
+        0.005
+      ],
+      [
+        700,
+        0.001
+      ]
+    ],
+    "phase2_steps": 1000,
+    "phase2_rates": [
+      [
+        0,
+        0.01
+      ],
+      [
+        400,
+        0.002
+      ],
+      [
+        700,
+        0.0004
+      ]
+    ],
+    "input_feature_order": [
+      "b1_cost",
+      "b1_carbon",
+      "b1_peak",
+      "b1_discomfort",
+      "b1_degradation",
+      "b1_ramping",
+      "b1_resilience",
+      "b2_cost",
+      "b2_carbon",
+      "b2_peak",
+      "b2_discomfort",
+      "b2_degradation",
+      "b2_ramping",
+      "b2_resilience",
+      "b3_cost",
+      "b3_carbon",
+      "b3_peak",
+      "b3_discomfort",
+      "b3_degradation",
+      "b3_ramping",
+      "b3_resilience"
+    ],
+    "target_R": 104.0,
+    "acquisition_quotas": {
+      "surrogate": 10,
+      "transfer": 20,
+      "recombination": 10,
+      "joint": 8,
+      "disagreement": 2
+    },
+    "transfer_scales": [
+      0.001,
+      0.01,
+      0.08,
+      "full_donor"
+    ],
+    "alpha_bounds": [
+      0.5,
+      4.0
+    ],
+    "joint_std": 0.04,
+    "training_update": "baseline_full_refit",
+    "initialization": "fresh_fixed_seeds_original_only",
+    "polish": {
+      "min_feedback_rows": 500,
+      "stall_rounds": 2,
+      "min_improvement": 0.02,
+      "quotas": {
+        "surrogate": 4,
+        "transfer": 12,
+        "recombination": 6,
+        "joint": 8,
+        "polish_scan": 20
+      },
+      "scan_steps": [
+        0.0005,
+        0.002,
+        0.008,
+        0.03,
+        0.08
+      ],
+      "minimum_actual_step": 0.0005
+    },
+    "anchor": {
+      "radius": 0.2,
+      "min_batches": 3,
+      "min_points": 30,
+      "MAE_ratio_max": 0.8,
+      "risk_weight": 0.5,
+      "window_valid_batches": 3,
+      "selection_top_k": 5
+    },
+    "frozen_v1_acquisition_sha256": "d0be5cd5db3c68f2ca3cdb681dcbe072b6a2bdd35f8729a52c17675368012ae0",
+    "active_sampling": {
+      "seed": 20261115,
+      "role_schedule": [
+        [
+          1,
+          6,
+          30,
+          20
+        ],
+        [
+          7,
+          14,
+          35,
+          15
+        ],
+        [
+          15,
+          19,
+          40,
+          10
+        ],
+        [
+          20,
+          20,
+          50,
+          0
+        ]
+      ],
+      "info_splits": {
+        "20": [
+          12,
+          4,
+          4
+        ],
+        "15": [
+          8,
+          4,
+          3
+        ],
+        "10": [
+          6,
+          2,
+          2
+        ],
+        "0": [
+          0,
+          0,
+          0
+        ]
+      },
+      "pair_steps": [
+        0.002,
+        0.008,
+        0.03,
+        0.004,
+        0.012,
+        0.024
+      ],
+      "minimum_step": 0.0005,
+      "known_parent_R_margin": 2.0,
+      "local_radius": 0.2,
+      "competitive_prediction_margin": 2.0,
+      "diversity_distance": 0.05,
+      "boundary_min_R_gap": 0.02,
+      "boundary_max_interval": 0.16,
+      "pair_utility": "std(delta)*(1+4*p*(1-p)), p=positive preference vote including half ties",
+      "competitive_utility": "std(prediction difference to nearest known center)*(0.25+0.75*min(distance_to_selected/0.05,1))"
+    },
+    "information_audit": {
+      "after_feedback_rounds": [
+        4,
+        8,
+        12,
+        16
+      ],
+      "seed": 2026,
+      "exclude": "only information-role rows in that round",
+      "extra_true_evaluations": 0,
+      "used_for_acquisition": false
+    }
+  },
+  "initialization": "fresh_fixed_seeds_original_only",
+  "historical_extra_labels_used": false
+}

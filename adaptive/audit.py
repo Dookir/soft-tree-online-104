@@ -24,7 +24,7 @@ def install(label=None):
                '/soft-tree-online-fast/calibration/','/soft-tree-online-104/sessions/',
                '/soft-tree-online-104/pretrained_original/','/soft-tree-online-104-release/results/',
                '/soft-tree-online-104-release/pretrained_original/','/releases/soft-tree-online-104-',
-               '/soft-tree-online-104-v2/','/soft-tree-online-104-v3/calibration/foreign/')
+               '/soft-tree-online-104-v2/','/soft-tree-online-104-v3/','/soft-tree-online-104-v4/calibration/foreign/')
     def hook(event,args):
         if event!='open' or not args or not isinstance(args[0],(str,bytes,os.PathLike)):return
         name=os.fsdecode(args[0]);absolute=os.path.abspath(name)

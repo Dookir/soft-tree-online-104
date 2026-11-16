@@ -1,0 +1,35 @@
+{
+  "device": "cuda:0",
+  "physical_gpu": 4,
+  "selection": "spare_shared",
+  "free_MiB": 21414,
+  "mean_utilization": 0.0,
+  "peak_utilization": 0,
+  "memory_budget_GiB": 2,
+  "readings": [
+    {
+      "index": 4,
+      "free": 21414,
+      "used": 59814,
+      "util": 0,
+      "processes": 1
+    },
+    {
+      "index": 4,
+      "free": 21414,
+      "used": 59814,
+      "util": 0,
+      "processes": 1
+    },
+    {
+      "index": 4,
+      "free": 21414,
+      "used": 59814,
+      "util": 0,
+      "processes": 1
+    }
+  ],
+  "shared_GPU_allowed": true,
+  "wait_gpu_seconds": 32.99151359498501,
+  "first_GPU_wait_seconds": 32.99151359498501
+}

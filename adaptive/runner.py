@@ -82,8 +82,18 @@ def record_feedback(session, state, folder):
     scores = parse_response(json.loads((folder/'stdout.json').read_bytes()),50)
     request = parse_request(json.loads((folder/'request.json').read_text()))
     if (batch['weights'] != request or len(batch['weights']) != 50 or
-            len(batch['sources']) != 50 or len(batch['predictions']) != 50 or len(batch['metadata']) != 50):
+            len(batch['sources']) != 50 or len(batch['predictions']) != 50 or len(batch['metadata']) != 50 or len(batch['roles']) != 50):
         raise RuntimeError('Candidate / request / output pairing mismatch')
+    from .information import splits
+    expected_exploit,expected_learn,_=splits(batch['round'])
+    if batch['roles'].count('exploit')!=expected_exploit or batch['roles'].count('learn')!=expected_learn:
+        raise RuntimeError('Active sampling role quota mismatch')
+    if any(m.get('role')!=r for m,r in zip(batch['metadata'],batch['roles'])):
+        raise RuntimeError('Role metadata pairing mismatch')
+    pairs={}
+    for m in batch['metadata']:
+        if 'pair_id' in m:pairs.setdefault(m['pair_id'],[]).append(m.get('pair_member'))
+    if any(sorted(v)!=[0,1] for v in pairs.values()):raise RuntimeError('Information pair is incomplete')
     if digest(folder/'request.json') != state['pending']['input_sha256']:
         raise RuntimeError('Pending request fingerprint changed')
     if state['pending'].get('candidates_sha256') is not None and digest(folder/'candidates.json') != state['pending']['candidates_sha256']:
@@ -93,13 +103,13 @@ def record_feedback(session, state, folder):
     rows = []
     for i,(w,r,source,pred) in enumerate(zip(batch['weights'],scores,batch['sources'],batch['predictions'])):
         rows.append(dict(id=f'r{batch["round"]:02d}-{i+1:02d}',round=batch['round'],index=i+1,
-                         weights=w,R=r,source=source,predictions_before_feedback=pred,acquisition=batch['metadata'][i]))
+                         weights=w,R=r,source=source,role=batch['roles'][i],predictions_before_feedback=pred,acquisition=batch['metadata'][i]))
     online.extend(r for r in rows if r['id'] not in existing)
     atomic_json(session/'online.json',online)
     with (session/'online.csv.tmp').open('w',encoding='utf-8',newline='') as out:
-        writer=csv.writer(out); writer.writerow(['id','round','index','source',*[f'b{b}_{j}' for b in range(1,4) for j in range(1,8)],'R'])
+        writer=csv.writer(out); writer.writerow(['id','round','index','source','role',*[f'b{b}_{j}' for b in range(1,4) for j in range(1,8)],'R'])
         for row in online:
-            writer.writerow([row['id'],row['round'],row['index'],row['source'],*[v for b in row['weights'] for v in b],row['R']])
+            writer.writerow([row['id'],row['round'],row['index'],row['source'],row['role'],*[v for b in row['weights'] for v in b],row['R']])
     (session/'online.csv.tmp').replace(session/'online.csv')
     best = min(online,key=lambda r:(r['R'],r['id']))
     offline = state['offline_best']
@@ -117,6 +127,15 @@ def record_feedback(session, state, folder):
                    successful_observations=len(online),model_version=batch['round']-1)
     atomic_json(folder/'feedback.json',summary)
     previous = state.get('cumulative_best_R',state['offline_best']['R'])
+    summary['role_counts']={role:batch['roles'].count(role) for role in sorted(set(batch['roles']))}
+    summary['role_best_R']={role:min(r['R'] for r in rows if r['role']==role) for role in sorted(set(batch['roles']))}
+    summary['role_improvements_over_previous_best']={role:sum(r['role']==role and r['R']<previous-.02 for r in rows) for role in sorted(set(batch['roles']))}
+    from .training_audit import assess
+    audit=assess(batch,scores)
+    if audit is not None:
+        summary['information_training_audit']=audit
+        audit_folder=session/'learning-audits'/f'after-r{audit["after_feedback_round"]:02d}'
+        atomic_json(audit_folder/f'evaluation-on-r{batch["round"]:02d}.json',audit)
     from .acquisition import update_alpha
     summary['scale_update'] = update_alpha(state,scores,previous,overall['R'],batch=batch)
     from .anchor import update_feedback
@@ -171,6 +190,9 @@ def finalize_report(session,state,allocation,started,args):
                 session_wall_seconds=(datetime.fromisoformat(state['completed_at'])-datetime.fromisoformat(state['started_at'])).total_seconds(),
                 GPU_wait_seconds=allocation['first_GPU_wait_seconds'],
                 reused_pretraining_seconds=sum(m.get('historical_pretraining_seconds',0.) for m in metadata))
+    audit_metadata=[json.loads(p.read_text()) for p in sorted((session/'learning-audits').glob('*/training.json'))]
+    timing['diagnostic_training_seconds']=sum(p['wall_seconds'] for p in audit_metadata)
+    timing['all_training_seconds']=timing['training_seconds']+timing['diagnostic_training_seconds']
     timing['total_with_GPU_wait_seconds']=timing['session_wall_seconds']+timing['GPU_wait_seconds']
     atomic_json(session/'timing-summary.json',timing)
     best=json.loads((session/'best.json').read_text())
@@ -180,18 +202,27 @@ def finalize_report(session,state,allocation,started,args):
     outcome.update(polish_trigger_round=state.get('polish_trigger_round'),
                    polish_rounds=sum(r.get('phase')=='feedback_triggered_polish' for r in summaries),
                    anchor_enabled_rounds=[r['round'] for r in summaries if r.get('anchor_used_for_selection')])
+    all_rows=json.loads((session/'online.json').read_text())
+    outcome['role_totals']={role:sum(r['role']==role for r in all_rows) for role in ('exploit','learn')}
+    outcome['best_R_by_role']={role:min(r['R'] for r in all_rows if r['role']==role) for role in ('exploit','learn') if any(r['role']==role for r in all_rows)}
+    outcome['information_training_audits']=[r['information_training_audit'] for r in summaries if 'information_training_audit' in r]
     atomic_json(session/'outcome.json',outcome)
     with (session/'REPORT.md').open('a') as output:
         output.write('\n目标 R ≤104：'+('达到' if outcome['achieved'] else '未达到')+'。预算用完后不追加评估。\n')
         output.write('\n训练 / 寻优 / 真实评估秒数：'+str([timing[k] for k in ('training_seconds','search_seconds','evaluation_seconds')])+'。\n')
         output.write('初始模型从原始2048行从头训练；复用预训练时间为 '+str(timing['reused_pretraining_seconds'])+' 秒。\n')
+    with (session/'REPORT.md').open('a') as output:
+        output.write('\n冲分/补信息名额合计：'+json.dumps(outcome['role_totals'],ensure_ascii=False)+'；分组最低真实R：'+json.dumps(outcome['best_R_by_role'],ensure_ascii=False)+'。\n')
+        output.write('诊断影子训练耗时单独记录为 '+str(timing['diagnostic_training_seconds'])+' 秒；不参与选点，不新增真实评估。\n')
+        for audit in outcome['information_training_audits']:
+            output.write('\n第'+str(audit['evaluated_round'])+'轮条件性诊断，加入信息组后的MAE改善：'+str(audit['MAE_improvement_from_information'])+'；不能解释为全空间因果结论。\n')
     # This file is explicitly denied by the audit hook until all20 rounds finish.
     reference=ROOT/'baseline_reference.json'
     if args.rounds==20 and args.test_epochs is None and reference.exists():
         old=json.loads(reference.read_text())
         comparison=dict(references=old,new=outcome,timing=timing,
             same_evaluation_count=[dict(round=r['round'],new_R=r['cumulative_best_R'],
-                baseline_R=old['v1_frozen']['best_R_by_round'][r['round']-1]) for r in summaries])
+                baseline_R=old['v3_frozen']['best_R_by_round'][r['round']-1]) for r in summaries])
         atomic_json(session/'comparison.json',comparison)
         with (session/'REPORT.md').open('a') as output:
             output.write('\n历史结果仅用于完成后的对照：'+json.dumps({k:v['best_R'] for k,v in old.items()},ensure_ascii=False)+'。\n')
@@ -302,9 +333,14 @@ def main():
         state['status']='training'; atomic_json(session/'state.json',state)
         models=train_ensemble(x,y,len(original_y),session/'models'/f'v{round_number-1:02d}',args.train_jobs,args.test_epochs)
         folder=session/'rounds'/f'{round_number:02d}'; folder.mkdir(parents=True,exist_ok=True)
+        from .training_audit import prepare,attach,AFTER_ROUNDS
+        if round_number-1 in AFTER_ROUNDS:
+            state['status']='diagnostic_training';atomic_json(session/'state.json',state)
+        diagnostic,diagnostic_seconds=prepare(session,models,x,y,online,round_number,args.test_epochs)
         training=json.loads((session/'models'/f'v{round_number-1:02d}'/'training.json').read_text())
         timings=json.loads((folder/'timings.json').read_text()) if (folder/'timings.json').exists() else {}
         timings['training_seconds']=training['wall_seconds']
+        timings['diagnostic_training_seconds']=diagnostic_seconds
         metrics_path=session/'models'/f'v{round_number-1:02d}'/'diagnostics.json'
         if not metrics_path.exists():
             diagnose(models,original_x,original_y,predict,metrics_path)
@@ -318,6 +354,9 @@ def main():
             weights,_,_=generate_batch(models,x,y,round_number,seen,folder,state['radius'],args.test_search_steps,
                                        search_state=state,online=online)
             timings['search_seconds']=time.monotonic()-search_started
+        batch=json.loads((folder/'candidates.json').read_text())
+        if diagnostic is not None and 'information_model_comparison' not in batch:
+            batch=attach(batch,models,diagnostic);atomic_json(folder/'candidates.json',batch)
         atomic_json(folder/'timings.json',timings)
         request=dict(weights=weights.reshape(-1,3,7).tolist())
         assert len(parse_request(request))==50
@@ -359,7 +398,7 @@ def main():
              session/'models'/f'v{args.rounds:02d}'/'diagnostics.json')
     best=json.loads((session/'best.json').read_text())
     summaries=[json.loads(p.read_text()) for p in sorted((session/'rounds').glob('*/feedback.json'))]
-    lines=['# 软决策树 104-v3 独立实验结果','',f'后端：{args.backend}；正式调用：{state["attempted_calls"]}；本次新标签：{len(online)}。',
+    lines=['# 软决策树 104-v4 主动采样独立实验结果','',f'后端：{args.backend}；正式调用：{state["attempted_calls"]}；本次新标签：{len(online)}。',
            f'最终最低真实 R：**{best["R"]:.12f}**，来源：{best["origin"]}。',
            f'原始最好 R：{state["offline_best"]["R"]:.12f}；本次线上最好 R：{best["online_best"]["R"]:.12f}。','',
            '| 轮次 | 本轮最低 R | 累计最低 R | 提交前预测 MAE |','|---:|---:|---:|---:|']

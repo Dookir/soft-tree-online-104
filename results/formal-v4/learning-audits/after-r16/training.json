@@ -1,0 +1,44 @@
+{
+  "data_fingerprint": "ab0e0203fabe58ace38103cb6325c5b7cdeb322f61671821b09e8cb9e4c9bd35",
+  "scale": 161.91360390296904,
+  "models": [
+    {
+      "seed": 2026,
+      "epochs": 486,
+      "seconds": 227.1798993870616,
+      "sha256": "d3016bb7f8379d62511af52c1f0fe185a716fb8634bc88f1c7d9c3c06eab469f"
+    }
+  ],
+  "after_feedback_round": 16,
+  "full_rows": 2848,
+  "without_information_rows": 2838,
+  "excluded_global_indices": [
+    2838,
+    2839,
+    2840,
+    2841,
+    2842,
+    2843,
+    2844,
+    2845,
+    2846,
+    2847
+  ],
+  "excluded_sample_ids": [
+    "r16-41",
+    "r16-42",
+    "r16-43",
+    "r16-44",
+    "r16-45",
+    "r16-46",
+    "r16-47",
+    "r16-48",
+    "r16-49",
+    "r16-50"
+  ],
+  "epochs": 486,
+  "seed": 2026,
+  "wall_seconds": 227.25734367221594,
+  "used_for_acquisition": false,
+  "extra_true_evaluations": 0
+}

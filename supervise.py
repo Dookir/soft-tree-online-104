@@ -11,7 +11,7 @@ from adaptive.protocol import atomic_json
 
 def may_retry(state,text,count):
     cuda=bool(re.search(r'CUDA out of memory|CUDA error|CUDA driver|CUBLAS_STATUS|GPU has fallen',text,re.I))
-    safe=state.get('pending') is None and state.get('status') in ('training','final_training','searching')
+    safe=state.get('pending') is None and state.get('status') in ('training','diagnostic_training','final_training','searching')
     return cuda and safe and count<3
 
 
