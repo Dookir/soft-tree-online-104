@@ -1,4 +1,4 @@
-# Soft Tree Online Ramping · v4.0.0
+# Soft Tree Online Ramping · v4.0.1
 
 **分楼软决策树 + 分尺度在线寻优，可复现课程实验。**
 
@@ -24,11 +24,28 @@ v4相比v3的104.140308降低 **0.283311**，低于104目标约0.143003。实验
 
 本实验从原始2048行独立冷启动，所有轮次按原配置从头全量加权重训；没有加载旧模型、旧反馈或旧最好点。历史完整版本保留在 [v1.0.0](https://github.com/Dookir/soft-tree-online-104/tree/v1.0.0) 和 [v3.0.0](https://github.com/Dookir/soft-tree-online-104/tree/v3.0.0)。
 
+## v4.0.1：降低运行随机性
+
+本补丁增强新运行的确定性；上面的103.856997仍是原v4.0.0实验的归档成绩，没有重新评分。原版保留在[v4.0.0](https://github.com/Dookir/soft-tree-online-104/tree/v4.0.0)。
+
+- 启动前固定Python哈希、UTF-8及数学库线程；必要时自动重启解释器，使设置真正生效。
+- 每个训练作业固定Python、NumPy和PyTorch随机数；原有五种子、打乱顺序和候选随机数种子保留。
+- 默认CPU、float64、单线程，严格确定性算法；关闭可选加速路径、TF32、cuDNN、MKLDNN及可选einsum路径优化。训练和寻优的Adam显式使用普通逐张量实现。
+- 固定相同数值时的排序，并记录生效的运行设置；Git检出保留原始字节，避免Windows换行转换破坏完整性核验。
+
+```bash
+.venv/bin/python run.py check-determinism --output outputs/determinism
+```
+
+此检查在两个独立CPU进程中，使用全部原始2048行、五种子各3轮短训练及每阶段8步寻优，故意传入不同的哈希种子、线程设置和全局随机状态，检查模型、预测和50组候选是否完全一致。它不调用评分器、不消耗评估预算，**不能替代完整训练或跨系统效果验收**。Windows使用 `.venv\Scripts\python.exe`。可加 `--reference validation/cpu-smoke-reference.npz` 与随包提供的Mac CPU短流程参考签名比较。两台电脑可比较导出的`run-1-signature.npz`，通过`--reference <另一台电脑的签名文件>`测量差异。
+
+为减少计算路径差异，正式复现建议保持CPU默认设置。GPU仍需显式指定；严格确定性不受支持的运算会报错。随机探索仍保留，只使用固定随机序列；关闭这些运行优化可能增加耗时，跨系统数值差异也不能完全消除。
+
 ## 快速开始
 
 支持 Windows x86-64、Linux x86-64 和 macOS arm64。固定CPU环境为 **Python3.10.21 / Torch2.6.0 / NumPy1.26.4 / float64 / 单线程**。
 
-Windows：双击 `01_SETUP_WINDOWS.bat` 安装项目自己的环境，再双击 `02_REPRODUCE_WINDOWS.bat` 核验并导出本次最佳结果。
+Windows：双击 `01_SETUP_WINDOWS.bat` 安装项目自己的环境，再双击 `02_REPRODUCE_WINDOWS.bat` 核验并导出本次最佳结果。双击 `04_CHECK_DETERMINISM_WINDOWS.bat` 可运行两进程一致性检查，并与随包参考签名比较。
 
 macOS / Linux：
 

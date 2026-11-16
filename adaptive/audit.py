@@ -28,12 +28,13 @@ def install(label=None):
     def hook(event,args):
         if event!='open' or not args or not isinstance(args[0],(str,bytes,os.PathLike)):return
         name=os.fsdecode(args[0]);absolute=os.path.abspath(name)
+        portable=absolute.replace('\\','/')
         inside=Path(absolute).is_relative_to(ROOT)
         if '--session' in sys.argv and inside and Path(absolute).is_relative_to(ROOT/'results'):
             raise PermissionError('Archived feedback/checkpoints are excluded from a fresh online run')
-        if not inside and any(part in absolute for part in forbidden):
+        if not inside and any(part in portable for part in forbidden):
             raise PermissionError('Old experiment input is forbidden: '+absolute)
-        if '--session' in sys.argv and str(ROOT/'calibration')+'/' in absolute and Path(name).suffix.lower() in ('.csv','.npz','.pt','.pth'):
+        if '--session' in sys.argv and Path(absolute).is_relative_to(ROOT/'calibration') and Path(name).suffix.lower() in ('.csv','.npz','.pt','.pth'):
             raise PermissionError('Calibration checkpoints are not formal-run inputs')
         if Path(absolute)==ROOT/'baseline_reference.json' and args[1]!='w':
             argv=sys.argv

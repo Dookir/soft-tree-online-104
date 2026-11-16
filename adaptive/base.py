@@ -1,8 +1,7 @@
 """Weighted full-data refits and diverse batch acquisition; never reads an evaluator."""
 import os
-for key in ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
-    os.environ[key] = '1'
-os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG', ':4096:8')
+from .determinism import prepare_environment, configure_runtime, seed_all, settings
+prepare_environment()
 
 from concurrent.futures import ProcessPoolExecutor
 import hashlib
@@ -28,9 +27,7 @@ DEVICE = os.environ.get('SOFTTREE_DEVICE', 'cpu')
 def configure():
     global CONFIGURED
     if not CONFIGURED:
-        torch.set_num_threads(1)
-        torch.set_num_interop_threads(1)
-        torch.use_deterministic_algorithms(True)
+        configure_runtime()
         if DEVICE.startswith('cuda'):
             budget = float(os.environ.get('SOFTTREE_GPU_MEMORY_GIB', '2'))*1024**3
             total = torch.cuda.get_device_properties(0).total_memory
@@ -40,7 +37,7 @@ def configure():
 
 def project(weights):
     rows = weights.reshape(-1, 7)
-    ordered = rows.sort(dim=-1, descending=True).values
+    ordered = rows.sort(dim=-1, descending=True, stable=True).values
     cumulative = ordered.cumsum(-1) - 1
     k = torch.arange(1, 8, dtype=rows.dtype, device=rows.device)
     rho = (ordered - cumulative/k > 0).sum(-1).clamp(min=1)-1
@@ -93,9 +90,11 @@ def sample_weights(x, y, original_rows):
 
 def train_one(seed, x, y, importance, scale, folder, epochs):
     configure()
+    seed_all(seed)
     started = time.monotonic()
     model = DistrictSurrogate(scale, seed).to(DEVICE)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=.001, weight_decay=.0001)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=.001, weight_decay=.0001,
+                                  betas=(.9,.999), eps=1e-8, foreach=False, fused=False)
     xx, yy, ww = torch.tensor(x,device=DEVICE), torch.tensor(y/scale,device=DEVICE), torch.tensor(importance,device=DEVICE)
     threshold = float(np.quantile(y, .2)/scale)
     rng = np.random.default_rng(seed+100000)
@@ -137,6 +136,8 @@ def train_ensemble(x, y, original_rows, folder, jobs=2, epoch_override=None):
     fingerprint = hashlib.sha256(x.tobytes()+y.tobytes()+str(epoch_override).encode()).hexdigest()
     if (folder/'training.json').exists():
         report = json.loads((folder/'training.json').read_text())
+        if report.get('determinism') != settings():
+            raise RuntimeError('Cached training uses a different numerical policy; choose a new output directory')
         if report['data_fingerprint'] != fingerprint:
             raise RuntimeError('Training resume fingerprint mismatch')
         return load_ensemble(folder)
@@ -154,7 +155,8 @@ def train_ensemble(x, y, original_rows, folder, jobs=2, epoch_override=None):
             futures = [pool.submit(train_one, *a) for a in args]
             trained = [f.result() for f in futures]
     atomic_json(folder/'training.json', dict(data_fingerprint=fingerprint, scale=scale, models=trained,
-                **report, initialization='fresh_fixed_seeds', device=DEVICE, torch=str(torch.__version__), numpy=np.__version__))
+                **report, initialization='fresh_fixed_seeds', device=DEVICE, torch=str(torch.__version__), numpy=np.__version__,
+                determinism=settings()))
     return load_ensemble(folder)
 
 
@@ -184,7 +186,8 @@ def predict(models, x):
 
 def descend(models, starts, kind, steps, rates):
     weights = torch.nn.Parameter(torch.tensor(starts,device=DEVICE))
-    optimizer = torch.optim.Adam([weights], lr=rates[0][1])
+    optimizer = torch.optim.Adam([weights], lr=rates[0][1], betas=(.9,.999), eps=1e-8,
+                                 foreach=False, fused=False)
     best = weights.detach().clone()
     best_score = torch.full((len(starts),), float('inf'), dtype=torch.float64,device=DEVICE)
     for step in range(steps+1):

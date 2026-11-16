@@ -1,5 +1,5 @@
 {
-  "version": "4.0.0",
+  "version": "4.0.1",
   "experiment": "formal-v4-20261115-01",
   "original_runtime_source_sha256": "9a5dfbe7a40261ce76c2b57a4d3e686917b1803ce211f63faf51eb50556a3fd1",
   "original_data_sha256": "877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023",
@@ -13,7 +13,6 @@
   },
   "unchanged_algorithm_files": {
     "model.py": "ff8d4dc46c2dae9809d01a78a9582ca481c7e7a4fbf8562a5b7bf286815b38d5",
-    "base.py": "dc4df5fb4cb36d216a3c28928e423ddeaeccde9abfe3ab76ef1a570bb05edbfe",
     "learning.py": "c8b6b218ebe1ed37241e7f275e520e46f7162687a4276aea33cb2ae856482960",
     "protocol.py": "7dd4de074d6ca90c68b0a7bacc564e3f33a5d68089f5ce18145ae794828005db",
     "acquisition.py": "3425eae6aa84625e4bdab14bc7c55fa48f8081ea626326d7e2dc243c4468a925",
@@ -35,7 +34,30 @@
     "private host path redaction",
     "portable CPU-default CLI and external JSON adapter",
     "free post-budget proposals reuse final-round50/0 policy, never submit a21st evaluation",
-    "archived best-net traces included for independent score recomputation"
+    "archived best-net traces included for independent score recomputation",
+    "v4.0.1 strict numerical runtime; mathematical architecture, objective, seeds, acquisition quotas and evaluation budget retained"
   ],
-  "evaluator_runtime_bundled": false
+  "evaluator_runtime_bundled": false,
+  "experiment_version": "4.0.0",
+  "runtime_hardening": {
+    "historical_release": "https://github.com/Dookir/soft-tree-online-104/tree/v4.0.0",
+    "original_base_snapshot": {
+      "path": "reference/v4.0.0/adaptive/base.py",
+      "sha256": "dc4df5fb4cb36d216a3c28928e423ddeaeccde9abfe3ab76ef1a570bb05edbfe"
+    },
+    "changes": [
+      "early environment/hash/UTF8 bootstrap",
+      "global RNG seeding in every training job",
+      "single-thread native float64 kernels; disable TF32/cuDNN/MKLDNN/opt_einsum acceleration",
+      "explicit non-foreach non-fused Adam/AdamW",
+      "stable simplex sorting and summary key order",
+      "runtime-policy recording and two-process repeatability check",
+      "Git byte preservation under Windows autocrlf",
+      "Windows-portable foreign-path access audit",
+      "reject reuse of cached training from a different runtime policy"
+    ],
+    "historical_results_modified": false,
+    "historical_model_and_feedback_retrained": false,
+    "new_online_trajectory_not_guaranteed": true
+  }
 }

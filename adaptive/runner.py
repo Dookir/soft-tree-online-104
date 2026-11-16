@@ -142,7 +142,7 @@ def record_feedback(session, state, folder):
     summary['v3_transition'] = update_feedback(state,batch,scores,previous,overall['R'])
     summary['phase'] = batch['phase']
     summary['anchor_used_for_selection'] = batch['anchor_used_for_selection']
-    summary['source_best_R'] = {source:min(r['R'] for r in rows if r['source']==source) for source in set(batch['sources'])}
+    summary['source_best_R'] = {source:min(r['R'] for r in rows if r['source']==source) for source in sorted(set(batch['sources']))}
     summary['transfer_bin_counts'] = batch['transfer_bin_counts']
     summary['unranked_count'] = batch['unranked_count']
     summary['local_pair_accuracy'] = pair_accuracy(truth,pred)
@@ -269,6 +269,7 @@ def main():
     original_x=np.asarray([[float(row[k]) for k in names] for row in original])
     original_y=np.asarray([float(row['ramping']) for row in original])
     verify_original_data(original_x,original_y)
+    from .determinism import settings
     session=args.session
     config=dict(backend=args.backend,rounds=args.rounds,batch_size=50,data_sha256=DATA_HASH,
                 solver_command=solver_command(args,args.session/'rounds/01') if args.backend=='external' else None,
@@ -277,6 +278,7 @@ def main():
                 wine=str(args.wine) if args.wine else None,wine_prefix=str(args.wine_prefix) if args.wine_prefix else None,
                 test_epochs=args.test_epochs,test_search_steps=args.test_search_steps,
                 training_environment=dict(python=platform.python_version(),torch=str(torch.__version__),numpy=np.__version__),
+                determinism=settings(),
                 requested_device=args.device,gpu=args.gpu,allow_shared_gpu=args.allow_shared_gpu,exclude_gpu=args.exclude_gpu,
                 acquisition=json.loads((ROOT/'adaptive/recipe.json').read_text()),
                 initialization='fresh_fixed_seeds_original_only',

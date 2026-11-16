@@ -1,55 +1,64 @@
 {
-  "version": "4.0.0",
+  "version": "4.0.1",
+  "experiment_version": "4.0.0",
   "checked_date": "2026-11-16",
-  "best_real_R": 103.85699706606101,
-  "target_achieved": true,
+  "best_archived_real_R": 103.85699706606101,
+  "historical_result_files_unchanged": 386,
   "original_rows": 2048,
   "archived_feedback_rows": 1000,
   "packaging_real_evaluations": 0,
-  "original_experiment_preflight": {
-    "local_tests": 12,
-    "server_tests": 12,
-    "synthetic_rounds": 20
-  },
   "release_validation": {
-    "macos_arm64_contract_tests": 23,
-    "linux_x86_64_contract_tests": 23,
-    "macos_python": "3.10.21",
-    "linux_python": "3.10.21",
-    "numpy": "1.26.4",
-    "torch": "2.6.0",
-    "linux_torch_build": "2.6.0+cu118; validation device=cpu",
-    "full_two_stage_optimize": {
-      "candidates": 50,
-      "exploit": 50,
-      "learn": 0,
-      "oracle_calls": 0,
-      "formal_round_submission": false
+    "macos_arm64_tests": 29,
+    "linux_x86_64_tests": 29,
+    "independent_processes_per_platform": 2,
+    "epochs_per_seed": 3,
+    "seeds": [
+      2026,
+      2027,
+      2028,
+      2029,
+      2030
+    ],
+    "original_training_rows": 2048,
+    "search_steps_per_phase": 8,
+    "acquisition_candidates": 50,
+    "macos_same_environment_exact": true,
+    "linux_same_environment_exact": true,
+    "macos_linux_differences": {
+      "candidate_predictions": {
+        "exact": false,
+        "max_abs_difference": 5.684341886080802e-14
+      },
+      "candidate_weights": {
+        "exact": false,
+        "max_abs_difference": 2.220446049250313e-16
+      },
+      "model_state": {
+        "exact": false,
+        "max_abs_difference": 4.440892098500626e-16
+      },
+      "probe_predictions": {
+        "exact": false,
+        "max_abs_difference": 5.684341886080802e-14
+      }
     },
-    "public_entry_synthetic_rounds": 5,
-    "public_entry_diagnostic_after_round": 4,
-    "resume_added_calls": 0
+    "public_synthetic_rounds": 5,
+    "resume_added_calls": 0,
+    "git_autocrlf_byte_preservation": true
   },
   "windows": {
-    "scripts_and_CPU_locks_provided": true,
+    "CPU_dependency_locks_and_scripts_provided": true,
+    "automated_contract_and_two_process_smoke_workflow": "https://github.com/Dookir/soft-tree-online-104/actions/workflows/verify.yml",
     "actual_full_training_validated": false
   },
-  "checks": [
-    "all1000 exact request/R pairs",
-    "all109 checkpoint checksums",
-    "710 exploit and290 learn quotas",
-    "atomic comparison pairs and past-only boundary endpoints",
-    "four single-seed diagnostic exclusion groups and exact metrics",
-    "20-batch causal replay of polish and anchor gates: neither used",
-    "past-only shadow centers",
-    "best8-week net traces independently recompute R",
-    "14 core source/config files byte-identical to original runtime",
-    "new proposals explicitly unscored",
-    "private paths and common credential patterns scanned"
+  "limitations": [
+    "Short repeatability check does not prove full486-epoch or20-round reproducibility",
+    "Windows full training and20-round true evaluation remain unvalidated",
+    "CPU/GPU and cross-platform bitwise equality are not guaranteed",
+    "Original103.856997 is archived v4.0.0 performance, not a newly measured result for this runtime patch"
   ],
   "unchanged_algorithm_files": {
     "model.py": "ff8d4dc46c2dae9809d01a78a9582ca481c7e7a4fbf8562a5b7bf286815b38d5",
-    "base.py": "dc4df5fb4cb36d216a3c28928e423ddeaeccde9abfe3ab76ef1a570bb05edbfe",
     "learning.py": "c8b6b218ebe1ed37241e7f275e520e46f7162687a4276aea33cb2ae856482960",
     "protocol.py": "7dd4de074d6ca90c68b0a7bacc564e3f33a5d68089f5ce18145ae794828005db",
     "acquisition.py": "3425eae6aa84625e4bdab14bc7c55fa48f8081ea626326d7e2dc243c4468a925",

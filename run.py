@@ -17,6 +17,8 @@ def main():
 
 
 if __name__=='__main__':
+    from adaptive.determinism import bootstrap_cli
+    bootstrap_cli()
     multiprocessing.freeze_support()
     try:
         raise SystemExit(main())

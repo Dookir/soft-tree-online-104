@@ -119,7 +119,7 @@ def verify_report():
         weekly.append(math.fsum(abs(net[t]-net[t-1]) for t in range(1,168)))
     recomputed=math.fsum(weekly)/8
     if abs(recomputed-best['R'])>1e-9 or trace['R']!=best['R']:raise RuntimeError('Archived trace does not reproduce true R')
-    return dict(version='4.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
+    return dict(version='4.0.1',experiment_version='4.0.0',files_checked=checked,original_rows=2048,feedback_rows=1000,
                 real_R=best['R'],origin=best['id'],weights=best['weights'],target_R=104.,
                 target_achieved=best['R']<=104.,score_type='archived_real_evaluation',
                 evaluator_called=False,models_retrained=False,role_totals=role_totals,trajectory_recomputed_R=recomputed)
@@ -156,6 +156,11 @@ def train(args):
     x,y=training_data(args.round)
     output=args.output.absolute()
     output.mkdir(parents=True,exist_ok=True)
+    from .determinism import settings
+    if (output/'training.json').exists():
+        cached=json.loads((output/'training.json').read_text())
+        if cached.get('determinism')!=settings():
+            raise RuntimeError('Cached training uses a different numerical policy; choose a new output directory')
     function=learning.train_ensemble
     started=time.monotonic();models=function(x,y,2048,output,1)
     reference=RESULT/'models'/f'v{args.round:02d}'
@@ -167,7 +172,7 @@ def train(args):
                 initialization='fresh_fixed_seeds',
                 reference_probe_prediction_max_abs_difference=float(gap.max()),
                 reference_probe_prediction_MAE=float(gap.mean()),device=allocation,
-                seconds=time.monotonic()-started,evaluator_called=False,
+                seconds=time.monotonic()-started,evaluator_called=False,determinism=settings(),
                 note='CPU/GPU training paths may differ; reported drift is measured, not a bitwise guarantee')
     atomic_json(output/'reproduction.json',report)
     print(json.dumps(report,ensure_ascii=False,indent=2))
@@ -181,6 +186,12 @@ def main():
         sub.add_parser(name)
     reproduction=sub.add_parser('reproduce',help='Verify and export archived real results without an oracle')
     reproduction.add_argument('--output',type=Path,default=ROOT/'outputs/reproduced')
+    stability=sub.add_parser('check-determinism',help='Two fresh CPU training/acquisition processes; no evaluator')
+    from .repeatability import positive
+    stability.add_argument('--epochs',type=positive,default=3)
+    stability.add_argument('--search-steps',type=positive,default=8)
+    stability.add_argument('--output',type=Path,default=ROOT/'outputs/determinism')
+    stability.add_argument('--reference',type=Path,help='Optional signature.npz from another reference computer')
     fitting=sub.add_parser('train',help='Train on original rows plus feedback through --round')
     fitting.add_argument('--round',type=int,choices=range(21),default=0)
     fitting.add_argument('--from-scratch',action='store_true')
@@ -208,9 +219,15 @@ def main():
         import numpy as np,torch
         from .learning import verify_original_data
         x,y=training_data(0);verify_original_data(x,y)
-        print(json.dumps(dict(version='4.0.0',files_checked=checked,python=platform.python_version(),
-                             numpy=np.__version__,torch=str(torch.__version__),allocation=allocation),indent=2));return 0
+        from .determinism import settings
+        print(json.dumps(dict(version='4.0.1',files_checked=checked,python=platform.python_version(),
+                             numpy=np.__version__,torch=str(torch.__version__),allocation=allocation,
+                             determinism=settings()),indent=2));return 0
+    if args.command=='check-determinism':
+        from .repeatability import check
+        return check(args)
     if args.command=='test':
+        environment('cpu')
         import unittest
         return 0 if unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.discover(str(ROOT/'tests'))).wasSuccessful() else 1
     if args.command=='train':
@@ -241,7 +258,8 @@ def main():
         proposal_round=min(args.round+1,20)
         generate_batch(models,x,y,proposal_round,{weight_key(w.tolist()) for w in x},args.output,alpha,
                        search_state=policy_state,online=history)
-        atomic_json(args.output/'score-status.json',dict(predictions_only=True,oracle_calls=0,
+        from .determinism import settings
+        atomic_json(args.output/'score-status.json',dict(predictions_only=True,oracle_calls=0,determinism=settings(),
                     true_R_available_for_new_proposals=False,proposal_generator_round=proposal_round,training_feedback_round=args.round,formal_round_submission=False))
         print(json.dumps(dict(output=str(args.output),candidates=50,score_type='model_predictions',oracle_calls=0)));return 0
     return 0

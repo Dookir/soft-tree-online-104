@@ -1,0 +1,2 @@
+# Preserve release hashes on Windows even when global core.autocrlf is true.
+* -text
