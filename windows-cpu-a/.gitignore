@@ -1,0 +1,15 @@
+/teacher_solver/solver.exe
+/teacher_solver/usage.count
+/verification/ARCHIVE_VERIFICATION.json
+/verification/runtime-check.json
+/verification/EXIT.json
+/verification/LOCAL_VALIDATION.json
+/formal-launch.lock
+/project/native-status.json
+/round-results.csv
+/specialization-effects.json
+/strategy-feedback.json
+/best-weights.json
+/best-result.json
+/实验报告.md
+!/evidence/formal-budget.json

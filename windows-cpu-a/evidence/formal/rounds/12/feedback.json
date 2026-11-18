@@ -1,0 +1,92 @@
+{
+  "round": 12,
+  "batch_min_R": 104.82998911908362,
+  "best_online_R": 104.82998911908362,
+  "cumulative_best_R": 104.82998911908362,
+  "prediction_MAE": 2.5762381602445057,
+  "prediction_RMSE": 2.87531559429289,
+  "source_counts": {
+    "joint": 8,
+    "learn_boundary": 4,
+    "learn_competitive": 3,
+    "learn_pair": 8,
+    "recombination": 6,
+    "specialized_combination": 1,
+    "specialized_incumbent_transfer": 1,
+    "specialized_recombination_transfer": 2,
+    "surrogate": 4,
+    "transfer": 13
+  },
+  "successful_observations": 600,
+  "model_version": 11,
+  "role_counts": {
+    "exploit": 35,
+    "learn": 15
+  },
+  "role_best_R": {
+    "exploit": 104.82998911908362,
+    "learn": 105.96648095082492
+  },
+  "role_improvements_over_previous_best": {
+    "exploit": 1,
+    "learn": 0
+  },
+  "scale_update": {
+    "alpha_used": 0.5,
+    "alpha_next": 0.5,
+    "unique_rounded_R_fraction": 0.9,
+    "improvement": 0.05030585825441847,
+    "reason": "contract_after_two_improvements"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 0,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 12,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 126.25436040277621,
+      "anchor_abs_error_sum": 48.65707052761687,
+      "raw_top5_regret": 0.4041335576912388,
+      "anchor_top5_regret": 0.03897978365421295
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 145,
+      "raw_MAE": 3.035751399361956,
+      "anchor_MAE": 0.8436220245191705,
+      "raw_top5_regret": 0.2173594749765518,
+      "anchor_top5_regret": 0.08294929750264164,
+      "assessed_rounds": [
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "learn_pair": 106.0466604452813,
+    "recombination": 105.7316732580075,
+    "joint": 105.95265697222204,
+    "surrogate": 105.5332696326077,
+    "learn_competitive": 105.96648095082492,
+    "specialized_incumbent_transfer": 104.86896890273783,
+    "transfer": 104.82998911908362,
+    "specialized_combination": 107.1917113577947,
+    "specialized_recombination_transfer": 105.23412267677486,
+    "learn_boundary": 106.0466604452813
+  },
+  "transfer_bin_counts": {
+    "small": 4,
+    "medium": 3,
+    "coarse": 3,
+    "support": 3
+  },
+  "unranked_count": 13,
+  "local_pair_accuracy": 0.6833881578947368
+}

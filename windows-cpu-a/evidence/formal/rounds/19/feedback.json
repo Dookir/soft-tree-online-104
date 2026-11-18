@@ -1,0 +1,90 @@
+{
+  "round": 19,
+  "batch_min_R": 103.63544523809104,
+  "best_online_R": 103.63544523809104,
+  "cumulative_best_R": 103.63544523809104,
+  "prediction_MAE": 3.3721481492657235,
+  "prediction_RMSE": 3.810980544065793,
+  "source_counts": {
+    "joint": 6,
+    "learn_boundary": 2,
+    "learn_competitive": 2,
+    "learn_pair": 6,
+    "polish_scan": 10,
+    "recombination": 6,
+    "specialized_step_followup": 2,
+    "surrogate": 4,
+    "transfer": 12
+  },
+  "successful_observations": 950,
+  "model_version": 18,
+  "role_counts": {
+    "exploit": 40,
+    "learn": 10
+  },
+  "role_best_R": {
+    "exploit": 103.63544523809104,
+    "learn": 104.35451693553478
+  },
+  "role_improvements_over_previous_best": {
+    "exploit": 0,
+    "learn": 0
+  },
+  "scale_update": {
+    "alpha_used": 0.7,
+    "alpha_next": 0.7,
+    "unique_rounded_R_fraction": 0.88,
+    "improvement": 0.0,
+    "reason": "unchanged"
+  },
+  "v3_transition": {
+    "polish_active_next": true,
+    "polish_trigger_round": 16,
+    "polish_stall_streak": 1,
+    "anchor_enabled_next": true,
+    "shadow_feedback": {
+      "round": 19,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 157.9879072655832,
+      "anchor_abs_error_sum": 29.95016286189329,
+      "raw_top5_regret": 0.10590399429204922,
+      "anchor_top5_regret": 0.07584400847555628
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 143,
+      "raw_MAE": 3.5419965468887056,
+      "anchor_MAE": 0.7630967480272998,
+      "raw_top5_regret": 0.22333664353938332,
+      "anchor_top5_regret": 0.213316648267219,
+      "assessed_rounds": [
+        17,
+        18,
+        19
+      ]
+    }
+  },
+  "phase": "feedback_triggered_polish",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "learn_pair": 106.20099918637425,
+    "recombination": 103.71091751847416,
+    "joint": 106.95499857817777,
+    "surrogate": 106.37461990118028,
+    "learn_competitive": 104.35451693553478,
+    "transfer": 103.63544523809104,
+    "polish_scan": 103.63544523809104,
+    "specialized_step_followup": 103.6365801366046,
+    "learn_boundary": 105.51512197277044
+  },
+  "transfer_bin_counts": {
+    "small": 3,
+    "medium": 3,
+    "coarse": 3,
+    "support": 3
+  },
+  "unranked_count": 22,
+  "local_pair_accuracy": 0.7808105872622002
+}

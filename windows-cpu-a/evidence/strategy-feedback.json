@@ -1,0 +1,2219 @@
+[
+  {
+    "id": "r01-25",
+    "round": 1,
+    "source": "specialized_model",
+    "R": 116.41934325755574,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        255,
+        1968
+      ],
+      "block_parent_R": [
+        117.58323827682761,
+        115.76481925917324
+      ],
+      "available_rows": 2048,
+      "pool_index": 19,
+      "selection": "mean_plus_half_std",
+      "selection_score": 104.78413224070678,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r01-26",
+    "round": 1,
+    "source": "specialized_model",
+    "R": 116.42155337170698,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        255,
+        1968
+      ],
+      "block_parent_R": [
+        117.58323827682761,
+        115.76481925917324
+      ],
+      "available_rows": 2048,
+      "pool_index": 16,
+      "selection": "mean_plus_half_std",
+      "selection_score": 105.12127373753856,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r01-27",
+    "round": 1,
+    "source": "specialized_coverage",
+    "R": 118.45978767174527,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 3,
+      "block_parent_indices": [
+        255,
+        255
+      ],
+      "block_parent_R": [
+        117.58323827682761,
+        117.58323827682761
+      ],
+      "available_rows": 2048,
+      "pool_index": 232,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.004882302273608,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r01-28",
+    "round": 1,
+    "source": "specialized_coverage",
+    "R": 123.66078192164424,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 4,
+      "block_parent_indices": [
+        1968,
+        255
+      ],
+      "block_parent_R": [
+        115.76481925917324,
+        117.58323827682761
+      ],
+      "available_rows": 2048,
+      "pool_index": 224,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 0.9965435160870105,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r01-29",
+    "round": 1,
+    "source": "specialized_transfer",
+    "R": 116.44977849593852,
+    "improvement_vs_parent": -0.6849592367652804,
+    "acquisition": {
+      "building": 1,
+      "donor": 2,
+      "receiver": 6,
+      "delta": 0.08205770080328545,
+      "bin": "support",
+      "center": 1968,
+      "parent_R": 115.76481925917324,
+      "parent_key": "2e2d78ecb333efb4456f1bb927d738d7ab2173d6115068671dbbabe7845c1d3d",
+      "requested_delta": 0.08205770080328545,
+      "direction": [
+        1,
+        2,
+        6
+      ],
+      "alpha": 1.0,
+      "transfer_pool_index": 17,
+      "selection": "model_ranked_transfer",
+      "same_parent_observed_gain": null,
+      "selection_score": 110.5532443316855,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r01-30",
+    "round": 1,
+    "source": "specialized_transfer",
+    "R": 115.76481925917324,
+    "improvement_vs_parent": 0.0,
+    "acquisition": {
+      "building": 1,
+      "donor": 2,
+      "receiver": 5,
+      "delta": 0.001,
+      "bin": "small",
+      "center": 1968,
+      "parent_R": 115.76481925917324,
+      "parent_key": "2e2d78ecb333efb4456f1bb927d738d7ab2173d6115068671dbbabe7845c1d3d",
+      "requested_delta": 0.001,
+      "direction": [
+        1,
+        2,
+        5
+      ],
+      "alpha": 1.0,
+      "transfer_pool_index": 0,
+      "selection": "fixed_rotation_no_model_gate",
+      "same_parent_observed_gain": null,
+      "selection_score": 111.14024356672685,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r02-25",
+    "round": 2,
+    "source": "specialized_model",
+    "R": 112.93925111030694,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 1.0,
+      "extra_coordinate": 3,
+      "block_parent_indices": [
+        2049,
+        2049
+      ],
+      "block_parent_R": [
+        113.13488015101755,
+        113.13488015101755
+      ],
+      "available_rows": 2098,
+      "pool_index": 151,
+      "selection": "mean_plus_half_std",
+      "selection_score": 107.27319867380658,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r02-26",
+    "round": 2,
+    "source": "specialized_model",
+    "R": 112.97056837345008,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 3,
+      "block_parent_indices": [
+        2048,
+        2051
+      ],
+      "block_parent_R": [
+        111.29589934123214,
+        113.25452587439212
+      ],
+      "available_rows": 2098,
+      "pool_index": 226,
+      "selection": "mean_plus_half_std",
+      "selection_score": 107.68309681462972,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r02-27",
+    "round": 2,
+    "source": "specialized_coverage",
+    "R": 120.60636437975336,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 1,
+      "block_parent_indices": [
+        2051,
+        2048
+      ],
+      "block_parent_R": [
+        113.25452587439212,
+        111.29589934123214
+      ],
+      "available_rows": 2098,
+      "pool_index": 227,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 0.9667147525549022,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r02-28",
+    "round": 2,
+    "source": "specialized_coverage",
+    "R": 124.47246665682178,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 4,
+      "block_parent_indices": [
+        2049,
+        2051
+      ],
+      "block_parent_R": [
+        113.13488015101755,
+        113.25452587439212
+      ],
+      "available_rows": 2098,
+      "pool_index": 230,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 0.9253207336814138,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r02-29",
+    "round": 2,
+    "source": "specialized_transfer",
+    "R": 111.8958706673002,
+    "improvement_vs_parent": -0.5999713260680579,
+    "acquisition": {
+      "building": 1,
+      "donor": 2,
+      "receiver": 6,
+      "delta": 0.04028984333880339,
+      "bin": "support",
+      "center": 2048,
+      "parent_R": 111.29589934123214,
+      "parent_key": "1c881d0e5cae1fb9194c62a848218fa7adcab990175ea39779eea527c6f7cf7a",
+      "requested_delta": 0.04028984333880339,
+      "direction": [
+        1,
+        2,
+        6
+      ],
+      "alpha": 1.0,
+      "transfer_pool_index": 17,
+      "selection": "model_ranked_transfer",
+      "same_parent_observed_gain": null,
+      "selection_score": 107.95023764448344,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r02-30",
+    "round": 2,
+    "source": "specialized_transfer",
+    "R": 111.29589934123214,
+    "improvement_vs_parent": 0.0,
+    "acquisition": {
+      "building": 1,
+      "donor": 2,
+      "receiver": 5,
+      "delta": 0.01,
+      "bin": "medium",
+      "center": 2048,
+      "parent_R": 111.29589934123214,
+      "parent_key": "1c881d0e5cae1fb9194c62a848218fa7adcab990175ea39779eea527c6f7cf7a",
+      "requested_delta": 0.01,
+      "direction": [
+        1,
+        2,
+        5
+      ],
+      "alpha": 1.0,
+      "transfer_pool_index": 6,
+      "selection": "fixed_rotation_no_model_gate",
+      "same_parent_observed_gain": null,
+      "selection_score": 108.10031662080631,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r03-25",
+    "round": 3,
+    "source": "specialized_model",
+    "R": 112.04248374013696,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2112,
+        2147
+      ],
+      "block_parent_R": [
+        110.16760477295612,
+        111.20886787911876
+      ],
+      "available_rows": 2148,
+      "pool_index": 202,
+      "selection": "mean_plus_half_std",
+      "selection_score": 106.78625759669562,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r03-26",
+    "round": 3,
+    "source": "specialized_model",
+    "R": 111.25025391811504,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 1,
+      "block_parent_indices": [
+        2112,
+        2147
+      ],
+      "block_parent_R": [
+        110.16760477295612,
+        111.20886787911876
+      ],
+      "available_rows": 2148,
+      "pool_index": 208,
+      "selection": "mean_plus_half_std",
+      "selection_score": 106.83602650872356,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r03-27",
+    "round": 3,
+    "source": "specialized_coverage",
+    "R": 121.1778720950242,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 1,
+      "block_parent_indices": [
+        2142,
+        2099
+      ],
+      "block_parent_R": [
+        111.00617264804896,
+        111.33395370841026
+      ],
+      "available_rows": 2148,
+      "pool_index": 248,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.406535211390901,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r03-28",
+    "round": 3,
+    "source": "specialized_coverage",
+    "R": 111.8181133029866,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2144,
+        2099
+      ],
+      "block_parent_R": [
+        111.23137268488064,
+        111.33395370841026
+      ],
+      "available_rows": 2148,
+      "pool_index": 16,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.244834129243505,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r03-29",
+    "round": 3,
+    "source": "specialized_transfer",
+    "R": 110.49509935325476,
+    "improvement_vs_parent": -0.32749458029863376,
+    "acquisition": {
+      "building": 1,
+      "donor": 6,
+      "receiver": 2,
+      "delta": 0.636574420026982,
+      "bin": "support",
+      "center": 2112,
+      "parent_R": 110.16760477295612,
+      "parent_key": "c7962b451f2775bf8c497035c1b0cff01addc5756fa1703c9d35268bff37a9de",
+      "requested_delta": 0.636574420026982,
+      "direction": [
+        1,
+        6,
+        2
+      ],
+      "alpha": 0.7,
+      "transfer_pool_index": 20,
+      "selection": "model_ranked_transfer",
+      "same_parent_observed_gain": null,
+      "selection_score": 107.76018000179597,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r03-30",
+    "round": 3,
+    "source": "specialized_transfer",
+    "R": 110.68306213675532,
+    "improvement_vs_parent": -0.5154573637992002,
+    "acquisition": {
+      "building": 1,
+      "donor": 2,
+      "receiver": 5,
+      "delta": 0.04028984333880339,
+      "bin": "support",
+      "center": 2112,
+      "parent_R": 110.16760477295612,
+      "parent_key": "c7962b451f2775bf8c497035c1b0cff01addc5756fa1703c9d35268bff37a9de",
+      "requested_delta": 0.04028984333880339,
+      "direction": [
+        1,
+        2,
+        5
+      ],
+      "alpha": 0.7,
+      "transfer_pool_index": 16,
+      "selection": "fixed_rotation_no_model_gate",
+      "same_parent_observed_gain": null,
+      "selection_score": 108.65907509273524,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r04-25",
+    "round": 4,
+    "source": "specialized_model",
+    "R": 109.15178368391936,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2182,
+        2181
+      ],
+      "block_parent_R": [
+        108.8667844660813,
+        107.58188305946533
+      ],
+      "available_rows": 2198,
+      "pool_index": 43,
+      "selection": "mean_plus_half_std",
+      "selection_score": 107.10699063174756,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r04-26",
+    "round": 4,
+    "source": "specialized_model",
+    "R": 108.850204599672,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2182,
+        2181
+      ],
+      "block_parent_R": [
+        108.8667844660813,
+        107.58188305946533
+      ],
+      "available_rows": 2198,
+      "pool_index": 8,
+      "selection": "mean_plus_half_std",
+      "selection_score": 107.1542149395894,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r04-27",
+    "round": 4,
+    "source": "specialized_coverage",
+    "R": 107.1266265042359,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 3,
+      "block_parent_indices": [
+        2181,
+        2181
+      ],
+      "block_parent_R": [
+        107.58188305946533,
+        107.58188305946533
+      ],
+      "available_rows": 2198,
+      "pool_index": 242,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.1744468633312803,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r04-28",
+    "round": 4,
+    "source": "specialized_coverage",
+    "R": 121.06408937752713,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2182,
+        2181
+      ],
+      "block_parent_R": [
+        108.8667844660813,
+        107.58188305946533
+      ],
+      "available_rows": 2198,
+      "pool_index": 250,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.0725579867482387,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r04-29",
+    "round": 4,
+    "source": "specialized_transfer",
+    "R": 107.76025838183703,
+    "improvement_vs_parent": -0.17837532237170706,
+    "acquisition": {
+      "building": 1,
+      "donor": 6,
+      "receiver": 2,
+      "delta": 0.055999999999999994,
+      "bin": "coarse",
+      "center": 2181,
+      "parent_R": 107.58188305946533,
+      "parent_key": "e8accc184462d237ed947f25703f7a2aec53831b3f05c8f6dac423cd7226b225",
+      "requested_delta": 0.055999999999999994,
+      "direction": [
+        1,
+        6,
+        2
+      ],
+      "alpha": 0.7,
+      "transfer_pool_index": 14,
+      "selection": "model_ranked_transfer",
+      "same_parent_observed_gain": null,
+      "selection_score": 107.01598580056651,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r04-30",
+    "round": 4,
+    "source": "specialized_transfer",
+    "R": 107.58188305946533,
+    "improvement_vs_parent": 0.0,
+    "acquisition": {
+      "building": 1,
+      "donor": 2,
+      "receiver": 6,
+      "delta": 0.0007,
+      "bin": "small",
+      "center": 2181,
+      "parent_R": 107.58188305946533,
+      "parent_key": "e8accc184462d237ed947f25703f7a2aec53831b3f05c8f6dac423cd7226b225",
+      "requested_delta": 0.0007,
+      "direction": [
+        1,
+        2,
+        6
+      ],
+      "alpha": 0.7,
+      "transfer_pool_index": 1,
+      "selection": "fixed_rotation_no_model_gate",
+      "same_parent_observed_gain": null,
+      "selection_score": 107.29120805614967,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r05-25",
+    "round": 5,
+    "source": "specialized_model",
+    "R": 107.55331200326329,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 1.0,
+      "extra_coordinate": 4,
+      "block_parent_indices": [
+        2224,
+        2224
+      ],
+      "block_parent_R": [
+        107.1266265042359,
+        107.1266265042359
+      ],
+      "available_rows": 2248,
+      "pool_index": 166,
+      "selection": "mean_plus_half_std",
+      "selection_score": 105.45505792683588,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r05-26",
+    "round": 5,
+    "source": "specialized_model",
+    "R": 107.34646993654314,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2224,
+        2224
+      ],
+      "block_parent_R": [
+        107.1266265042359,
+        107.1266265042359
+      ],
+      "available_rows": 2248,
+      "pool_index": 2,
+      "selection": "mean_plus_half_std",
+      "selection_score": 105.79636708416406,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r05-27",
+    "round": 5,
+    "source": "specialized_coverage",
+    "R": 109.43506884539966,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 0.3,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2223,
+        2211
+      ],
+      "block_parent_R": [
+        108.850204599672,
+        107.648453521193
+      ],
+      "available_rows": 2248,
+      "pool_index": 99,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.0189655382707021,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r05-28",
+    "round": 5,
+    "source": "specialized_coverage",
+    "R": 117.4269793984713,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 1,
+      "block_parent_indices": [
+        2224,
+        2224
+      ],
+      "block_parent_R": [
+        107.1266265042359,
+        107.1266265042359
+      ],
+      "available_rows": 2248,
+      "pool_index": 208,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 0.933389453062203,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r05-29",
+    "round": 5,
+    "source": "specialized_transfer",
+    "R": 107.41781111026648,
+    "improvement_vs_parent": -0.2911846060305834,
+    "acquisition": {
+      "building": 1,
+      "donor": 6,
+      "receiver": 2,
+      "delta": 0.005768215354899935,
+      "bin": "support",
+      "center": 2224,
+      "parent_R": 107.1266265042359,
+      "parent_key": "d0488d197f733aafa8d948ac6751909a04075f1874497e93c03785f758a28e15",
+      "requested_delta": 0.005768215354899935,
+      "direction": [
+        1,
+        6,
+        2
+      ],
+      "alpha": 0.5,
+      "transfer_pool_index": 12,
+      "selection": "model_ranked_transfer",
+      "same_parent_observed_gain": null,
+      "selection_score": 106.79029925577373,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r05-30",
+    "round": 5,
+    "source": "specialized_transfer",
+    "R": 118.16104480449576,
+    "improvement_vs_parent": -11.034418300259858,
+    "acquisition": {
+      "building": 1,
+      "donor": 5,
+      "receiver": 2,
+      "delta": 0.007379354122446874,
+      "bin": "support",
+      "center": 2224,
+      "parent_R": 107.1266265042359,
+      "parent_key": "d0488d197f733aafa8d948ac6751909a04075f1874497e93c03785f758a28e15",
+      "requested_delta": 0.007379354122446874,
+      "direction": [
+        1,
+        5,
+        2
+      ],
+      "alpha": 0.5,
+      "transfer_pool_index": 10,
+      "selection": "fixed_rotation_no_model_gate",
+      "same_parent_observed_gain": null,
+      "selection_score": 107.1865370871762,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r06-25",
+    "round": 6,
+    "source": "specialized_model",
+    "R": 107.91926237067672,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2289,
+        2211
+      ],
+      "block_parent_R": [
+        106.05894512834492,
+        107.648453521193
+      ],
+      "available_rows": 2298,
+      "pool_index": 4,
+      "selection": "mean_plus_half_std",
+      "selection_score": 104.75561484908876,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r06-26",
+    "round": 6,
+    "source": "specialized_model",
+    "R": 107.84309305122588,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2289,
+        2211
+      ],
+      "block_parent_R": [
+        106.05894512834492,
+        107.648453521193
+      ],
+      "available_rows": 2298,
+      "pool_index": 11,
+      "selection": "mean_plus_half_std",
+      "selection_score": 104.87164977293553,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r06-27",
+    "round": 6,
+    "source": "specialized_coverage",
+    "R": 117.59884547407272,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 1,
+      "block_parent_indices": [
+        2289,
+        2264
+      ],
+      "block_parent_R": [
+        106.05894512834492,
+        107.72341631085146
+      ],
+      "available_rows": 2298,
+      "pool_index": 254,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.1451798881528783,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r06-28",
+    "round": 6,
+    "source": "specialized_coverage",
+    "R": 108.54142863547897,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 0.3,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2289,
+        2211
+      ],
+      "block_parent_R": [
+        106.05894512834492,
+        107.648453521193
+      ],
+      "available_rows": 2298,
+      "pool_index": 118,
+      "selection": "max_min_distance_no_model_gate",
+      "selection_distance": 1.0122656031036619,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r06-29",
+    "round": 6,
+    "source": "specialized_transfer",
+    "R": 106.23276854271536,
+    "improvement_vs_parent": -0.17382341437044602,
+    "acquisition": {
+      "building": 1,
+      "donor": 6,
+      "receiver": 2,
+      "delta": 0.005768215354899935,
+      "bin": "support",
+      "center": 2289,
+      "parent_R": 106.05894512834492,
+      "parent_key": "710d675296e55bf8d842509c75921cf4291404ef7f7f47adee058db5ea5aef42",
+      "requested_delta": 0.005768215354899935,
+      "direction": [
+        1,
+        6,
+        2
+      ],
+      "alpha": 0.5,
+      "transfer_pool_index": 12,
+      "selection": "model_ranked_transfer",
+      "same_parent_observed_gain": null,
+      "selection_score": 107.31254111052343,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r06-30",
+    "round": 6,
+    "source": "specialized_transfer",
+    "R": 106.09398820402566,
+    "improvement_vs_parent": -0.03504307568074694,
+    "acquisition": {
+      "building": 1,
+      "donor": 5,
+      "receiver": 6,
+      "delta": 0.0005,
+      "bin": "small",
+      "center": 2289,
+      "parent_R": 106.05894512834492,
+      "parent_key": "710d675296e55bf8d842509c75921cf4291404ef7f7f47adee058db5ea5aef42",
+      "requested_delta": 0.0005,
+      "direction": [
+        1,
+        5,
+        6
+      ],
+      "alpha": 0.5,
+      "transfer_pool_index": 1,
+      "selection": "fixed_rotation_no_model_gate",
+      "same_parent_observed_gain": null,
+      "selection_score": 107.40719729198678,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r07-32",
+    "round": 7,
+    "source": "specialized_recombination_transfer",
+    "R": 107.12985671276692,
+    "improvement_vs_parent": -0.43556387769058347,
+    "acquisition": {
+      "center": 2318,
+      "parent_R": 106.69429283507634,
+      "parent_key": "d77d750b97f630a8a82fb2b20f9f91b32c0e87805694ed914c22568cfe64bfaf",
+      "parent_id": "r06-21",
+      "building": 2,
+      "donor": 4,
+      "receiver": 0,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        2,
+        4,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 103.71297682542566,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r07-33",
+    "round": 7,
+    "source": "specialized_recombination_transfer",
+    "R": 110.3439860753715,
+    "improvement_vs_parent": -3.6496932402951643,
+    "acquisition": {
+      "center": 2318,
+      "parent_R": 106.69429283507634,
+      "parent_key": "d77d750b97f630a8a82fb2b20f9f91b32c0e87805694ed914c22568cfe64bfaf",
+      "parent_id": "r06-21",
+      "building": 0,
+      "donor": 0,
+      "receiver": 2,
+      "delta": 0.24793674576982058,
+      "bin": "support",
+      "direction": [
+        0,
+        0,
+        2
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r07-34",
+    "round": 7,
+    "source": "specialized_incumbent_transfer",
+    "R": 105.93735401669984,
+    "improvement_vs_parent": -0.06960130482912064,
+    "acquisition": {
+      "center": 2347,
+      "parent_R": 105.86775271187072,
+      "parent_key": "0d25853700eb320cd8b779b6afc9cc21c3185865e1b0649e698652fefe9cec70",
+      "parent_id": "r06-50",
+      "building": 1,
+      "donor": 5,
+      "receiver": 2,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        5,
+        2
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 104.25449715548677,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r07-35",
+    "round": 7,
+    "source": "specialized_combination",
+    "R": 106.64566469716374,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 1.0,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2347,
+        2347
+      ],
+      "block_parent_R": [
+        105.86775271187072,
+        105.86775271187072
+      ],
+      "available_rows": 2348,
+      "selection": "model_ranked_combination",
+      "selection_score": 104.66366247157563,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r08-34",
+    "round": 8,
+    "source": "specialized_incumbent_transfer",
+    "R": 105.28259384597186,
+    "improvement_vs_parent": 0.03441312909126282,
+    "acquisition": {
+      "center": 2358,
+      "parent_R": 105.31700697506312,
+      "parent_key": "7128abd8e7c75fce9139665f59f042db3b82e76fe894bc9721d8933ed5b06e6d",
+      "parent_id": "r07-11",
+      "building": 1,
+      "donor": 5,
+      "receiver": 2,
+      "delta": 0.005,
+      "bin": "medium",
+      "direction": [
+        1,
+        5,
+        2
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 103.16022241715278,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r08-35",
+    "round": 8,
+    "source": "specialized_combination",
+    "R": 107.4541440816829,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 0.3,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2358,
+        2365
+      ],
+      "block_parent_R": [
+        105.31700697506312,
+        106.77272187604105
+      ],
+      "available_rows": 2398,
+      "selection": "distance_within_top_prediction_quartile",
+      "selection_score": 106.93694055830666,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r09-32",
+    "round": 9,
+    "source": "specialized_recombination_transfer",
+    "R": 106.71811262331904,
+    "improvement_vs_parent": -1.0491058233892687,
+    "acquisition": {
+      "center": 2418,
+      "parent_R": 105.66900679992978,
+      "parent_key": "b0c16e4d8b3d8d15c5087af37a16b6c555b00504f94671b9a53ce14c921de824",
+      "parent_id": "r08-21",
+      "building": 2,
+      "donor": 2,
+      "receiver": 5,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        2,
+        2,
+        5
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 102.36706037778305,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r09-33",
+    "round": 9,
+    "source": "specialized_recombination_transfer",
+    "R": 106.19574916141572,
+    "improvement_vs_parent": -0.5267423614859439,
+    "acquisition": {
+      "center": 2418,
+      "parent_R": 105.66900679992978,
+      "parent_key": "b0c16e4d8b3d8d15c5087af37a16b6c555b00504f94671b9a53ce14c921de824",
+      "parent_id": "r08-21",
+      "building": 0,
+      "donor": 0,
+      "receiver": 3,
+      "delta": 0.0005,
+      "bin": "small",
+      "direction": [
+        0,
+        0,
+        3
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r09-34",
+    "round": 9,
+    "source": "specialized_incumbent_transfer",
+    "R": 105.15116856025998,
+    "improvement_vs_parent": 0.0064572542905807495,
+    "acquisition": {
+      "center": 2414,
+      "parent_R": 105.15762581455056,
+      "parent_key": "0f6977a0a5110cb00c302601c1a46fa616eadc0581509cef01e095d59424bf2c",
+      "parent_id": "r08-17",
+      "building": 1,
+      "donor": 5,
+      "receiver": 6,
+      "delta": 0.005,
+      "bin": "medium",
+      "direction": [
+        1,
+        5,
+        6
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 102.35104085891149,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r09-35",
+    "round": 9,
+    "source": "specialized_combination",
+    "R": 106.56244205369148,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2414,
+        2417
+      ],
+      "block_parent_R": [
+        105.15762581455056,
+        105.807944207103
+      ],
+      "available_rows": 2448,
+      "selection": "model_ranked_combination",
+      "selection_score": 103.0289563556148,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r10-32",
+    "round": 10,
+    "source": "specialized_recombination_transfer",
+    "R": 105.13469709886704,
+    "improvement_vs_parent": 0.02292871568351984,
+    "acquisition": {
+      "center": 2414,
+      "parent_R": 105.15762581455056,
+      "parent_key": "0f6977a0a5110cb00c302601c1a46fa616eadc0581509cef01e095d59424bf2c",
+      "parent_id": "r08-17",
+      "building": 0,
+      "donor": 4,
+      "receiver": 5,
+      "delta": 0.005,
+      "bin": "medium",
+      "direction": [
+        0,
+        4,
+        5
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 101.907033858486,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r10-33",
+    "round": 10,
+    "source": "specialized_recombination_transfer",
+    "R": 105.15762581455056,
+    "improvement_vs_parent": 0.0,
+    "acquisition": {
+      "center": 2414,
+      "parent_R": 105.15762581455056,
+      "parent_key": "0f6977a0a5110cb00c302601c1a46fa616eadc0581509cef01e095d59424bf2c",
+      "parent_id": "r08-17",
+      "building": 1,
+      "donor": 0,
+      "receiver": 1,
+      "delta": 0.0005,
+      "bin": "small",
+      "direction": [
+        1,
+        0,
+        1
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r10-34",
+    "round": 10,
+    "source": "specialized_incumbent_transfer",
+    "R": 105.12823984457646,
+    "improvement_vs_parent": 0.0064572542905807495,
+    "acquisition": {
+      "center": 2455,
+      "parent_R": 105.13469709886704,
+      "parent_key": "bb806b505cf27985e1e2dfc1a8b56efb1e3345555a3501613aa786af12c4926d",
+      "parent_id": "r09-08",
+      "building": 1,
+      "donor": 2,
+      "receiver": 6,
+      "delta": 0.005,
+      "bin": "medium",
+      "direction": [
+        1,
+        2,
+        6
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 101.91602441855596,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r10-35",
+    "round": 10,
+    "source": "specialized_combination",
+    "R": 107.43571731785778,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 0.3,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2465,
+        2417
+      ],
+      "block_parent_R": [
+        105.6772499202052,
+        105.807944207103
+      ],
+      "available_rows": 2498,
+      "selection": "distance_within_top_prediction_quartile",
+      "selection_score": 107.48215736184935,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r11-32",
+    "round": 11,
+    "source": "specialized_recombination_transfer",
+    "R": 105.77974700613412,
+    "improvement_vs_parent": -0.5485760439187146,
+    "acquisition": {
+      "center": 2518,
+      "parent_R": 105.2311709622154,
+      "parent_key": "4bb6549696c0fba6ceab22c35bb02a972518f208abdd944ad7e3045211d157b1",
+      "parent_id": "r10-21",
+      "building": 1,
+      "donor": 6,
+      "receiver": 0,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        6,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 102.565170229757,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r11-33",
+    "round": 11,
+    "source": "specialized_recombination_transfer",
+    "R": 110.3538673116127,
+    "improvement_vs_parent": -5.122696349397302,
+    "acquisition": {
+      "center": 2518,
+      "parent_R": 105.2311709622154,
+      "parent_key": "4bb6549696c0fba6ceab22c35bb02a972518f208abdd944ad7e3045211d157b1",
+      "parent_id": "r10-21",
+      "building": 0,
+      "donor": 0,
+      "receiver": 3,
+      "delta": 0.20793674576982057,
+      "bin": "support",
+      "direction": [
+        0,
+        0,
+        3
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r11-34",
+    "round": 11,
+    "source": "specialized_incumbent_transfer",
+    "R": 105.1575882701436,
+    "improvement_vs_parent": -0.12913108989596367,
+    "acquisition": {
+      "center": 2506,
+      "parent_R": 105.02845718024764,
+      "parent_key": "5adfdb05cd24bb485e2d65c0d996d897f1985c4bbe0950dd684d7ef64e59dce5",
+      "parent_id": "r10-09",
+      "building": 1,
+      "donor": 5,
+      "receiver": 2,
+      "delta": 0.005,
+      "bin": "medium",
+      "direction": [
+        1,
+        5,
+        2
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 102.01171994347071,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r11-35",
+    "round": 11,
+    "source": "specialized_combination",
+    "R": 104.88029497733804,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 1.0,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2506,
+        2506
+      ],
+      "block_parent_R": [
+        105.02845718024764,
+        105.02845718024764
+      ],
+      "available_rows": 2548,
+      "selection": "model_ranked_combination",
+      "selection_score": 105.10450914158787,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r12-32",
+    "round": 12,
+    "source": "specialized_recombination_transfer",
+    "R": 105.98968887142836,
+    "improvement_vs_parent": -0.7555661946534968,
+    "acquisition": {
+      "center": 2565,
+      "parent_R": 105.23412267677486,
+      "parent_key": "dd423aaf3eccb7c8cfbe382f6f871d084c58f4e3fb6c81be79898d548ebdc32a",
+      "parent_id": "r11-18",
+      "building": 2,
+      "donor": 3,
+      "receiver": 4,
+      "delta": 0.016283824455928103,
+      "bin": "support",
+      "direction": [
+        2,
+        3,
+        4
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 102.03836624885383,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r12-33",
+    "round": 12,
+    "source": "specialized_recombination_transfer",
+    "R": 105.23412267677486,
+    "improvement_vs_parent": 0.0,
+    "acquisition": {
+      "center": 2565,
+      "parent_R": 105.23412267677486,
+      "parent_key": "dd423aaf3eccb7c8cfbe382f6f871d084c58f4e3fb6c81be79898d548ebdc32a",
+      "parent_id": "r11-18",
+      "building": 0,
+      "donor": 0,
+      "receiver": 4,
+      "delta": 0.0005,
+      "bin": "small",
+      "direction": [
+        0,
+        0,
+        4
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r12-34",
+    "round": 12,
+    "source": "specialized_incumbent_transfer",
+    "R": 104.86896890273783,
+    "improvement_vs_parent": 0.011326074600205516,
+    "acquisition": {
+      "center": 2582,
+      "parent_R": 104.88029497733804,
+      "parent_key": "667e8371bc16c1bfa96fe97d2324ded43f0ec74a01e2aea01218bc83f6284eb5",
+      "parent_id": "r11-35",
+      "building": 1,
+      "donor": 2,
+      "receiver": 6,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        2,
+        6
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 103.4496008674425,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r12-35",
+    "round": 12,
+    "source": "specialized_combination",
+    "R": 107.1917113577947,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 3,
+      "block_parent_indices": [
+        2344,
+        2561
+      ],
+      "block_parent_R": [
+        106.4657429648796,
+        105.13354843389244
+      ],
+      "available_rows": 2598,
+      "selection": "distance_within_top_prediction_quartile",
+      "selection_score": 108.80935161063631,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r13-32",
+    "round": 13,
+    "source": "specialized_recombination_transfer",
+    "R": 105.0117476755986,
+    "improvement_vs_parent": -0.13145269826055994,
+    "acquisition": {
+      "center": 2582,
+      "parent_R": 104.88029497733804,
+      "parent_key": "667e8371bc16c1bfa96fe97d2324ded43f0ec74a01e2aea01218bc83f6284eb5",
+      "parent_id": "r11-35",
+      "building": 1,
+      "donor": 2,
+      "receiver": 0,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        2,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 101.88983354759795,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r13-33",
+    "round": 13,
+    "source": "specialized_recombination_transfer",
+    "R": 104.88029497733804,
+    "improvement_vs_parent": 0.0,
+    "acquisition": {
+      "center": 2582,
+      "parent_R": 104.88029497733804,
+      "parent_key": "667e8371bc16c1bfa96fe97d2324ded43f0ec74a01e2aea01218bc83f6284eb5",
+      "parent_id": "r11-35",
+      "building": 0,
+      "donor": 0,
+      "receiver": 4,
+      "delta": 0.0005,
+      "bin": "small",
+      "direction": [
+        0,
+        0,
+        4
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r13-34",
+    "round": 13,
+    "source": "specialized_incumbent_transfer",
+    "R": 105.36438202357384,
+    "improvement_vs_parent": -0.5343929044902183,
+    "acquisition": {
+      "center": 2602,
+      "parent_R": 104.82998911908362,
+      "parent_key": "2729058c36bb85fe3f71554e707d0870e7937bafb982937a832f12aab3796b6d",
+      "parent_id": "r12-05",
+      "building": 1,
+      "donor": 5,
+      "receiver": 6,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        5,
+        6
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 102.15942517899825,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r13-35",
+    "round": 13,
+    "source": "specialized_combination",
+    "R": 106.47811671067028,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 1.0,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2344,
+        2565
+      ],
+      "block_parent_R": [
+        106.4657429648796,
+        105.23412267677486
+      ],
+      "available_rows": 2648,
+      "selection": "model_ranked_combination",
+      "selection_score": 103.49041036082285,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r14-32",
+    "round": 14,
+    "source": "specialized_recombination_transfer",
+    "R": 105.26211302168667,
+    "improvement_vs_parent": -0.26849622651934624,
+    "acquisition": {
+      "center": 2668,
+      "parent_R": 104.99361679516733,
+      "parent_key": "81bc2c7acea02f62066f5e8da965e4c6d96a0597671851f695760aadb5879163",
+      "parent_id": "r13-21",
+      "building": 1,
+      "donor": 5,
+      "receiver": 0,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        5,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 101.11139528818134,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r14-33",
+    "round": 14,
+    "source": "specialized_recombination_transfer",
+    "R": 105.34390900935978,
+    "improvement_vs_parent": -0.35029221419245005,
+    "acquisition": {
+      "center": 2668,
+      "parent_R": 104.99361679516733,
+      "parent_key": "81bc2c7acea02f62066f5e8da965e4c6d96a0597671851f695760aadb5879163",
+      "parent_id": "r13-21",
+      "building": 0,
+      "donor": 0,
+      "receiver": 4,
+      "delta": 0.005,
+      "bin": "medium",
+      "direction": [
+        0,
+        0,
+        4
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r14-34",
+    "round": 14,
+    "source": "specialized_incumbent_transfer",
+    "R": 105.39561029709876,
+    "improvement_vs_parent": -0.6364862583577491,
+    "acquisition": {
+      "center": 2686,
+      "parent_R": 104.759124038741,
+      "parent_key": "eeced77b37cdeb8c2ec7c36c7519ef40fd2f190d89a76466a4306806de9f20a7",
+      "parent_id": "r13-39",
+      "building": 1,
+      "donor": 5,
+      "receiver": 6,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        5,
+        6
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 102.05455413241741,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r14-35",
+    "round": 14,
+    "source": "specialized_combination",
+    "R": 107.25971540343016,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2344,
+        2565
+      ],
+      "block_parent_R": [
+        106.4657429648796,
+        105.23412267677486
+      ],
+      "available_rows": 2698,
+      "selection": "distance_within_top_prediction_quartile",
+      "selection_score": 107.07581939556604,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r15-37",
+    "round": 15,
+    "source": "specialized_recombination_transfer",
+    "R": 105.33808115124702,
+    "improvement_vs_parent": -0.2847113832831383,
+    "acquisition": {
+      "center": 2715,
+      "parent_R": 105.05336976796389,
+      "parent_key": "8b77bc566d612cb507355508be5176323b9552929100922727f1de25f4543327",
+      "parent_id": "r14-18",
+      "building": 1,
+      "donor": 5,
+      "receiver": 0,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        5,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 100.84708944347364,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r15-38",
+    "round": 15,
+    "source": "specialized_recombination_transfer",
+    "R": 122.41126079761308,
+    "improvement_vs_parent": -17.357891029649196,
+    "acquisition": {
+      "center": 2715,
+      "parent_R": 105.05336976796389,
+      "parent_key": "8b77bc566d612cb507355508be5176323b9552929100922727f1de25f4543327",
+      "parent_id": "r14-18",
+      "building": 0,
+      "donor": 0,
+      "receiver": 4,
+      "delta": 0.2079367457698206,
+      "bin": "support",
+      "direction": [
+        0,
+        0,
+        4
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r15-39",
+    "round": 15,
+    "source": "specialized_incumbent_transfer",
+    "R": 104.34650010429324,
+    "improvement_vs_parent": -0.23112489376218548,
+    "acquisition": {
+      "center": 2711,
+      "parent_R": 104.11537521053106,
+      "parent_key": "b1e529c7a174ac107e9297ecbc9d457303d95a9f9d0d84f2ed35f7d8e1b5e85f",
+      "parent_id": "r14-14",
+      "building": 1,
+      "donor": 5,
+      "receiver": 2,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        5,
+        2
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 101.03556639068219,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r15-40",
+    "round": 15,
+    "source": "specialized_combination",
+    "R": 105.79965723922942,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 1.0,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2711,
+        2709
+      ],
+      "block_parent_R": [
+        104.11537521053106,
+        105.0335306978086
+      ],
+      "available_rows": 2748,
+      "selection": "model_ranked_combination",
+      "selection_score": 102.34072896124272,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r16-37",
+    "round": 16,
+    "source": "specialized_recombination_transfer",
+    "R": 104.47629373148084,
+    "improvement_vs_parent": -0.30361721571536293,
+    "acquisition": {
+      "center": 2766,
+      "parent_R": 104.17267651576547,
+      "parent_key": "d636abf9aa3570b0367646739370a7eef57eb76d9fc31cb97c14979822b6941c",
+      "parent_id": "r15-19",
+      "building": 1,
+      "donor": 6,
+      "receiver": 0,
+      "delta": 0.04,
+      "bin": "coarse",
+      "direction": [
+        1,
+        6,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 100.60582110595215,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r16-38",
+    "round": 16,
+    "source": "specialized_recombination_transfer",
+    "R": 122.57670100798714,
+    "improvement_vs_parent": -18.404024492221666,
+    "acquisition": {
+      "center": 2766,
+      "parent_R": 104.17267651576547,
+      "parent_key": "d636abf9aa3570b0367646739370a7eef57eb76d9fc31cb97c14979822b6941c",
+      "parent_id": "r15-19",
+      "building": 0,
+      "donor": 0,
+      "receiver": 4,
+      "delta": 0.2079367457698206,
+      "bin": "support",
+      "direction": [
+        0,
+        0,
+        4
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r16-39",
+    "round": 16,
+    "source": "specialized_incumbent_transfer",
+    "R": 104.19842342380434,
+    "improvement_vs_parent": -0.08627041056752205,
+    "acquisition": {
+      "center": 2778,
+      "parent_R": 104.11215301323682,
+      "parent_key": "ce55bd48efcb985df94c116381a17eeebae9d25cf199adc073815f32a5d205b4",
+      "parent_id": "r15-31",
+      "building": 1,
+      "donor": 5,
+      "receiver": 6,
+      "delta": 0.005,
+      "bin": "medium",
+      "direction": [
+        1,
+        5,
+        6
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 100.77264252838823,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r16-40",
+    "round": 16,
+    "source": "specialized_combination",
+    "R": 106.16379570495336,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 0.3,
+      "extra_coordinate": 4,
+      "block_parent_indices": [
+        2778,
+        2778
+      ],
+      "block_parent_R": [
+        104.11215301323682,
+        104.11215301323682
+      ],
+      "available_rows": 2798,
+      "selection": "distance_within_top_prediction_quartile",
+      "selection_score": 107.48248980701553,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r17-27",
+    "round": 17,
+    "source": "specialized_recombination_transfer",
+    "R": 104.4335916209966,
+    "improvement_vs_parent": -0.2641373025253557,
+    "acquisition": {
+      "center": 2816,
+      "parent_R": 104.16945431847124,
+      "parent_key": "3dbf1c2ec6824362e4d78e10672a0f3a27fe232d55d8fa00e154c1f5bcc678ff",
+      "parent_id": "r16-19",
+      "building": 1,
+      "donor": 6,
+      "receiver": 0,
+      "delta": 0.08,
+      "bin": "coarse",
+      "direction": [
+        1,
+        6,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 100.48257573254158,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r17-28",
+    "round": 17,
+    "source": "specialized_recombination_transfer",
+    "R": 105.2012270623818,
+    "improvement_vs_parent": -1.0317727439105653,
+    "acquisition": {
+      "center": 2816,
+      "parent_R": 104.16945431847124,
+      "parent_key": "3dbf1c2ec6824362e4d78e10672a0f3a27fe232d55d8fa00e154c1f5bcc678ff",
+      "parent_id": "r16-19",
+      "building": 0,
+      "donor": 0,
+      "receiver": 5,
+      "delta": 0.01,
+      "bin": "medium",
+      "direction": [
+        0,
+        0,
+        5
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r17-29",
+    "round": 17,
+    "source": "specialized_incumbent_transfer",
+    "R": 104.17041599843652,
+    "improvement_vs_parent": -0.07584400847557049,
+    "acquisition": {
+      "center": 2803,
+      "parent_R": 104.09457198996095,
+      "parent_key": "e9f0f7acae3e200af39b28609f23fd14a513907c87ba9d8c4095857f24fd6206",
+      "parent_id": "r16-06",
+      "building": 1,
+      "donor": 5,
+      "receiver": 2,
+      "delta": 0.01,
+      "bin": "medium",
+      "direction": [
+        1,
+        5,
+        2
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 100.4761756079172,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r17-30",
+    "round": 17,
+    "source": "specialized_combination",
+    "R": 105.53502235934138,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 4,
+      "concentration": 1.0,
+      "extra_coordinate": 0,
+      "block_parent_indices": [
+        2803,
+        2703
+      ],
+      "block_parent_R": [
+        104.09457198996095,
+        104.75616341643035
+      ],
+      "available_rows": 2848,
+      "selection": "model_ranked_combination",
+      "selection_score": 102.13960049958436,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r18-27",
+    "round": 18,
+    "source": "specialized_recombination_transfer",
+    "R": 104.519043084234,
+    "improvement_vs_parent": -0.17576517723499308,
+    "acquisition": {
+      "center": 2815,
+      "parent_R": 104.343277906999,
+      "parent_key": "b32ad10763254661f39483700836e4afd56d3cbacc765a321e9b8b0cdb690b69",
+      "parent_id": "r16-18",
+      "building": 1,
+      "donor": 2,
+      "receiver": 0,
+      "delta": 0.08,
+      "bin": "coarse",
+      "direction": [
+        1,
+        2,
+        0
+      ],
+      "selection": "parent_model_rank",
+      "selection_score": 100.1430307269429,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r18-28",
+    "round": 18,
+    "source": "specialized_recombination_transfer",
+    "R": 105.46316927857696,
+    "improvement_vs_parent": -1.1198913715779497,
+    "acquisition": {
+      "center": 2815,
+      "parent_R": 104.343277906999,
+      "parent_key": "b32ad10763254661f39483700836e4afd56d3cbacc765a321e9b8b0cdb690b69",
+      "parent_id": "r16-18",
+      "building": 0,
+      "donor": 0,
+      "receiver": 5,
+      "delta": 0.01,
+      "bin": "medium",
+      "direction": [
+        0,
+        0,
+        5
+      ],
+      "selection": "untried_parent_direction_rotation",
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r18-29",
+    "round": 18,
+    "source": "specialized_incumbent_transfer",
+    "R": 104.01827870029956,
+    "improvement_vs_parent": 0.0,
+    "acquisition": {
+      "center": 2853,
+      "parent_R": 104.01827870029956,
+      "parent_key": "8fdbb6250d8ef8370539575425df92d6d7c6a7104a82f61bee02385a3e54dbc9",
+      "parent_id": "r17-06",
+      "building": 1,
+      "donor": 5,
+      "receiver": 2,
+      "delta": 0.001,
+      "bin": "small",
+      "direction": [
+        1,
+        5,
+        2
+      ],
+      "selection": "incumbent_model_rank",
+      "selection_score": 99.98369863860172,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r18-30",
+    "round": 18,
+    "source": "specialized_combination",
+    "R": 105.35250157024711,
+    "improvement_vs_parent": null,
+    "acquisition": {
+      "support_size": 3,
+      "concentration": 0.3,
+      "extra_coordinate": null,
+      "block_parent_indices": [
+        2853,
+        2853
+      ],
+      "block_parent_R": [
+        104.01827870029956,
+        104.01827870029956
+      ],
+      "available_rows": 2898,
+      "selection": "distance_within_top_prediction_quartile",
+      "selection_score": 106.35003339786239,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r19-29",
+    "round": 19,
+    "source": "specialized_step_followup",
+    "R": 103.6365801366046,
+    "improvement_vs_parent": 0.3816985636949539,
+    "acquisition": {
+      "center": 2853,
+      "parent_R": 104.01827870029956,
+      "parent_key": "8fdbb6250d8ef8370539575425df92d6d7c6a7104a82f61bee02385a3e54dbc9",
+      "parent_id": "r17-06",
+      "direction": [
+        2,
+        3,
+        0
+      ],
+      "building": 2,
+      "donor": 3,
+      "receiver": 0,
+      "delta": 0.00025,
+      "selection": "confirmed_direction_step",
+      "reference_child_id": "r18-33",
+      "reference_delta": 0.0005,
+      "same_parent_observed_gain": 0.38283346220852366,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r19-30",
+    "round": 19,
+    "source": "specialized_step_followup",
+    "R": 103.67505847942084,
+    "improvement_vs_parent": 0.3432202208787203,
+    "acquisition": {
+      "center": 2853,
+      "parent_R": 104.01827870029956,
+      "parent_key": "8fdbb6250d8ef8370539575425df92d6d7c6a7104a82f61bee02385a3e54dbc9",
+      "parent_id": "r17-06",
+      "direction": [
+        2,
+        3,
+        0
+      ],
+      "building": 2,
+      "donor": 3,
+      "receiver": 0,
+      "delta": 0.0006000000000000001,
+      "selection": "confirmed_direction_step",
+      "reference_child_id": "r18-33",
+      "reference_delta": 0.0005,
+      "same_parent_observed_gain": 0.38283346220852366,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r20-29",
+    "round": 20,
+    "source": "specialized_step_followup",
+    "R": 103.63544523809104,
+    "improvement_vs_parent": 0.38283346220852366,
+    "acquisition": {
+      "center": 2853,
+      "parent_R": 104.01827870029956,
+      "parent_key": "8fdbb6250d8ef8370539575425df92d6d7c6a7104a82f61bee02385a3e54dbc9",
+      "parent_id": "r17-06",
+      "direction": [
+        2,
+        3,
+        0
+      ],
+      "building": 2,
+      "donor": 3,
+      "receiver": 0,
+      "delta": 0.000375,
+      "selection": "confirmed_direction_step",
+      "reference_child_id": "r18-33",
+      "reference_delta": 0.0005,
+      "same_parent_observed_gain": 0.38283346220852366,
+      "role": "exploit"
+    }
+  },
+  {
+    "id": "r20-30",
+    "round": 20,
+    "source": "specialized_step_followup",
+    "R": 103.67505847942084,
+    "improvement_vs_parent": 0.3432202208787203,
+    "acquisition": {
+      "center": 2853,
+      "parent_R": 104.01827870029956,
+      "parent_key": "8fdbb6250d8ef8370539575425df92d6d7c6a7104a82f61bee02385a3e54dbc9",
+      "parent_id": "r17-06",
+      "direction": [
+        2,
+        3,
+        0
+      ],
+      "building": 2,
+      "donor": 3,
+      "receiver": 0,
+      "delta": 0.00055,
+      "selection": "confirmed_direction_step",
+      "reference_child_id": "r18-33",
+      "reference_delta": 0.0005,
+      "same_parent_observed_gain": 0.38283346220852366,
+      "role": "exploit"
+    }
+  }
+]

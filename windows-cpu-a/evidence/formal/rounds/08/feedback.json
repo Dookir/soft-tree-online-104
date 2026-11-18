@@ -1,0 +1,90 @@
+{
+  "round": 8,
+  "batch_min_R": 105.15762581455056,
+  "best_online_R": 105.15762581455056,
+  "cumulative_best_R": 105.15762581455056,
+  "prediction_MAE": 3.6888004822359424,
+  "prediction_RMSE": 4.197901719003318,
+  "source_counts": {
+    "joint": 8,
+    "learn_boundary": 4,
+    "learn_competitive": 3,
+    "learn_pair": 8,
+    "recombination": 6,
+    "specialized_combination": 1,
+    "specialized_incumbent_transfer": 1,
+    "surrogate": 4,
+    "transfer": 15
+  },
+  "successful_observations": 400,
+  "model_version": 7,
+  "role_counts": {
+    "exploit": 35,
+    "learn": 15
+  },
+  "role_best_R": {
+    "exploit": 105.15762581455056,
+    "learn": 105.75247118773405
+  },
+  "role_improvements_over_previous_best": {
+    "exploit": 3,
+    "learn": 0
+  },
+  "scale_update": {
+    "alpha_used": 0.5,
+    "alpha_next": 0.5,
+    "unique_rounded_R_fraction": 0.96,
+    "improvement": 0.15938116051256657,
+    "reason": "contract_after_two_improvements"
+  },
+  "v3_transition": {
+    "polish_active_next": false,
+    "polish_trigger_round": null,
+    "polish_stall_streak": 0,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 8,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 173.35224043361256,
+      "anchor_abs_error_sum": 65.65090528644726,
+      "raw_top5_regret": 0.0,
+      "anchor_top5_regret": 0.0
+    },
+    "anchor_gate": {
+      "passed": true,
+      "reason": "passed",
+      "valid_batches": 3,
+      "eligible_points": 138,
+      "raw_MAE": 3.1894903893997673,
+      "anchor_MAE": 1.4567102696504104,
+      "raw_top5_regret": 0.3028760667269381,
+      "anchor_top5_regret": 0.3028537345429214,
+      "assessed_rounds": [
+        6,
+        7,
+        8
+      ]
+    }
+  },
+  "phase": "v1_discovery",
+  "anchor_used_for_selection": false,
+  "source_best_R": {
+    "learn_pair": 106.17436234897468,
+    "recombination": 105.15762581455056,
+    "joint": 106.10891073103994,
+    "surrogate": 106.3254439784214,
+    "learn_competitive": 105.75247118773405,
+    "specialized_incumbent_transfer": 105.28259384597186,
+    "transfer": 105.25409967789892,
+    "specialized_combination": 107.4541440816829,
+    "learn_boundary": 106.0466604452813
+  },
+  "transfer_bin_counts": {
+    "small": 5,
+    "medium": 4,
+    "coarse": 3,
+    "support": 3
+  },
+  "unranked_count": 12,
+  "local_pair_accuracy": 0.7489779231398201
+}

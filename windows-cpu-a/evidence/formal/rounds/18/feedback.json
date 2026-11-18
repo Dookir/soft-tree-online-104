@@ -1,0 +1,94 @@
+{
+  "round": 18,
+  "batch_min_R": 103.63544523809104,
+  "best_online_R": 103.63544523809104,
+  "cumulative_best_R": 103.63544523809104,
+  "prediction_MAE": 3.5400295932765578,
+  "prediction_RMSE": 3.939087930323266,
+  "source_counts": {
+    "joint": 4,
+    "learn_boundary": 2,
+    "learn_competitive": 2,
+    "learn_pair": 6,
+    "polish_scan": 10,
+    "recombination": 6,
+    "specialized_combination": 1,
+    "specialized_incumbent_transfer": 1,
+    "specialized_recombination_transfer": 2,
+    "surrogate": 4,
+    "transfer": 12
+  },
+  "successful_observations": 900,
+  "model_version": 17,
+  "role_counts": {
+    "exploit": 40,
+    "learn": 10
+  },
+  "role_best_R": {
+    "exploit": 103.63544523809104,
+    "learn": 105.51512197277044
+  },
+  "role_improvements_over_previous_best": {
+    "exploit": 4,
+    "learn": 0
+  },
+  "scale_update": {
+    "alpha_used": 1.0,
+    "alpha_next": 0.7,
+    "unique_rounded_R_fraction": 0.9,
+    "improvement": 0.38283346220852366,
+    "reason": "contract_after_two_improvements"
+  },
+  "v3_transition": {
+    "polish_active_next": true,
+    "polish_trigger_round": 16,
+    "polish_stall_streak": 0,
+    "anchor_enabled_next": false,
+    "shadow_feedback": {
+      "round": 18,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 175.6991975182272,
+      "anchor_abs_error_sum": 36.86819178818536,
+      "raw_top5_regret": 0.4455702379346036,
+      "anchor_top5_regret": 0.4455702379346036
+    },
+    "anchor_gate": {
+      "passed": false,
+      "reason": "error_or_selection_guard_failed",
+      "valid_batches": 3,
+      "eligible_points": 142,
+      "raw_MAE": 3.621527659596905,
+      "anchor_MAE": 0.8379935366383912,
+      "raw_top5_regret": 0.3152758926153278,
+      "anchor_top5_regret": 0.3302730744083817,
+      "assessed_rounds": [
+        16,
+        17,
+        18
+      ]
+    }
+  },
+  "phase": "feedback_triggered_polish",
+  "anchor_used_for_selection": true,
+  "source_best_R": {
+    "learn_pair": 106.03407813142984,
+    "recombination": 104.09960809070616,
+    "joint": 107.55410772265168,
+    "surrogate": 106.0541724767536,
+    "learn_competitive": 107.23107593879104,
+    "specialized_incumbent_transfer": 104.01827870029956,
+    "transfer": 104.02548876125364,
+    "specialized_combination": 105.35250157024711,
+    "polish_scan": 103.63544523809104,
+    "specialized_recombination_transfer": 104.519043084234,
+    "learn_boundary": 105.51512197277044
+  },
+  "transfer_bin_counts": {
+    "small": 3,
+    "medium": 3,
+    "coarse": 3,
+    "support": 3
+  },
+  "unranked_count": 19,
+  "local_pair_accuracy": 0.7537067545304778
+}

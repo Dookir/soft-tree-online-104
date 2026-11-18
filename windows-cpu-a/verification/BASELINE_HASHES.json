@@ -1,0 +1,23 @@
+{
+  "adaptive/acquisition.py": "3425eae6aa84625e4bdab14bc7c55fa48f8081ea626326d7e2dc243c4468a925",
+  "adaptive/acquisition_v1.py": "d0be5cd5db3c68f2ca3cdb681dcbe072b6a2bdd35f8729a52c17675368012ae0",
+  "adaptive/acquisition_v3.py": "798623c6882059ccd527065f3b0d904fe342151aba2e6815992b42126f2b5c67",
+  "adaptive/anchor.py": "27f21c534ab9fc3a84846e6bd203c345620dee5754357be957d125e20bc0ee86",
+  "adaptive/audit.py": "616cfc2a5c090f2da01cb9fb1a664eb2857a8958502acd94f3eb7d236358b436",
+  "adaptive/base.py": "dc4df5fb4cb36d216a3c28928e423ddeaeccde9abfe3ab76ef1a570bb05edbfe",
+  "adaptive/budget.py": "4aa67b8b4a640d798aa2b656b6e88d8ddfdfcad030f885a61242e018b7b48f85",
+  "adaptive/information.py": "318f46325153f31e9ca8f3950a44a1c1bb4c64ba474c1e151f634dce5943d04e",
+  "adaptive/learning.py": "c8b6b218ebe1ed37241e7f275e520e46f7162687a4276aea33cb2ae856482960",
+  "adaptive/lines.py": "af1ad01300e434843500579ba1576e58f0920c07f57f494d943992d8a4e3288b",
+  "adaptive/model.py": "ff8d4dc46c2dae9809d01a78a9582ca481c7e7a4fbf8562a5b7bf286815b38d5",
+  "adaptive/polling.py": "c0266ae452ab61057e0d674e66a3e3ba91452e3cd751a76a919e171987f4c079",
+  "adaptive/protocol.py": "7dd4de074d6ca90c68b0a7bacc564e3f33a5d68089f5ce18145ae794828005db",
+  "adaptive/recipe.json": "39694418c56f4567d31dd08a8eccac4b8e8cff8d21667d33e70f823c834286b8",
+  "adaptive/release.py": "d01ebb5443d916b1d6278a11a0a4ef7f5d0dbaafa93936bf2063021f21d66b75",
+  "adaptive/resources.py": "07ed8ae52a9771df35d038d568cc78719a96ec16c990fd06dc284cec6b86b772",
+  "adaptive/runner.py": "92f92aa699a2a74bf3ef544809dd0216a44064bf23c255d4ae5c5b16d56c6283",
+  "adaptive/training_audit.py": "2d6fbf2e79170189627689eb867b9f76d00dc72eb9f69a20d0826f9e6d732f12",
+  "adaptive/v1_engine.py": "3ff4c1c59fbe4405c2585719b325d8c29f91173fc51d099133c5b39746f9ce59",
+  "adaptive/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "adaptive/data/train.csv": "877b5f8ee265245dd693148a5d7b11f28f48b426e43ac3ac1be8b7a934249023"
+}

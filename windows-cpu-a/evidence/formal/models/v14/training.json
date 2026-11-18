@@ -1,0 +1,61 @@
+{
+  "data_fingerprint": "c4c49862d534fa61730bf7821deab6c1b4dd4101455b22ea3b09a86bfaeda762",
+  "scale": 161.91360390296904,
+  "models": [
+    {
+      "seed": 2026,
+      "epochs": 486,
+      "seconds": 48.60899999999674,
+      "sha256": "f48ebb3e7db3c74b9df70969e1e079b192f766b699f936eb460d9b7a3db36378"
+    },
+    {
+      "seed": 2027,
+      "epochs": 484,
+      "seconds": 48.51600000000326,
+      "sha256": "bc98c2f34bb97f6e21a757bc0422f646c18dcbf1daad715d72b35111ca4896e7"
+    },
+    {
+      "seed": 2028,
+      "epochs": 484,
+      "seconds": 46.25,
+      "sha256": "4ffa27578fd14eceb2defc22d7af65fc2da7b4aa7227b78283a9cb9db00b7267"
+    },
+    {
+      "seed": 2029,
+      "epochs": 481,
+      "seconds": 45.796999999991385,
+      "sha256": "4fe3cd7cc57594ed674fa4d3247d0382c45b81124b7725cacf825bb57f4d05ab"
+    },
+    {
+      "seed": 2030,
+      "epochs": 471,
+      "seconds": 40.14000000001397,
+      "sha256": "366648414d19c57e4f84ffb9420690656af75a2572ea39ef2a5a911c7b46e7ad"
+    }
+  ],
+  "total_rows": 2748,
+  "original_rows": 2048,
+  "online_rows": 700,
+  "active_rows": 2748,
+  "pruned_indices": [],
+  "elite_indices": [
+    2711,
+    2703,
+    2631,
+    2553,
+    2668
+  ],
+  "weighting": "source(offline=1,online=1.5)*low_R[1,1.5]*region[1,1.5], cap=3",
+  "active_weight_min": 1.0000000000000009,
+  "active_weight_max": 3.0,
+  "online_weight_share": 0.46354001953518614,
+  "pruning": "high-R top20%, elite distance>=0.3, neighbor distance<=0.03, label gap<=1% median; at most5%",
+  "initialization": "fresh_fixed_seeds",
+  "device": "cpu",
+  "torch": "2.6.0+cpu",
+  "numpy": "1.26.4",
+  "wall_seconds": 138.54699999999139,
+  "optimizer_steps": 52932,
+  "old_models_loaded": false,
+  "old_online_labels_used": false
+}

@@ -1,0 +1,229 @@
+{
+  "status": "complete",
+  "backend": "native",
+  "completed_rounds": 20,
+  "attempted_calls": 20,
+  "pending": null,
+  "offline_best": {
+    "id": "p01969",
+    "R": 115.76481925917324,
+    "weights": [
+      [
+        0.18820192424833943,
+        0.06360466420059784,
+        0.20218812019519208,
+        0.2143194240587854,
+        0.033248929385831,
+        0.21981267379719566,
+        0.07862426411405848
+      ],
+      [
+        0.23588131097397017,
+        0.14100310763021828,
+        0.08205770080328545,
+        0.05530500458165258,
+        0.12974305755590243,
+        0.2875770324599347,
+        0.06843278599503624
+      ],
+      [
+        0.16258951876772473,
+        0.029255805470118926,
+        0.04458718056535448,
+        0.06959649096135122,
+        0.11341991678227721,
+        0.3471329386268938,
+        0.23341814882627956
+      ]
+    ]
+  },
+  "radius": 1.4,
+  "small_improvement_streak": 0,
+  "good_improvement_streak": 0,
+  "cumulative_best_R": 103.63530439231543,
+  "target_R": 104.0,
+  "polish_active": true,
+  "anchor_enabled": true,
+  "polish_stall_streak": 2,
+  "anchor_history": [
+    {
+      "round": 1,
+      "eligible_count": 36,
+      "raw_abs_error_sum": 218.40901502036468,
+      "anchor_abs_error_sum": 51.10501541397639,
+      "raw_top5_regret": 1.8086413552518934,
+      "anchor_top5_regret": 1.4719270698114997
+    },
+    {
+      "round": 2,
+      "eligible_count": 34,
+      "raw_abs_error_sum": 143.60648781148376,
+      "anchor_abs_error_sum": 36.826140009165954,
+      "raw_top5_regret": 0.9839441243093319,
+      "anchor_top5_regret": 0.9839441243093319
+    },
+    {
+      "round": 3,
+      "eligible_count": 34,
+      "raw_abs_error_sum": 85.64046597363566,
+      "anchor_abs_error_sum": 47.728441614154065,
+      "raw_top5_regret": 2.8393751364201307,
+      "anchor_top5_regret": 2.8393751364201307
+    },
+    {
+      "round": 4,
+      "eligible_count": 43,
+      "raw_abs_error_sum": 121.91588167053197,
+      "anchor_abs_error_sum": 56.50873391888767,
+      "raw_top5_regret": 2.103280190262012,
+      "anchor_top5_regret": 0.14698326960206032
+    },
+    {
+      "round": 5,
+      "eligible_count": 37,
+      "raw_abs_error_sum": 127.05495615625628,
+      "anchor_abs_error_sum": 89.32588123325628,
+      "raw_top5_regret": 1.49436687491837,
+      "anchor_top5_regret": 1.1614434625953578
+    },
+    {
+      "round": 6,
+      "eligible_count": 42,
+      "raw_abs_error_sum": 111.91603235058663,
+      "anchor_abs_error_sum": 60.20036165983524,
+      "raw_top5_regret": 0.9086282001808144,
+      "anchor_top5_regret": 0.17890773341058264
+    },
+    {
+      "round": 7,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 154.88140095296865,
+      "anchor_abs_error_sum": 75.17475026547413,
+      "raw_top5_regret": 0.0,
+      "anchor_top5_regret": 0.7296534702181816
+    },
+    {
+      "round": 8,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 173.35224043361256,
+      "anchor_abs_error_sum": 65.65090528644726,
+      "raw_top5_regret": 0.0,
+      "anchor_top5_regret": 0.0
+    },
+    {
+      "round": 9,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 168.85015579195095,
+      "anchor_abs_error_sum": 45.78118736741253,
+      "raw_top5_regret": 0.0,
+      "anchor_top5_regret": 0.0
+    },
+    {
+      "round": 10,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 169.8589792423,
+      "anchor_abs_error_sum": 37.63705782434472,
+      "raw_top5_regret": 0.09978266432881355,
+      "anchor_top5_regret": 0.09978266432881355
+    },
+    {
+      "round": 11,
+      "eligible_count": 49,
+      "raw_abs_error_sum": 144.0706132624074,
+      "anchor_abs_error_sum": 36.03106520331812,
+      "raw_top5_regret": 0.14816220290960302,
+      "anchor_top5_regret": 0.11008544452489843
+    },
+    {
+      "round": 12,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 126.25436040277621,
+      "anchor_abs_error_sum": 48.65707052761687,
+      "raw_top5_regret": 0.4041335576912388,
+      "anchor_top5_regret": 0.03897978365421295
+    },
+    {
+      "round": 13,
+      "eligible_count": 50,
+      "raw_abs_error_sum": 163.5621379885028,
+      "anchor_abs_error_sum": 47.063166181684565,
+      "raw_top5_regret": 0.34073569218161026,
+      "anchor_top5_regret": 0.25262363685759226
+    },
+    {
+      "round": 14,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 156.60505579057138,
+      "anchor_abs_error_sum": 46.122972441921405,
+      "raw_top5_regret": 0.9379945574328303,
+      "anchor_top5_regret": 0.0
+    },
+    {
+      "round": 15,
+      "eligible_count": 46,
+      "raw_abs_error_sum": 148.55383151859056,
+      "anchor_abs_error_sum": 32.80673573767449,
+      "raw_top5_regret": 0.41235446091741323,
+      "anchor_top5_regret": 0.07080502901226282
+    },
+    {
+      "round": 16,
+      "eligible_count": 47,
+      "raw_abs_error_sum": 165.73932872325878,
+      "anchor_abs_error_sum": 39.822410096640965,
+      "raw_top5_regret": 0.3817217415198826,
+      "anchor_top5_regret": 0.4267132868990444
+    },
+    {
+      "round": 17,
+      "eligible_count": 47,
+      "raw_abs_error_sum": 172.81840142127447,
+      "anchor_abs_error_sum": 42.304480317825224,
+      "raw_top5_regret": 0.11853569839149714,
+      "anchor_top5_regret": 0.11853569839149714
+    },
+    {
+      "round": 18,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 175.6991975182272,
+      "anchor_abs_error_sum": 36.86819178818536,
+      "raw_top5_regret": 0.4455702379346036,
+      "anchor_top5_regret": 0.4455702379346036
+    },
+    {
+      "round": 19,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 157.9879072655832,
+      "anchor_abs_error_sum": 29.95016286189329,
+      "raw_top5_regret": 0.10590399429204922,
+      "anchor_top5_regret": 0.07584400847555628
+    },
+    {
+      "round": 20,
+      "eligible_count": 48,
+      "raw_abs_error_sum": 205.83128329434976,
+      "anchor_abs_error_sum": 47.86503070589974,
+      "raw_top5_regret": 0.009443912655129338,
+      "anchor_top5_regret": 0.009443912655129338
+    }
+  ],
+  "started_at": "2026-11-18T11:08:02.328247",
+  "anchor_gate": {
+    "passed": true,
+    "reason": "passed",
+    "valid_batches": 3,
+    "eligible_points": 144,
+    "raw_MAE": 3.746655472765001,
+    "anchor_MAE": 0.7964123983054054,
+    "raw_top5_regret": 0.18697271496059406,
+    "anchor_top5_regret": 0.17695271968842974,
+    "assessed_rounds": [
+      18,
+      19,
+      20
+    ]
+  },
+  "best_online_R": 103.63530439231543,
+  "polish_trigger_round": 16,
+  "completed_at": "2026-11-18T16:36:20.538931"
+}

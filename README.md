@@ -1,4 +1,16 @@
-# Soft Tree Online Ramping · v4.0.2
+# Soft Tree Online Ramping · v4.1.0
+
+当前版本采用 **Windows CPU 优质重组点跟进**。从原始 2,048 行数据开始，调用老师原版 `solver.exe` 完成 20 轮 × 50 组实测，最低 **R = 103.63530439231543**。
+
+- [运行和复现步骤](windows-cpu-a/README.md)
+- [寻优逻辑](windows-cpu-a/project/adaptive/paired_selection.py)
+- [21 版训练集与 105 个主模型](windows-cpu-a/evidence/formal/models/)
+- [逐轮成绩](windows-cpu-a/evidence/round-results.csv) · [完整精度最优权重](windows-cpu-a/evidence/best-weights.json)
+- [v4.1.0 发布与评分器下载](https://github.com/Dookir/soft-tree-online-104/releases/tag/v4.1.0)
+
+## v4.0.2 及更早版本
+
+下面保留此前实验的说明和运行入口。Windows 原版评分器的新运行入口位于 [windows-cpu-a](windows-cpu-a/README.md)。
 
 **分楼软决策树 + 分尺度在线寻优，可复现课程实验。**
 

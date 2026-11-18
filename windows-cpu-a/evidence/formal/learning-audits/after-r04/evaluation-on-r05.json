@@ -1,0 +1,49 @@
+{
+  "after_feedback_round": 4,
+  "evaluated_round": 5,
+  "seed": 2026,
+  "full_rows": 2248,
+  "without_information_rows": 2228,
+  "excluded_sample_ids": [
+    "r04-31",
+    "r04-32",
+    "r04-33",
+    "r04-34",
+    "r04-35",
+    "r04-36",
+    "r04-37",
+    "r04-38",
+    "r04-39",
+    "r04-40",
+    "r04-41",
+    "r04-42",
+    "r04-43",
+    "r04-44",
+    "r04-45",
+    "r04-46",
+    "r04-47",
+    "r04-48",
+    "r04-49",
+    "r04-50"
+  ],
+  "shadow_model_sha256": "b41b695a880ef3a5d1f58cb3065b05a03ae3a8ec7895ef98386ecdefb6dd00b4",
+  "generated_before_feedback": true,
+  "used_for_acquisition": false,
+  "full": {
+    "MAE": 4.544106194946087,
+    "low20_MAE": 1.8015987248525291,
+    "pair_accuracy": 0.5395918367346939,
+    "selected_true_R": 120.57474534749052,
+    "selection_regret": 14.515800219145603
+  },
+  "without_information": {
+    "MAE": 4.504761957752291,
+    "low20_MAE": 1.5047707708008944,
+    "pair_accuracy": 0.49387755102040815,
+    "selected_true_R": 114.48012927547096,
+    "selection_regret": 8.421184147126041
+  },
+  "MAE_improvement_from_information": -0.03934423719379598,
+  "interpretation": "conditional on next actually queried candidates; not a whole-space causal claim",
+  "extra_true_evaluations": 0
+}

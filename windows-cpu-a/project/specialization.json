@@ -1,0 +1,45 @@
+{
+  "label": "\u670d\u52a1\u5668\u7ed3\u6784\u542f\u53d1\u7684\u72ec\u7acb\u5bfb\u4f18",
+  "specialization_seed": 7319026,
+  "baseline": "original CPU v4.0.0",
+  "exploration_radius_multiplier": 1.0,
+  "pool_size": 256,
+  "three_support": 128,
+  "four_support": 128,
+  "concentrations": [
+    1.0,
+    0.3
+  ],
+  "samples_per_support_concentration": 64,
+  "building2_support": [
+    "peak",
+    "ramping",
+    "resilience"
+  ],
+  "extra_uniform_choices": [
+    "cost",
+    "carbon",
+    "discomfort",
+    "degradation"
+  ],
+  "other_building_block_margin": 2.0,
+  "bank_size": 8,
+  "block_distance": 0.05,
+  "reserved_exploit_slots": 6,
+  "rounds": 20,
+  "batch_size": 50,
+  "training_seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "session": "formal",
+  "max_native_calls": 20,
+  "native_evaluation": "serialized original EXE with isolated TEMP",
+  "initialization": "fresh original2048 only",
+  "strategy": "recombination",
+  "strategy_label": "\u4f18\u8d28\u91cd\u7ec4\u70b9\u8ddf\u8fdb",
+  "strategy_starts_round": 7
+}

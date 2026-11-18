@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/Dookir/soft-tree-online-104",
+  "commit": "59b94bbf12f0ee2421ce8cc7d3380c895bda62c1",
+  "experiment": "A-repro",
+  "initialization": "fresh original2048 only",
+  "training_seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "exploration_radius_multiplier": 1.0,
+  "solver_executed": false,
+  "teacher_executable_sha256": "293867b81dbf0c6194f97a57115487b9a39239d0c7dadbd51d749a203a077247",
+  "structural_prior": "building2 peak/ramping/resilience support only",
+  "max_calls": 20,
+  "max_evaluations": 1000,
+  "old_results_loaded": false,
+  "strategy": "recombination",
+  "strategy_label": "\u4f18\u8d28\u91cd\u7ec4\u70b9\u8ddf\u8fdb"
+}

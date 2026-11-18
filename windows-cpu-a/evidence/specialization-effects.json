@@ -1,0 +1,44 @@
+{
+  "specialized_model": {
+    "count": 12,
+    "best_R": 107.34646993654314,
+    "new_records_vs_previous_round": 0,
+    "parent_improvements": 0
+  },
+  "specialized_coverage": {
+    "count": 12,
+    "best_R": 107.1266265042359,
+    "new_records_vs_previous_round": 1,
+    "parent_improvements": 0
+  },
+  "specialized_transfer": {
+    "count": 12,
+    "best_R": 106.09398820402566,
+    "new_records_vs_previous_round": 0,
+    "parent_improvements": 0
+  },
+  "specialized_recombination_transfer": {
+    "count": 22,
+    "best_R": 104.4335916209966,
+    "new_records_vs_previous_round": 0,
+    "parent_improvements": 1
+  },
+  "specialized_incumbent_transfer": {
+    "count": 12,
+    "best_R": 104.01827870029956,
+    "new_records_vs_previous_round": 4,
+    "parent_improvements": 4
+  },
+  "specialized_combination": {
+    "count": 12,
+    "best_R": 104.88029497733804,
+    "new_records_vs_previous_round": 1,
+    "parent_improvements": 0
+  },
+  "specialized_step_followup": {
+    "count": 4,
+    "best_R": 103.63544523809104,
+    "new_records_vs_previous_round": 0,
+    "parent_improvements": 4
+  }
+}

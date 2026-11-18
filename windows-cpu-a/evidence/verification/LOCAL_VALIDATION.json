@@ -1,0 +1,42 @@
+{
+  "guarded_processes": 43,
+  "structural_prior": true,
+  "specialization_verified": true,
+  "exploration_radius_multiplier": 1.0,
+  "date": "2026-11-18",
+  "experiment": "formal",
+  "strategy": "recombination",
+  "complete": true,
+  "original_rows": 2048,
+  "official_calls": 20,
+  "official_feedback_rows": 1000,
+  "official_executable_used": true,
+  "executable_sha256": "293867b81dbf0c6194f97a57115487b9a39239d0c7dadbd51d749a203a077247",
+  "source_commit": "59b94bbf12f0ee2421ce8cc7d3380c895bda62c1",
+  "historical_labels_used": false,
+  "all21_training_sets_checked": true,
+  "main_checkpoints_checked": 105,
+  "diagnostic_checkpoints_checked": 4,
+  "release_files_checked": 44,
+  "best_R": 103.63530439231543,
+  "winner": "r20-05",
+  "target_achieved": true,
+  "roles": {
+    "exploit": 710,
+    "learn": 290
+  },
+  "timing": {
+    "training_seconds": 2824.372999999963,
+    "search_seconds": 2504.6870000000054,
+    "evaluation_seconds": 14206.23000000004,
+    "worker_seconds_this_invocation": 19701.782000000007,
+    "session_wall_seconds": 19698.210684,
+    "GPU_wait_seconds": 0.0,
+    "reused_pretraining_seconds": 0.0,
+    "diagnostic_training_seconds": 155.64100000000326,
+    "all_training_seconds": 2980.0139999999665,
+    "total_with_GPU_wait_seconds": 19698.210684
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "raw_evidence": "project/sessions/formal/rounds"
+}
